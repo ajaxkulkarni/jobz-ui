@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Documentation - Bootflat</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/site.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+
+    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">-->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/ang/main.js"></script>
+    <script src="js/ang/postJob.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="postJob">
+
+
+
+
+    <div class="container-fluid">
+        <div class="row myNavBar">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default myNavBar" role="navigation">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Bootflat</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                            <p class="navbar-text navbar-right myNavText">Signed in as Mark Otto</p>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <h3>Profile Information</h3>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Experience" ng-model="user.experience">
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Your Skills" ng-model="skill.name" ng-keyup="onKeyUp($event)">
+                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in skills">{{s.name}}</span>&nbsp;
+                    <ul class="list-group">
+                        <a href="#">
+                            <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Your Qualifications" ng-model="education.name" ng-keyup="onKeyUpEdu($event)">
+                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in educations">{{s.name}}</span>&nbsp;
+                    <ul class="list-group">
+                        <a href="#">
+                            <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingEducations">{{s.name}}</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Job Title" ng-model="user.jobTitle">
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Company" ng-model="user.company">
+                </div>
+                
+                
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <textarea class="form-control" placeholder="About yourself .." ng-model="user.description"></textarea>
+                </div>
+
+
+                <div class="col-md-8 col-md-offset-2 text-center mySubmit">
+                    <button type="button" class="btn btn-block mySubmitButton" ng-click="saveProfile()">Submit</button>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+    </script>
+
+</body>
+
+</html>

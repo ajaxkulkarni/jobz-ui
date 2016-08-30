@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Documentation - Bootflat</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="css/site.min.css">
+    <!--link rel="stylesheet" href="css/vertical_nav.css"-->
+    <link rel="stylesheet" href="css/drawer.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="js/site.min.js"></script>
+
+    <script src="js/angular.min.js"></script>
+
+    <script src="js/ang/main.js"></script>
+
+    <script src="js/ang/dashboard.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="dashboard">
+
+    <input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+    <label for="drawer-toggle" id="drawer-toggle-label"></label>
+    <header>Header</header>
+    <nav id="drawer">
+        <ul>
+            <li><a href="#" ng-click="showPostedJobs('open')">Posted Jobs&nbsp;&nbsp;&nbsp;<span class="label label-success compatLabel">{{profile.postedJobs.length}}</span></a></li>
+            <li><a href="#">Applied Jobs&nbsp;&nbsp;&nbsp;<span class="label label-success compatLabel">{{profile.appliedJobs.length}}</span></a></li>
+            <li><a href="#" ng-click="showAvailableJobs('open')">Available Jobs&nbsp;&nbsp;&nbsp;<span class="label label-success compatLabel">{{profile.availableJobs.length}}</span></a></li>
+            <li><a href="#" ng-click="showPosterInterests('open')">Your Interests&nbsp;&nbsp;&nbsp;<span class="label label-success compatLabel">{{profile.profileInterests.length}}</span></a></li>
+        </ul>
+    </nav>
+    <div id="page-content">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="row jobSection">
+                    <div class="col-md-3">
+
+
+                    </div>
+                    <div class="col-md-6">
+
+
+                        <h3>{{header}}</h3>
+                        <div class="row" ng-repeat="job in postedJobs" class="panelRow">
+                            <div class="col-md-12">
+                                <div class="panel panel-default jobPanel">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <a ng-click="showMatchingProfiles(job)">Matching &nbsp; <span class="label label-success compatLabel">{{job.matchingCandidates.length}}</span></a>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a>Applications &nbsp;<span class="label label-success compatLabel">{{job.applications.length}}</span></a>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a ng-click="showInterestCandidates(job)">Interests &nbsp;<span class="label label-success compatLabel">{{job.interestCandidates.length}}</span></a>
+                                            </div>
+                                        </div>
+
+                                        <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{job.location}}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{job.experience}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="badge" ng-repeat="skill in job.skillsRequired">{{skill.name}}</span>&nbsp;
+                                                <!-- <span class="badge">Normal</span>&nbsp;
+                                        <span class="badge">Normal</span>&nbsp;-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                {{job.description}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-body jobPanelFooter">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-4">
+                                                Read More
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br/>
+                                <br/>
+                            </div>
+                            <br/>
+                            <br/>
+                        </div>
+                        
+                        <div class="row" ng-repeat="job in jobsList" class="panelRow">
+                            <div class="col-md-12">
+                                <div class="panel panel-default jobPanel">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a ng-click="showInterestCandidates(job)">Compatibility &nbsp;<span class="label label-success compatLabel">{{job.compatibility}}</span></a>
+                                            </div>
+                                        </div>
+
+                                        <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{job.location}}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{job.experience}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="badge" ng-repeat="skill in job.skillsRequired">{{skill.name}}</span>&nbsp;
+                                                <!-- <span class="badge">Normal</span>&nbsp;
+                                        <span class="badge">Normal</span>&nbsp;-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                {{job.description}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-body jobPanelFooter">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-4">
+                                                Read More
+                                            </div>
+                                            <div class="col-xs-2 col-md-4">
+                                                Show Interest
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br/>
+                                <br/>
+                            </div>
+                            <br/>
+                            <br/>
+                        </div>
+
+                        <div class="row" ng-repeat="candidate in candidates" class="panelRow">
+                            <div class="col-md-12">
+                                <div class="panel panel-default jobPanel">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2 class="panel-title jobPanelTitle">{{candidate.name}}</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <!--<a>Matching &nbsp; <span class="label label-success compatLabel">{{job.matchingCandidates.length}}</span></a>-->
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a>Compatibility &nbsp;<span class="label label-success compatLabel">{{candidate.compatibility}}</span></a>
+                                            </div>
+                                        </div>
+
+                                        <p class="panel-title jobPanelSubTitle">{{candidate.designation}}</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{candiate.company}}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{candidate.experience}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="badge" ng-repeat="skill in candidate.jobSkills">{{skill.name}}</span>&nbsp;
+                                                <!-- <span class="badge">Normal</span>&nbsp;
+                                        <span class="badge">Normal</span>&nbsp;-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                {{candidate.description}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-body jobPanelFooter">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-4">
+                                                Read More
+                                            </div>
+                                            <div class="col-xs-2 col-md-4" ng-click="showInterestCandidate(candidate)">
+                                                Show Interest
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br/>
+                                <br/>
+                            </div>
+                            <br/>
+                            <br/>
+                        </div>
+
+                        
+                        <div class="row" ng-repeat="candidate in myCandidates" class="panelRow">
+                            <div class="col-md-12">
+                                <div class="panel panel-default jobPanel">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2 class="panel-title jobPanelTitle">{{candidate.name}}</h2>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <!--<a>Matching &nbsp; <span class="label label-success compatLabel">{{job.matchingCandidates.length}}</span></a>-->
+                                            </div>
+                                            <div class="col-md-4">
+                                                <a>Compatibility &nbsp;<span class="label label-success compatLabel">{{candidate.compatibility}}</span></a>
+                                            </div>
+                                        </div>
+
+                                        <p class="panel-title jobPanelSubTitle">{{candidate.designation}}</p>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{candiate.company}}
+                                            </div>
+                                            <div class="col-md-4">
+                                                {{candidate.experience}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="badge" ng-repeat="skill in candidate.jobSkills">{{skill.name}}</span>&nbsp;
+                                                <!-- <span class="badge">Normal</span>&nbsp;
+                                        <span class="badge">Normal</span>&nbsp;-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                {{candidate.description}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-body jobPanelFooter">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-4">
+                                                Read More
+                                            </div>
+                                            <div class="col-xs-2 col-md-4">
+                                                Interest shown
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br/>
+                                <br/>
+                            </div>
+                            <br/>
+                            <br/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <div class="modal" id="showInterestModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Send Interest</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to send interest to this profile? ({{interestedProfile.name}})</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" ng-click="showInterest()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

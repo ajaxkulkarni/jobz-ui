@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Documentation - Bootflat</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- SmartAddon.com Verification -->
+    <!--meta name="smartaddon-verification" content="936e8d43184bc47ef34e25e426c508fe" />
+	<meta name="keywords" content="Flat UI Design, UI design, UI, user interface, web interface design, user interface design, Flat web design, Bootstrap, Bootflat, Flat UI colors, colors">
+	<meta name="description" content="The complete style of the Bootflat Framework.">
+    <link rel="shortcut icon" href="favicon_16.ico"/>
+    <link rel="bookmark" href="favicon_16.ico"/-->
+    <!-- site css -->
+    <link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/site.min.js"></script>
+
+    <script src="js/angular.min.js"></script>
+
+    <script src="js/ang/main.js"></script>
+
+    <script src="js/ang/register.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="register">
+
+
+
+
+    <div class="container-fluid">
+        
+        <div ng-include="'header.html'"></div>
+        
+        <div class="row mainSection">
+            <!--<h1>Get Jobzz Easily!</h1>-->
+            <div class="col-sm-4 text-center mainTitles">
+                <!--h3>Column 1</h3-->
+                <button type="button" class="btn btn-block myButton" ng-click="selectIntent('Seeker')">I'm a Seeker</button>
+            </div>
+            <div class="col-sm-4 text-center mainTitles">
+                <!--h3>Column 1</h3-->
+                <button type="button" class="btn btn-block myButton" ng-click="selectIntent('Referrer')">I'm a Referrer</button>
+            </div>
+            <div class="col-sm-4 text-center mainTitles">
+                <!--h3>Column 1</h3-->
+                <button type="button" class="btn btn-block myButton" ng-click="selectIntent('Recruiter')">I'm a Recruiter</button>
+            </div>
+        </div>
+
+        <div class="row" id="register">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <h3>Register</h3>
+                {{registerResponse}}
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="text" class="form-control" placeholder="Email" ng-model="user.email">
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="password" class="form-control" placeholder="Password" ng-model="user.phone">
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
+                    <input type="password" class="form-control" placeholder="Confirm Password" ng-model="user.password">
+                </div>
+                <div class="col-md-8 col-md-offset-2 text-center mySubmit">
+                    <button type="button" class="btn btn-block mySubmitButton" ng-click="registerUser()">Submit</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+</body>
+
+</html>

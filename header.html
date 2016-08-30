@@ -1,0 +1,64 @@
+<div class="row myNavBar">
+    <div class="col-md-12">
+        <nav class="navbar navbar-default myNavBar" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Bootflat</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <p class="navbar-text navbar-right myNavText"data-toggle="modal" data-target="#myModal">Login</p>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Login</h4>
+                {{loginResponse}}
+            </div>
+            <div class="modal-body">
+                <!--<p>Feel free to contact us for any issues you might have with our products.</p>-->
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" placeholder="Email" ng-model="user.email">
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" placeholder="Password"ng-model="user.password" >
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label>Not a User? <a href="#register">Sign In</a></label>
+                       <!-- <textarea class="form-control" rows="3">Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac</textarea>-->
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-default myCloseButton" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success myLoginButton" ng-click="loginUser()">Login</button>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <!--<div class="modal-footer">
+               
+            </div>-->
+        </div>
+    </div>
+</div>
