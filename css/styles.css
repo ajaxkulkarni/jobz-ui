@@ -198,3 +198,17 @@ body {
 	border-color : #044F67;
 	width: 40%;
 }
+
+.myProgress {
+	height: 40%;
+	width: 100%;
+}
+
+.progressSection {
+	padding-top: 10%;
+}
+
+.myBadge {
+    #width: 15%;
+    #border-radius: 0px;
+}

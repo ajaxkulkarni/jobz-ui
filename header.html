@@ -12,7 +12,8 @@
                     <a class="navbar-brand" href="#">Bootflat</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                    <p class="navbar-text navbar-right myNavText"data-toggle="modal" data-target="#myModal">Login</p>
+                    <p class="navbar-text navbar-right myNavText"data-toggle="modal" data-target="#myModal" ng-show="loggedIn == null">Login</p>
+                    <a href="dashboard.html"><p class="navbar-text navbar-right myNavText"data-toggle="modal" data-target="#myModal" ng-show="loggedIn != null">{{loggedIn.name}}</p></a>
                 </div>
             </div>
         </nav>

@@ -4,18 +4,23 @@ angular.module("app").controller('register', function ($scope, userService) {
     if (localStorage.user != null) {
         $scope.loggedIn = JSON.parse(localStorage.user);
     }
-
+    //alert($scope.loggedIn.email);
     //alert("Here!");
     $scope.user = {};
     $scope.response = {};
-    $scope.loginResponse = "";
-    $scope.registerResponse = "";
+    $scope.loginResponse = null;
+    $scope.registerResponse = null;
+    $scope.showProgress = false;
 
     $scope.registerUser = function () {
-
+        $scope.showProgress = true;
         userService.register($scope).then(function (response) {
-            if ($scope.response.status != 200) {
-                $scope.registerResponse = $scope.response.responseText;
+            $scope.showProgress = false;
+            if (response == null) {
+                $scope.registerResponse = "Error connecting server ..";
+            }
+            if (response.status != 200) {
+                $scope.registerResponse = response.responseText;
                 return;
             }
             postLogin($scope);
@@ -26,12 +31,16 @@ angular.module("app").controller('register', function ($scope, userService) {
 
     $scope.selectIntent = function (intent) {
         localStorage.intent = intent;
-       
+
         if ($scope.loggedIn != null) {
+            if(intent == 'Seeker') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
             window.location.href = 'postJob.html';
             return;
         }
-         $('html, body').animate({
+        $('html, body').animate({
             scrollTop: $("#register").offset().top
         }, 2000);
     };
@@ -40,6 +49,7 @@ angular.module("app").controller('register', function ($scope, userService) {
         userService.login($scope).then(function (response) {
             if (response.status != 200) {
                 $scope.loginResponse = response.responseText;
+                $scope.user = response.candidateProfile;
                 //alert($scope.loginResponse);
                 return;
             }
@@ -50,7 +60,7 @@ angular.module("app").controller('register', function ($scope, userService) {
     };
 
     $scope.goToRegister = function (intent) {
-        
+
 
     };
 

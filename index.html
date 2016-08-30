@@ -60,7 +60,17 @@
         <div class="row" id="register">
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h3>Register</h3>
-                {{registerResponse}}
+				
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3 text-center">
+					<div class="alert alert-danger" ng-show="registerResponse != null && registerResponse.length > 0">
+						<!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
+						<strong>Oh snap!</strong> {{registerResponse}}
+					</div>
+					</div>
+				</div>
+				
+				
                 <div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
                 </div>
@@ -73,6 +83,18 @@
                 <div class="col-md-8 col-md-offset-2 myText">
                     <input type="password" class="form-control" placeholder="Confirm Password" ng-model="user.password">
                 </div>
+				
+				<div class="row" ng-show="showProgress == true">
+				<div class="col-md-6 col-md-offset-3 progressSection">
+                <div class="progress progress-striped active">
+                  <div class="progress-bar progress-bar-success myProgress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <!--<span class="sr-only">40% Complete (success)</span>-->
+                  </div>
+                </div>
+				</div>
+				</div>
+				
+				
                 <div class="col-md-8 col-md-offset-2 text-center mySubmit">
                     <button type="button" class="btn btn-block mySubmitButton" ng-click="registerUser()">Submit</button>
                 </div>

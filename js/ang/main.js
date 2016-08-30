@@ -18,6 +18,7 @@ app.service('generic', function ($http) {
             alert("failure message: " + JSON.stringify({
                 data: data
             }));
+            
         });
     }
     
@@ -61,9 +62,11 @@ app.service('userService', function ($http, $q) {
             deferred.resolve(response);
         });
         res.error(function (data, status, headers, config) {
-            alert("failure message: " + JSON.stringify({
+            /*alert("failure message: " + JSON.stringify({
                 data: data
-            }));
+            }));*/
+            response = data;
+            deferred.resolve(response);
         });
         
         response = deferred.promise;
@@ -87,9 +90,11 @@ app.service('userService', function ($http, $q) {
             deferred.resolve(response);
         });
         res.error(function (data, status, headers, config) {
-            alert("failure message: " + JSON.stringify({
+            /*alert("failure message: " + JSON.stringify({
                 data: data
-            }));
+            }));*/
+            response = data;
+            deferred.resolve(response);
         });
         response = deferred.promise;
         return $q.when(response);
@@ -114,10 +119,46 @@ app.service('userService', function ($http, $q) {
 
         });
         res.error(function (data, status, headers, config) {
-            alert("failure message: " + JSON.stringify({
+            /*alert("failure message: " + JSON.stringify({
                 data: data
-            }));
+            }));*/
+            response = data;
+            deferred.resolve(response);
         });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+    
+    this.update = function ($scope) {
+        //alert("In service");
+        var dataObj = {
+            requestedBy: {
+                name: $scope.user.name,
+                email: $scope.user.email,
+                password: $scope.user.password,
+                phone: $scope.user.phone,
+                company: $scope.user.company,
+                designation: $scope.user.designation,
+                experience: $scope.user.experience,
+                description: $scope.user.description,
+                jobSkills : $scope.user.skills,
+                educations : $scope.user.educations
+            }
+        };
+        deferred = $q.defer();
+        var res = $http.post(root + '/updateUser', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            /*alert("failure message: " + JSON.stringify({
+                data: data
+            }));*/
+            response = data;
+            deferred.resolve(response);
+        });
+        
         response = deferred.promise;
         return $q.when(response);
     }
@@ -171,9 +212,11 @@ app.service('jobService', function ($http, $q) {
             deferred.resolve(response);
         });
         res.error(function (data, status, headers, config) {
-            alert("failure message: " + JSON.stringify({
+            /*alert("failure message: " + JSON.stringify({
                 data: data
-            }));
+            }));*/
+            response = data;
+            deferred.resolve(response);
         });
         response = deferred.promise;
         return $q.when(response);
@@ -181,18 +224,17 @@ app.service('jobService', function ($http, $q) {
     
     this.showInterest = function ($scope) {
         
-        user = JSON.parse(localStorage.user);
-        var job = JSON.parse(localStorage.currentJob);
-        alert($scope.interestedProfile.email);
+        //user = JSON.parse(localStorage.user);
+        //alert($scope.interestedProfile.email);
         var dataObj = {
 
             applyJobRequested: {
-                id: job.id,
+                id: $scope.interestedJob.id,
                 currentCandidate: {
                     name: $scope.interestedProfile.name,
                     email: $scope.interestedProfile.email
                 },
-                interestShownByPoster: "Y"
+                interestShownByPoster: $scope.interestByPoster
             }
         }
         //alert("calling");
@@ -203,9 +245,11 @@ app.service('jobService', function ($http, $q) {
             deferred.resolve(response);
         });
         res.error(function (data, status, headers, config) {
-            alert("failure message: " + JSON.stringify({
+            /*alert("failure message: " + JSON.stringify({
                 data: data
-            }));
+            }));*/
+            response = data;
+            deferred.resolve(response);
         });
         response = deferred.promise;
         return $q.when(response);

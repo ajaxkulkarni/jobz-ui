@@ -53,11 +53,11 @@
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h3>Profile Information</h3>
                 <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Experience" ng-model="user.experience">
+                    <input type="text" value="{{profile.experience}}" class="form-control" placeholder="Experience" ng-model="user.experience">
                 </div>
                 <div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Your Skills" ng-model="skill.name" ng-keyup="onKeyUp($event)">
-                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in skills">{{s.name}}</span>&nbsp;
+                    <span class="badge myBadge" ng-click="removeSkill(s)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span>&nbsp;
                     <ul class="list-group">
                         <a href="#">
                             <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
@@ -66,18 +66,18 @@
                 </div>
                 <div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Your Qualifications" ng-model="education.name" ng-keyup="onKeyUpEdu($event)">
-                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in educations">{{s.name}}</span>&nbsp;
+                    <span class="badge myBadge" ng-click="removeEdu(s)" ng-repeat="s in user.educations">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span>&nbsp;
                     <ul class="list-group">
                         <a href="#">
-                            <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingEducations">{{s.name}}</li>
+                            <li class="list-group-item" ng-click="itemClickEdu(s)" ng-repeat="s in matchingEducations">{{s.name}}</li>
                         </a>
                     </ul>
                 </div>
                 <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Job Title" ng-model="user.jobTitle">
+                    <input type="text" class="form-control" placeholder="Job Title" ng-model="user.designation">
                 </div>
                 <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Company" ng-model="user.company">
+                    <input type="text" class="form-control" value="{{profile.company}}" placeholder="Company" ng-model="user.company">
                 </div>
                 
                 
