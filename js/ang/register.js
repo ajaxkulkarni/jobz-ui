@@ -11,10 +11,21 @@ angular.module("app").controller('register', function ($scope, userService) {
     $scope.loginResponse = null;
     $scope.registerResponse = null;
     $scope.showProgress = false;
+	
+	$.skylo({
+    state: 'success',
+    inchSpeed: 200,
+    initialBurst: 30,
+    flat: false
+	});
+	
 
     $scope.registerUser = function () {
         $scope.showProgress = true;
+		$.skylo('start');
+		$.skylo('inch',5);
         userService.register($scope).then(function (response) {
+			$.skylo('end');
             $scope.showProgress = false;
             if (response == null) {
                 $scope.registerResponse = "Error connecting server ..";
