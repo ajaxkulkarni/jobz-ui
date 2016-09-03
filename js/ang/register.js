@@ -11,21 +11,21 @@ angular.module("app").controller('register', function ($scope, userService) {
     $scope.loginResponse = null;
     $scope.registerResponse = null;
     $scope.showProgress = false;
-	
-	$.skylo({
-    state: 'success',
-    inchSpeed: 200,
-    initialBurst: 30,
-    flat: false
-	});
-	
+
+    $.skylo({
+        state: 'success',
+        inchSpeed: 200,
+        initialBurst: 30,
+        flat: false
+    });
+
 
     $scope.registerUser = function () {
         $scope.showProgress = true;
-		$.skylo('start');
-		$.skylo('inch',5);
+        $.skylo('start');
+        $.skylo('inch', 5);
         userService.register($scope).then(function (response) {
-			$.skylo('end');
+            $.skylo('end');
             $scope.showProgress = false;
             if (response == null) {
                 $scope.registerResponse = "Error connecting server ..";
@@ -42,12 +42,13 @@ angular.module("app").controller('register', function ($scope, userService) {
 
     $scope.selectIntent = function (intent) {
         localStorage.intent = intent;
-
         if ($scope.loggedIn != null) {
-            if(intent == 'Seeker') {
+            if (intent == 'Seeker') {
                 window.location.href = 'dashboard.html';
+                localStorage.viewType = "AvailableJobs";
                 return;
             }
+            localStorage.viewType = "PostedJobs";
             window.location.href = 'postJob.html';
             return;
         }
@@ -57,13 +58,16 @@ angular.module("app").controller('register', function ($scope, userService) {
     };
 
     $scope.loginUser = function () {
+        $.skylo('start');
+        $.skylo('inch', 5);
         userService.login($scope).then(function (response) {
+            $.skylo('end');
             if (response.status != 200) {
                 $scope.loginResponse = response.responseText;
-                $scope.user = response.candidateProfile;
-                //alert($scope.loginResponse);
                 return;
             }
+            $scope.user = response.candidateProfile;
+            //alert(response.candidateProfile);
             postLogin($scope);
         });
 
@@ -73,6 +77,10 @@ angular.module("app").controller('register', function ($scope, userService) {
     $scope.goToRegister = function (intent) {
 
 
+    };
+    
+    $scope.logout = function () {
+        userService.logout();
     };
 
 
@@ -89,3 +97,4 @@ function postLogin($scope) {
     }
 
 }
+

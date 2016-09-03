@@ -53,6 +53,13 @@
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h3>Job Information</h3>
                 <div class="col-md-8 col-md-offset-2 myText">
+                    <select ng-model="job.intent" class="mySelect">
+                        <option value="Referrer">I'm a Referrer</option>
+                        <option value="Recruiter">I'm a Recruiter</option>
+                    </select>
+                    
+                </div>
+                <div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Job Title" ng-model="job.jobTitle">
                 </div>
                 <div class="col-md-8 col-md-offset-2 myText">
@@ -66,7 +73,7 @@
                 </div>
                 <div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Skills required" ng-model="skill.name" ng-keyup="onKeyUp($event)">
-                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in skills">{{s.name}}</span>&nbsp;
+                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in job.skills">{{s.name}}</span>&nbsp;
                     <ul class="list-group">
                         <a href="#">
                             <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
@@ -106,7 +113,9 @@
     </div>
     <script>
         $(function () {
-            $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
         });
     </script>
 

@@ -1,5 +1,12 @@
 angular.module("app").controller('confirmJob', function ($scope, jobService, $http) {
     
+    $.skylo({
+        state: 'success',
+        inchSpeed: 200,
+        initialBurst: 30,
+        flat: false
+    });
+    
     if(localStorage.user == null) {
         window.location.href = "index.html";
         return;
@@ -10,12 +17,16 @@ angular.module("app").controller('confirmJob', function ($scope, jobService, $ht
     }
 
     $scope.postJob = function () {
+        $.skylo('start');
+        $.skylo('inch', 5);
         jobService.postJob($scope).then(function (response) {
+            $.skylo('end');
             if (response.status != 200) {
                 $scope.postJobResponse = response.responseText;
                 //alert($scope.loginResponse);
                 return;
             }
+            localStorage.viewType = "PostedJobs";
             window.location.href = "dashboard.html";
         });
     };

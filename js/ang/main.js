@@ -73,6 +73,16 @@ app.service('userService', function ($http, $q) {
         return $q.when(response);
     }
     
+    this.logout = function() {
+        localStorage.loggedIn = null;
+        localStorage.user = null;
+        localStorage.currentJob = null;
+        localStorage.postJob = null;
+        localStorage.profile = null;
+        localStorage.viewProfile = null;
+        window.location.href = "index.html";
+    }
+    
     this.login = function ($scope) {
         //alert("In service " + $scope);
         var dataObj = {
@@ -114,6 +124,7 @@ app.service('userService', function ($http, $q) {
         var res = $http.post(root + '/getUser', dataObj);
         res.success(function (data, status, headers, config) {
             response = data;
+            //alert("1:" + data.candidateProfile.postedJobs);
             deferred.resolve(response);
             //alert("Data:" + response.candidateProfile.profileInterests.length);
 
@@ -234,7 +245,8 @@ app.service('jobService', function ($http, $q) {
                     name: $scope.interestedProfile.name,
                     email: $scope.interestedProfile.email
                 },
-                interestShownByPoster: $scope.interestByPoster
+                interestShownByPoster: $scope.interestByPoster,
+                interestShownBySeeker: $scope.interestBySeeker
             }
         }
         //alert("calling");

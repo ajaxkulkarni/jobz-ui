@@ -1,17 +1,26 @@
 angular.module("app").controller('postJob', function ($scope, generic, $http) {
 
+    //alert("Hi!");
     $scope.skills = [];
     $scope.educations = [];
-
+    $scope.job = {};
+    $scope.job.skills = [];
+    $scope.job.intent = "Referrer";
+    
+    
     if (localStorage.profile != null) {
         $scope.user = JSON.parse(localStorage.profile);
         //alert($scope.user.jobSkills);
     }
 
     $scope.itemClick = function ($skill) {
-        //alert("Item clicked!" + $skill.name);
-        $scope.user.skills.push($skill);
-        $scope.job.skills.push($skill);
+        if ($scope.user != null) {
+            $scope.user.jobSkills.push($skill);
+        }
+        if ($scope.job != null) {
+            $scope.job.skills.push($skill);
+        }
+        //alert($scope.job.skills);
         $scope.skill = "";
         $("#skillInput").val("");
         $scope.matchingSkills = [];
@@ -21,8 +30,12 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     $scope.onKeyUp = function ($event) {
         //alert("Here!" + $event.keyCode);
         if ($event.keyCode == 13) {
-            $scope.user.jobSkills.push($scope.skill);
-            $scope.job.skills.push($scope.skill);
+            if ($scope.user != null) {
+                $scope.user.jobSkills.push($scope.skill);
+            }
+            if ($scope.job != null) {
+                $scope.job.skills.push($scope.skill);
+            }
             $scope.skill = "";
             $("#skillInput").val("");
         } else {
@@ -38,8 +51,12 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     };
 
     $scope.removeSkill = function ($skill) {
-        $scope.user.jobSkills.pop($skill);
-        $scope.job.skills.pop($skill);
+        if ($scope.user != null) {
+            $scope.user.jobSkills.pop($skill);
+        }
+        if ($scope.job != null) {
+            $scope.job.skills.pop($skill);
+        }
     };
 
 
@@ -74,7 +91,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
 
     $scope.removeEdu = function ($edu) {
         var index = $scope.user.educations.indexOf($edu);
-        $scope.user.educations.splice(index, 1);  
+        $scope.user.educations.splice(index, 1);
         //$scope.user.educations.pop($edu);
     };
 
@@ -83,6 +100,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         //$scope.job.skills = $scope.skills;
         //$scope.job.intent = localStorage.intent;
         localStorage.postJob = JSON.stringify($scope.job);
+        //alert($scope.job.intent);
         window.location.href = "viewJob.html";
     };
 
@@ -90,6 +108,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         //$scope.user.skills = $scope.skills;
         //$scope.user.educations = $scope.educations;
         //$scope.user.intent = localStorage.intent;
+        //alert($(".selecter_2"));
         localStorage.viewProfile = JSON.stringify($scope.user);
         window.location.href = "viewProfile.html";
     };

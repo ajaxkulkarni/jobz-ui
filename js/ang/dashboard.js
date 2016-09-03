@@ -1,5 +1,10 @@
 angular.module("app").controller('dashboard', function ($scope, userService, jobService, $http) {
 
+    if(localStorage.user == null) {
+        window.location.href = "index.html";
+        return;
+    }
+    
     $scope.loggedIn = JSON.parse(localStorage.user);
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";
@@ -10,9 +15,10 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
 
     //alert(localStorage.viewType);
 
-    $scope.showProfileProgress = true;
-
+    //$scope.showProfileProgress = true;
+    /*alert(localStorage.viewType);
     if (localStorage.viewType == null) {
+        
         if (localStorage.intent == "Seeker") {
             viewType = "AvailableJobs";
         } else {
@@ -20,29 +26,42 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         }
 
     }
+    */
+    $.skylo({
+        state: 'success',
+        inchSpeed: 200,
+        initialBurst: 30,
+        flat: false
+    });
 
     loadProfile();
     
     
-    function hideProgressBars() {
+    /*function hideProgressBars() {
         $scope.showProfileProgress = false;
         $scope.showApplyProgress = false;
-    }
+    }*/
 
     function loadProfile() {
         //alert($scope.user);
+        $.skylo('start');
+        $.skylo('inch', 5);
+        $scope.loading = true;
+       
         if ($scope.user != null) {
             userService.getUser($scope).then(function (response) {
-                hideProgressBars();
-                if (response.status == 200) {
+                $.skylo('end');
+                $scope.loading = false;
+                if (response != null && response.status == 200) {
                     $scope.profile = response.candidateProfile;
                     //alert(response.candidateProfile.profileInterests);
                     localStorage.profile = JSON.stringify($scope.profile);
                     //alert($scope.profile.profileInterests.length);
-                    //$scope.postedJobs = response.candidateProfile.postedJobs;
+                    //alert("2:" + response.candidateProfile.postedJobs);
                     //$scope.header = "Posted Jobs";
+                    var job = JSON.parse(localStorage.currentJob);
                     if (localStorage.viewType == "MatchingProfiles") {
-                        var job = JSON.parse(localStorage.currentJob);
+                        
                         var i = 0;
                         //alert("Here!" + job.id);
                         for (i = 0; i < response.candidateProfile.postedJobs.length; i++) {
@@ -62,7 +81,17 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                         $scope.showPostedJobs("close");
                     } else if (localStorage.viewType == "AppliedJobs") {
                         $scope.showAppliedJobs("close");
+                    } else if (localStorage.viewType == "AppliedCandidates") {
+                        $scope.showAppliedCandidates(job);
+                    } else if (localStorage.viewType == "AcceptedCandidates") {
+                        $scope.showAcceptedCandidates("close");
+                    } else if (localStorage.viewType == "AcceptedJobs") {
+                        $scope.showAcceptedJobs();
+                    } else if (localStorage.viewType == "JobRequests") {
+                        $scope.showJobRequests();
                     }
+                } else {
+                    $scope.profileError = "Error loading your profile..";
                 }
 
             });
@@ -75,10 +104,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     };
 
     $scope.logout = function () {
-
-        localStorage.loggedIn = null;
-        localStorage.user = null;
-        window.location.href = "index.html";
+        userService.logout();
     };
 
     $scope.showMatchingProfiles = function (job) {
@@ -125,8 +151,32 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.jobsList = [];
         $scope.postedJobs = [];
         $scope.candidates = [];
-        $scope.header = "Interest shown for " + job.jobTitle;
+        $scope.header = "My Candidates for " + job.jobTitle;
         localStorage.viewType = "InterestShown";
+    };
+    
+    $scope.showAppliedCandidates = function (job) {
+        $scope.myCandidates = job.applications;
+        localStorage.currentJob = JSON.stringify(job);
+        $scope.jobsList = [];
+        $scope.postedJobs = [];
+        $scope.candidates = [];
+        $scope.header = "Candidates Applied for " + job.jobTitle;
+        localStorage.viewType = "AppliedCandidates";
+    };
+    
+    $scope.showAcceptedCandidates = function (drawerState) {
+        //alert("Here!");
+        $scope.myCandidates = $scope.profile.acceptedProfiles;
+        //localStorage.currentJob = JSON.stringify(job);
+        $scope.jobsList = [];
+        $scope.postedJobs = [];
+        $scope.candidates = [];
+        $scope.header = "Candidate contacts available to you";
+        if (drawerState == "open") {
+            $("#drawer-toggle").click();
+        }
+        localStorage.viewType = "AcceptedCandidates";
     };
 
 
@@ -134,6 +184,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         localStorage.currentJob = null;
         $scope.postedJobs = [];
         $scope.candidates = [];
+        $scope.myCandidates = [];
         var profile = JSON.parse(localStorage.profile);
         $scope.jobsList = profile.availableJobs;
         $scope.header = "Jobs For you";
@@ -147,6 +198,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         localStorage.currentJob = null;
         $scope.postedJobs = [];
         $scope.candidates = [];
+        $scope.myCandidates = [];
         var profile = JSON.parse(localStorage.profile);
         $scope.jobsList = profile.appliedJobs;
         $scope.header = "Applied By you";
@@ -154,6 +206,28 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $("#drawer-toggle").click();
         }
         localStorage.viewType = "AppliedJobs";
+    };
+    
+    $scope.showAcceptedJobs = function () {
+        localStorage.currentJob = null;
+        $scope.postedJobs = [];
+        $scope.candidates = [];
+        $scope.myCandidates = [];
+        var profile = JSON.parse(localStorage.profile);
+        $scope.jobsList = profile.acceptedJobs;
+        $scope.header = "Job Contacts for You";
+        localStorage.viewType = "AcceptedJobs";
+    };
+    
+    $scope.showJobRequests = function () {
+        localStorage.currentJob = null;
+        $scope.postedJobs = [];
+        $scope.candidates = [];
+        $scope.myCandidates = [];
+        var profile = JSON.parse(localStorage.profile);
+        $scope.jobsList = profile.jobRequests;
+        $scope.header = "Job Requests for You";
+        localStorage.viewType = "JobRequests";
     };
 
     $scope.showInterestCandidate = function (candidate) {
@@ -165,15 +239,25 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.interestedJob = job;
         $("#applyJobModal").modal('show');
     };
+    
+    $scope.acceptInterestCandidate = function (candidate) {
+        $scope.interestedProfile = candidate;
+        $scope.showInterest();
+        //$("#showInterestModal").modal('show');
+    };
 
     $scope.showInterest = function () {
         $scope.showApplyProgress = true;
         $scope.interestByPoster = "Y";
         $scope.interestedJob = JSON.parse(localStorage.currentJob);
+        $.skylo('start');
+        $.skylo('inch', 5);
         jobService.showInterest($scope).then(function (response) {
+            $.skylo('end');
             $scope.showApplyProgress = false;
             if (response.status == 200) {
                 //alert("Done!");
+                loadProfile();
                 $scope.showInterestResponse = "Interest submitted successfully!";
             } else {
                 $scope.showInterestResponse = response.statusText;
@@ -184,15 +268,29 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     $scope.applyJob = function () {
         $scope.showApplyProgress = true;
         $scope.interestedProfile = $scope.user;
+        $scope.interestBySeeker = "Y";
+        $.skylo('start');
+        $.skylo('inch', 5);
         jobService.showInterest($scope).then(function (response) {
+            $.skylo('end');
             if (response.status == 200) {
                 //alert("Done!");
-                $scope.showInterestResponse = "Interest submitted successfully!";
+                $scope.applyJobResponse = "Application submitted successfully!";
                 loadProfile();
             } else {
-                $scope.showInterestResponse = response.statusText;
+                $scope.applyJobResponse = response.statusText;
             }
         });
+    };
+    
+    $scope.viewContact = function(candidate) {
+        $scope.acceptedCandidate = candidate;
+        $("#acceptedCandidateModal").modal('show');
+    };
+    
+    $scope.wipe = function() {
+        $scope.showInterestResponse = null;
+        $scope.applyJobResponse= null;
     };
 
 

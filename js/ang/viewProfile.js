@@ -5,6 +5,13 @@ angular.module("app").controller('viewProfile', function ($scope, userService, $
         return;
     }
     
+    $.skylo({
+        state: 'success',
+        inchSpeed: 200,
+        initialBurst: 30,
+        flat: false
+    });
+    
     if (localStorage != null && localStorage.viewProfile != null) {
         $scope.user = JSON.parse(localStorage.viewProfile);
         var user = JSON.parse(localStorage.user);
@@ -16,12 +23,16 @@ angular.module("app").controller('viewProfile', function ($scope, userService, $
     }
 
     $scope.saveProfile = function () {
+        $.skylo('start');
+        $.skylo('inch', 5);
         userService.update($scope).then(function (response) {
+            $.skylo('end');
             if (response.status != 200) {
                 $scope.postJobResponse = response.responseText;
                 //alert($scope.loginResponse);
                 return;
             }
+            localStorage.viewType = "AvailableJobs";
             window.location.href = "dashboard.html";
         });
     };

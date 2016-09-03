@@ -8,11 +8,12 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/skylo.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="js/site.min.js"></script>
-
+    <script src="js/skylo.js"></script>
     <script src="js/angular.min.js"></script>
 
     <script src="js/ang/main.js"></script>
@@ -75,14 +76,14 @@
                                 <br/>
                                 <p><span class="label" ng-repeat="s in user.jobSkills">{{s.name}}</span>&nbsp;
                                 </p>
-                                
+
                                 <h4>Education</h4>
                                 <br/>
                                 <p><span class="label" ng-repeat="s in user.educations">{{s.name}}</span>&nbsp;
                                 </p>
-                                
+
                                 <p>
-                                   {{user.description}}
+                                    {{user.description}}
 
                                 </p>
                             </div>
