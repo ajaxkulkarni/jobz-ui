@@ -1,5 +1,17 @@
 angular.module("app").controller('confirmJob', function ($scope, jobService, $http) {
     
+    if(localStorage.user == null) {
+        window.location.href = "index.html";
+        return;
+    }
+    
+    $scope.loggedIn = JSON.parse(localStorage.user);
+    
+    if ($scope.loggedIn == null) {
+        window.location.href = "index.html";
+        return;
+    }
+    
     $.skylo({
         state: 'success',
         inchSpeed: 200,

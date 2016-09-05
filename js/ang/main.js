@@ -1,7 +1,7 @@
 var app = angular.module("app", []);
 
-//var root = "http://localhost:8080/jobz-app/service";
-var root = "http://115.124.124.220:8080/jobz/service";
+var root = "http://localhost:8080/jobz-app/service";
+//var root = "http://115.124.124.220:8080/jobz/service";
 
 
 
@@ -154,10 +154,11 @@ app.service('userService', function ($http, $q) {
                 designation: $scope.user.designation,
                 experience: $scope.user.experience,
                 description: $scope.user.description,
-                jobSkills : $scope.user.skills,
+                jobSkills : $scope.user.jobSkills,
                 educations : $scope.user.educations
             }
         };
+        //alert(JSON.stringify(dataObj));
         deferred = $q.defer();
         var res = $http.post(root + '/updateUser', dataObj);
         res.success(function (data, status, headers, config) {
@@ -251,7 +252,7 @@ app.service('jobService', function ($http, $q) {
                 interestShownBySeeker: $scope.interestBySeeker
             }
         }
-        //alert("calling");
+        //alert("calling" + JSON.stringify(dataObj));
         deferred = $q.defer();
         var res = $http.post(root + '/applyForJob', dataObj);
         res.success(function (data, status, headers, config) {

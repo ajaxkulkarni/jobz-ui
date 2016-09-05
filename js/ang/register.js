@@ -1,6 +1,6 @@
 angular.module("app").controller('register', function ($scope, userService) {
 
-    $scope.loggedIn = {};
+    $scope.loggedIn = null;
     if (localStorage.user != null) {
         $scope.loggedIn = JSON.parse(localStorage.user);
     }
@@ -90,7 +90,7 @@ function postLogin($scope) {
     localStorage.user = JSON.stringify($scope.user);
     if (localStorage.intent == 'Referrer' || localStorage.intent == 'Recruiter') {
         window.location.href = 'postJob.html';
-    } else if (localStorage.intent == 'Seeker') {
+    } else if (localStorage.intent == 'Seeker' && $scope.user.description == null || $scope.user.description.length == 0) {
         window.location.href = 'updateProfile.html';
     } else {
         window.location.href = 'dashboard.html';

@@ -6,6 +6,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     }
     
     $scope.loggedIn = JSON.parse(localStorage.user);
+    //alert(localStorage.user);
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";
         return;
@@ -56,6 +57,8 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                     $scope.profile = response.candidateProfile;
                     //alert(response.candidateProfile.profileInterests);
                     localStorage.profile = JSON.stringify($scope.profile);
+                    localStorage.user = JSON.stringify($scope.profile);
+                    //alert(localStorage.profile);
                     //alert($scope.profile.profileInterests.length);
                     //alert("2:" + response.candidateProfile.postedJobs);
                     //$scope.header = "Posted Jobs";

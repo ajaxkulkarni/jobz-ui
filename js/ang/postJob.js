@@ -1,5 +1,17 @@
 angular.module("app").controller('postJob', function ($scope, generic, $http) {
 
+    if(localStorage.user == null) {
+        window.location.href = "index.html";
+        return;
+    }
+    
+    $scope.loggedIn = JSON.parse(localStorage.user);
+    
+    if ($scope.loggedIn == null) {
+        window.location.href = "index.html";
+        return;
+    }
+    
     //alert("Hi!");
     $scope.skills = [];
     $scope.educations = [];
@@ -7,14 +19,25 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     $scope.job.skills = [];
     $scope.job.intent = "Referrer";
     
+    //alert(localStorage.profile);
     
     if (localStorage.profile != null) {
         $scope.user = JSON.parse(localStorage.profile);
         //alert($scope.user.jobSkills);
     }
+    
+    //alert($scope.user.experience);
+    if($scope.user == null) {
+        //alert($scope.user);
+        $scope.user = {};
+        $scope.user.jobSkills = [];
+        $scope.user.educations = [];
+    }
 
     $scope.itemClick = function ($skill) {
+        //alert($scope.user);
         if ($scope.user != null) {
+            //alert($scope.user.jobSkills);
             $scope.user.jobSkills.push($skill);
         }
         if ($scope.job != null) {
@@ -30,7 +53,9 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     $scope.onKeyUp = function ($event) {
         //alert("Here!" + $event.keyCode);
         if ($event.keyCode == 13) {
+            //alert($scope.user);
             if ($scope.user != null) {
+                //alert($scope.user.jobSkills);
                 $scope.user.jobSkills.push($scope.skill);
             }
             if ($scope.job != null) {

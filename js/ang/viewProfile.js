@@ -5,6 +5,14 @@ angular.module("app").controller('viewProfile', function ($scope, userService, $
         return;
     }
     
+    $scope.loggedIn = JSON.parse(localStorage.user);
+    
+    if ($scope.loggedIn == null) {
+        window.location.href = "index.html";
+        return;
+    }
+    
+    
     $.skylo({
         state: 'success',
         inchSpeed: 200,
@@ -27,6 +35,7 @@ angular.module("app").controller('viewProfile', function ($scope, userService, $
         $.skylo('inch', 5);
         userService.update($scope).then(function (response) {
             $.skylo('end');
+            //alert(JSON.stringify(response));
             if (response.status != 200) {
                 $scope.postJobResponse = response.responseText;
                 //alert($scope.loginResponse);
