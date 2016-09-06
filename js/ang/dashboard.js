@@ -102,8 +102,10 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     }
 
 
-    $scope.postJob = function () {
-        //TODO :
+    $scope.editJob = function (job) {
+        localStorage.postJob = JSON.stringify(job);
+        window.location.href = "postJob.html";
+        
     };
 
     $scope.logout = function () {
@@ -125,6 +127,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         var profile = JSON.parse(localStorage.profile);
         $scope.myCandidates = [];
         $scope.candidates = [];
+        $scope.jobsList = [];
         $scope.postedJobs = profile.postedJobs;
         $scope.header = "Posted Jobs";
         localStorage.viewType = "PostedJobs";

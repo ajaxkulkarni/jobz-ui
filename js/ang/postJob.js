@@ -17,13 +17,19 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     $scope.educations = [];
     $scope.job = {};
     $scope.job.skills = [];
-    $scope.job.intent = "Referrer";
+    $scope.job.type = "Referrer";
     
     //alert(localStorage.profile);
     
     if (localStorage.profile != null) {
         $scope.user = JSON.parse(localStorage.profile);
         //alert($scope.user.jobSkills);
+    }
+    
+    if(localStorage.postJob != null) {
+        $scope.job = JSON.parse(localStorage.postJob);
+        $scope.job.expiryDate = new Date($scope.job.expiryDate).toString('yyyy-MM-dd');
+        //alert($scope.job.skillsRequired);
     }
     
     //alert($scope.user.experience);
@@ -41,7 +47,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
             $scope.user.jobSkills.push($skill);
         }
         if ($scope.job != null) {
-            $scope.job.skills.push($skill);
+            $scope.job.skillsRequired.push($skill);
         }
         //alert($scope.job.skills);
         $scope.skill = "";
@@ -59,7 +65,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
                 $scope.user.jobSkills.push($scope.skill);
             }
             if ($scope.job != null) {
-                $scope.job.skills.push($scope.skill);
+                $scope.job.skillsRequired.push($scope.skill);
             }
             $scope.skill = "";
             $("#skillInput").val("");
@@ -80,7 +86,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
             $scope.user.jobSkills.pop($skill);
         }
         if ($scope.job != null) {
-            $scope.job.skills.pop($skill);
+            $scope.job.skillsRequired.pop($skill);
         }
     };
 
