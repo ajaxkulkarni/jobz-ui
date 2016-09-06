@@ -39,6 +39,7 @@ angular.module("app").controller('confirmJob', function ($scope, jobService, $ht
                     //alert($scope.loginResponse);
                     return;
                 }
+                localStorage.postJob = null;
                 localStorage.viewType = "PostedJobs";
                 window.location.href = "dashboard.html";
             });
@@ -50,6 +51,7 @@ angular.module("app").controller('confirmJob', function ($scope, jobService, $ht
                     //alert($scope.loginResponse);
                     return;
                 }
+                localStorage.postJob = null;
                 localStorage.viewType = "PostedJobs";
                 window.location.href = "dashboard.html";
             });
