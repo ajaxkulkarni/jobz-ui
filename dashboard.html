@@ -49,25 +49,27 @@
 
             <div class="row jobSection">
                 <div class="col-md-3 col-md-offset-1 optionList">
-                    <ul class="list-group">
+                    <div class="list-group" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
                         <div id="poster" class="collapse in">
-                            <li class="list-group-item" ng-click="showPostedJobs('open')"><span class="badge badge-default">{{profile.postedJobs.length}}</span>Posted Jobs</li>
-                            <li class="list-group-item" ng-click="showPosterInterests('open')"><span class="badge badge-primary">{{profile.profileInterests.length}}</span>My Candidates</li>
-                            <li class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="badge badge-success">{{profile.acceptedProfiles.length}}</span>Accepted Candidates</li>
-                            <a href="postJob.html"><li class="list-group-item">Post a New Job</li></a>
+                            <a href="#" class="list-group-item" ng-click="showPostedJobs('open')"><span class="badge badge-default">{{profile.postedJobs.length}}</span>Posted Jobs</a>
+                            <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="badge badge-primary">{{profile.profileInterests.length}}</span>My Candidates</a>
+                            <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="badge badge-success">{{profile.acceptedProfiles.length}}</span>Accepted Candidates</a>
+                            <a href="postJob.html" class="list-group-item">Post a New Job</a>
+                            <a href="#" ng-click="updateType('Seeker')" class="list-group-item">Switch to Job Seeker</a>
                         </div>
-                    </ul>
+                    </div>
                     <br/>
-                    <ul class="list-group">
+                    <div class="list-group" ng-show="profile.type == 'Seeker' || profile.type == null">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#seeker"><span class="listSpan" style="float:right"></span>Job Seeker&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
                         <div id="seeker" class="collapse in">
-                            <li class="list-group-item" ng-click="showAppliedJobs('open')"><span class="badge badge-default">{{profile.appliedJobs.length}}</span>Applied Jobs</li>
-                            <li class="list-group-item" ng-click="showAvailableJobs('open')"><span class="badge badge-primary">{{profile.availableJobs.length}}</span>Available Jobs</li>
-                            <li class="list-group-item" ng-click="showJobRequests()"><span class="badge badge-primary">{{profile.jobRequests.length}}</span>Job Requests</li>
-                            <li class="list-group-item" ng-click="showAcceptedJobs()"><span class="badge badge-primary">{{profile.acceptedJobs.length}}</span>Accepted Job Requests</li>
+                            <a class="list-group-item" ng-click="showAppliedJobs('open')"><span class="badge badge-default">{{profile.appliedJobs.length}}</span>Applied Jobs</a>
+                            <a class="list-group-item" ng-click="showAvailableJobs('open')"><span class="badge badge-primary">{{profile.availableJobs.length}}</span>Available Jobs</a>
+                            <a class="list-group-item" ng-click="showJobRequests()"><span class="badge badge-primary">{{profile.jobRequests.length}}</span>Job Requests</a>
+                            <a class="list-group-item" ng-click="showAcceptedJobs()"><span class="badge badge-primary">{{profile.acceptedJobs.length}}</span>Accepted Job Requests</a>
+                            <a href="#" ng-click="updateType('Poster')" class="list-group-item">Switch to Job Poster</a>
                         </div>
-                    </ul>
+                    </div>
                 </div>
                 <div class="col-md-6">
 
@@ -107,13 +109,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <a ng-click="showMatchingProfiles(job)">Matching &nbsp; <span class="label label-success compatLabel">{{job.matchingCandidates.length}}</span></a>
+                                            <a href="#" ng-click="showMatchingProfiles(job)">Matching &nbsp; <span class="label label-success compatLabel">{{job.matchingCandidates.length}}</span></a>
                                         </div>
                                         <div class="col-md-3">
-                                            <a ng-click="showAppliedCandidates(job)">Applications &nbsp;<span class="label label-success compatLabel">{{job.applications.length}}</span></a>
+                                            <a href="#" ng-click="showAppliedCandidates(job)">Applications &nbsp;<span class="label label-success compatLabel">{{job.applications.length}}</span></a>
                                         </div>
                                         <div class="col-md-3">
-                                            <a ng-click="showInterestCandidates(job)">My Interests &nbsp;<span class="label label-success compatLabel">{{job.interestCandidates.length}}</span></a>
+                                            <a href="#" ng-click="showInterestCandidates(job)">My Interests &nbsp;<span class="label label-success compatLabel">{{job.interestCandidates.length}}</span></a>
                                         </div>
                                         <div class="col-md-3">
                                             <!--<span class="glyphicon glyphicon-pencil"></span>-->
@@ -126,7 +128,7 @@
                                             {{job.location}}
                                         </div>
                                         <div class="col-md-4">
-                                            {{job.experience}}
+                                            {{job.minExperience}} - {{job.maxExperience}}
                                         </div>
                                     </div>
                                     <div class="row">
@@ -146,10 +148,10 @@
                                 <div class="panel-body jobPanelFooter">
                                     <div class="row">
                                         <div class="col-xs-2 col-md-4">
-                                            Read More
+                                            <a href="#" style="color:white">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="editJob(job)">
-                                            Edit
+                                            <a href="#" style="color:white">Edit</a>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +183,7 @@
                                             {{job.location}}
                                         </div>
                                         <div class="col-md-4">
-                                            {{job.experience}}
+                                            {{job.minExperience}} - {{job.maxExperience}}
                                         </div>
                                     </div>
                                     <div class="row">
@@ -201,19 +203,19 @@
                                 <div class="panel-body jobPanelFooter">
                                     <div class="row">
                                         <div class="col-xs-2 col-md-4">
-                                            Read More
+                                            <a href="#" style="color:white">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster != 'Y'">
-                                            Show Interest
+                                            <a href="#" style="color:white">Show Interest</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster != 'Y'">
-                                            Interest Shown
+                                            <a href="#" style="color:white">Interest Shown</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="viewContact(job.postedBy)" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster == 'Y'">
-                                            View Contact
+                                            <a href="#" style="color:white">View Contact</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster == 'Y'">
-                                            Accept Request
+                                            <a href="#" style="color:white">Accept Request</a>
                                         </div>
                                     </div>
                                 </div>
@@ -268,10 +270,10 @@
                                 <div class="panel-body jobPanelFooter">
                                     <div class="row">
                                         <div class="col-xs-2 col-md-4">
-                                            Read More
+                                            <a href="#" style="color:white">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestCandidate(candidate)">
-                                            Show Interest
+                                            <a href="#" style="color:white">Show Interest</a>
                                         </div>
                                     </div>
                                 </div>
@@ -327,12 +329,12 @@
                                 <div class="panel-body jobPanelFooter">
                                     <div class="row">
                                         <div class="col-xs-2 col-md-4">
-                                            Read More
+                                            <a href="#" style="color:white">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4">
-                                            <span ng-show="candidate.seekerInterested != 'Y' && candidate.posterInterested == 'Y' ">Interest shown</span>
-                                            <span ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested != 'Y' " ng-click="acceptInterestCandidate(candidate)">Accept Interest</span>
-                                            <span ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested == 'Y'" ng-click="viewContact(candidate)">View Contact</span>
+                                            <a href="#" style="color:white"><span ng-show="candidate.seekerInterested != 'Y' && candidate.posterInterested == 'Y' ">Interest shown</span></a>
+                                            <a href="#" style="color:white"><span ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested != 'Y' " ng-click="acceptInterestCandidate(candidate)">Accept Interest</span></a>
+                                            <a href="#" style="color:white"><span ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested == 'Y'" ng-click="viewContact(candidate)">View Contact</span></a>
 
                                         </div>
                                     </div>

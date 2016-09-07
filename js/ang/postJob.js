@@ -18,20 +18,27 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     $scope.job = {};
     $scope.job.skillsRequired = [];
     $scope.job.type = "Referrer";
+    //$scope.job.sector.id = "IT";
     
     //alert(localStorage.profile);
     
     if (localStorage.profile != null) {
         $scope.user = JSON.parse(localStorage.profile);
+        if($scope.user.sector.id != null) {
+            $scope.user.sector.id = $scope.user.sector.id.toString();
+        }
         //alert($scope.user.jobSkills);
     }
     //alert(localStorage.postJob!= 'null');
     if(localStorage.postJob != null && localStorage.postJob != 'null') {
         $scope.job = JSON.parse(localStorage.postJob);
         $scope.job.expiryDate = new Date($scope.job.expiryDate).toString('yyyy-MM-dd');
+        if($scope.job.sector.id != null) {
+            $scope.job.sector.id = $scope.job.sector.id.toString();
+        }   
         //alert($scope.job.skillsRequired);
     }
-    
+    //$scope.job.sector.id = "2";
     //alert($scope.user.experience);
     if($scope.user == null) {
         //alert($scope.user);

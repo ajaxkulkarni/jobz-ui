@@ -14,20 +14,17 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
 
     $scope.user = JSON.parse(localStorage.user);
 
-    //alert(localStorage.viewType);
-
-    //$scope.showProfileProgress = true;
-    /*alert(localStorage.viewType);
+    
     if (localStorage.viewType == null) {
         
-        if (localStorage.intent == "Seeker") {
+        if ($scope.loggedIn.type == "Seeker") {
             viewType = "AvailableJobs";
         } else {
             viewType = "PostedJobs";
         }
 
     }
-    */
+    
     $.skylo({
         state: 'success',
         inchSpeed: 200,
@@ -37,14 +34,11 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
 
     loadProfile();
     
-    
-    /*function hideProgressBars() {
-        $scope.showProfileProgress = false;
-        $scope.showApplyProgress = false;
-    }*/
+
 
     function loadProfile() {
         //alert($scope.user);
+        localStorage.postJob = null;
         $.skylo('start');
         $.skylo('inch', 5);
         $scope.loading = true;
@@ -293,6 +287,29 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.acceptedCandidate = candidate;
         $("#acceptedCandidateModal").modal('show');
     };
+    
+    $scope.updateType = function(type) {
+        $scope.user = $scope.profile;
+        $scope.user.type = type;
+        $.skylo('start');
+        $.skylo('inch', 5);
+        userService.update($scope).then(function (response) {
+            $.skylo('end');
+            //alert(JSON.stringify(response));
+            if (response.status != 200) {
+                $scope.updateResponse = response.responseText;
+                //alert($scope.loginResponse);
+                return;
+            }
+            if(type == 'Poster') {
+                localStorage.viewType = "PostedJobs";
+            } else {
+                localStorage.viewType = "AvailableJobs";
+            }
+            loadProfile();
+        });
+    };
+    
     
     $scope.wipe = function() {
         $scope.showInterestResponse = null;

@@ -28,27 +28,9 @@
 
 
     <div class="container-fluid">
-        <div class="row myNavBar">
-            <div class="col-md-12">
-                <nav class="navbar navbar-default myNavBar" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Bootflat</a>
-                        </div>
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                            <p class="navbar-text navbar-right myNavText">Signed in as Mark Otto</p>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-
+        
+        <div ng-include="'header.html'"></div>
+        
         <div class="row">
             <div class="col-md-offset-3 col-md-6">
                 <div class="pricing">
@@ -64,7 +46,7 @@
                                         {{job.location}}
                                     </div>
                                     <div class="col-md-4">
-                                        {{job.experience}}
+                                        {{job.minExperience}} - {{job.maxExperience}}
                                     </div>
                                     <div class="col-md-4">
                                         {{job.intent}}

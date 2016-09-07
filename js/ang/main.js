@@ -54,7 +54,8 @@ app.service('userService', function ($http, $q) {
                 name: $scope.user.name,
                 email: $scope.user.email,
                 password: $scope.user.password,
-                phone: $scope.user.phone
+                phone: $scope.user.phone,
+                type: $scope.user.intent
             }
         };
         deferred = $q.defer();
@@ -82,6 +83,7 @@ app.service('userService', function ($http, $q) {
         localStorage.postJob = null;
         localStorage.profile = null;
         localStorage.viewProfile = null;
+        localStorage.viewType = null;
         window.location.href = "index.html";
     }
     
@@ -155,7 +157,11 @@ app.service('userService', function ($http, $q) {
                 experience: $scope.user.experience,
                 description: $scope.user.description,
                 jobSkills : $scope.user.jobSkills,
-                educations : $scope.user.educations
+                educations : $scope.user.educations,
+                type: $scope.user.type,
+                sector: {
+                    id: $scope.user.sector.id
+                }
             }
         };
         //alert(JSON.stringify(dataObj));
@@ -201,7 +207,8 @@ app.service('jobService', function ($http, $q) {
                 expiryDate: expiryDate,
                 location: $scope.job.location,
                 type: $scope.job.type,
-                experience: $scope.job.experience,
+                minExperience: $scope.job.minExperience,
+                maxExperience: $scope.job.maxExperience,
                 salary: $scope.job.salary,
                 description: $scope.job.description,
                 maxApplicants: 15,
@@ -214,7 +221,10 @@ app.service('jobService', function ($http, $q) {
                     email: user.email,
                     password: user.password
                 },
-                skillsRequired: $scope.job.skillsRequired
+                skillsRequired: $scope.job.skillsRequired,
+                sector: {
+                    id: $scope.job.sector.id
+                }
             }
         }
         //alert("calling");
@@ -250,13 +260,17 @@ app.service('jobService', function ($http, $q) {
                 expiryDate: expiryDate,
                 location: $scope.job.location,
                 type: $scope.job.type,
-                experience: $scope.job.experience,
+                minExperience: $scope.job.minExperience,
+                maxExperience: $scope.job.maxExperience,
                 salary: $scope.job.salary,
                 description: $scope.job.description,
                 maxApplicants: 15,
                 jobTitle: $scope.job.jobTitle,
                 companyName: $scope.job.companyName,
-                skillsRequired: $scope.job.skillsRequired
+                skillsRequired: $scope.job.skillsRequired,
+                sector: {
+                    id: $scope.job.sector.id
+                }
             }
         }
         //alert("calling");

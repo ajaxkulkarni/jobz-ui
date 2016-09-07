@@ -3,6 +3,7 @@ angular.module("app").controller('register', function ($scope, userService) {
     $scope.loggedIn = null;
     if (localStorage.user != null) {
         $scope.loggedIn = JSON.parse(localStorage.user);
+        //alert($scope.loggedIn.email);
     }
     //alert($scope.loggedIn.email);
     //alert("Here!");
@@ -43,6 +44,18 @@ angular.module("app").controller('register', function ($scope, userService) {
     $scope.selectIntent = function (intent) {
         localStorage.intent = intent;
         if ($scope.loggedIn != null) {
+            $.skylo('start');
+            $.skylo('inch', 5);
+            userService.update($scope).then(function (response) {
+                $.skylo('end');
+                //alert(JSON.stringify(response));
+                if (response.status != 200) {
+                    $scope.updateResponse = response.responseText;
+                    //alert($scope.loginResponse);
+                    return;
+                }
+                
+            });
             if (intent == 'Seeker') {
                 window.location.href = 'dashboard.html';
                 localStorage.viewType = "AvailableJobs";
@@ -52,6 +65,7 @@ angular.module("app").controller('register', function ($scope, userService) {
             window.location.href = 'postJob.html';
             return;
         }
+        $scope.user.intent = localStorage.intent;
         $('html, body').animate({
             scrollTop: $("#register").offset().top
         }, 2000);
@@ -74,11 +88,6 @@ angular.module("app").controller('register', function ($scope, userService) {
 
     };
 
-    $scope.goToRegister = function (intent) {
-
-
-    };
-    
     $scope.logout = function () {
         userService.logout();
     };
@@ -88,7 +97,7 @@ angular.module("app").controller('register', function ($scope, userService) {
 
 function postLogin($scope) {
     localStorage.user = JSON.stringify($scope.user);
-    if (localStorage.intent == 'Referrer' || localStorage.intent == 'Recruiter') {
+    if (localStorage.intent == 'Poster') {
         window.location.href = 'postJob.html';
     } else if (localStorage.intent == 'Seeker' && $scope.user.description == null || $scope.user.description.length == 0) {
         window.location.href = 'updateProfile.html';
@@ -97,4 +106,3 @@ function postLogin($scope) {
     }
 
 }
-
