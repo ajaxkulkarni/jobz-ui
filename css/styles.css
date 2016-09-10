@@ -1,104 +1,108 @@
 body {
-    background-color: #F2F1EF;
+    background-color: #EAEAEA;
 }
 
 .mainSection {
-	
-	background-color : #044F67;
-	height : 500px;
-
+    #background-color: #356E89;
+    background-color: #356E89;
+    height: 500px;
 }
 
 .mainTitles {
-	
-	color : white;
-	padding-top : 20%;
-    padding-left : 3%;
+    #color: white;
+    padding-top: 20%;
+    padding-left: 3%;
 }
 
 .myButton {
-	#background-color : #F9690E;
-    background-color : #044F67;
-	width : 95%;
-	height : 70px;
-	border-radius : 0px;
-	border-color : white;
-	font-size : 24px;
+    #background-color: #F9690E;
+    background-color: #356E89;
+    background-color: #356E89;
+    width: 95%;
+    #height: 70px;
+    border-radius: 0px;
+    #border-color: white;
+    border-style: none;
+    #ont-size: 24px;
+    font-size: 50px;
+    font-weight: bold;
 }
 
 .myButton:hover {
-	#background-color : #F9690E;
-    background-color : white;
-	width : 95%;
-	height : 70px;
-	border-radius : 0px;
-	border-color : white;
-	font-size : 24px;
-    color: #044F67;
+    #background-color: #D4E4E1;
+    background-color: #356E89;
+    #background-color: white;
+    width: 95%;
+    #height: 70px;
+    #border-radius: 0px;
+    #border-color: white;
+    #font-size: 24px;
+    color: #D4E4E1;
 }
 
 .myNavBar {
-	background-color : #044F67;
-	border-color : #044F67;
+    #background-color: #356E89;
+    border-color: #356E89;
+    background-color: #356E89;
 }
 
 .myNavText:hover {
-	color : white;
+    color: white;
 }
 
 .myText {
-	padding-top: 3%;
-	padding-bottom: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 .mySubmit {
-	padding-left: 21%;
-	padding-bottom: 10%;
-	padding-top: 8%;
+    padding-left: 21%;
+    padding-bottom: 10%;
+    padding-top: 8%;
 }
 
 .mySubmitButton {
-	background-color : #044F67;
-	width : 60%;
-	height : 35px;
-	border-radius : 0px;
-	#border-color : #F9690E;
-    border-color : white;
-	font-size : 20px;
-	padding-bottom: 13%;
+    background-color: #356E89;
+    width: 60%;
+    height: 35px;
+    border-radius: 0px;
+    #border-color: #F9690E;
+    border-color: white;
+    font-size: 20px;
+    padding-bottom: 13%;
 }
 
 .myPanelButton {
-	background-color : #044F67;
-	width : 40%;
-	height : 40px;
-	border-radius : 0px;
-    border-color : white;
-	font-size : 20px;
-	padding-bottom: 6%;
+    background-color: #356E89;
+    width: 40%;
+    height: 40px;
+    border-radius: 0px;
+    border-color: white;
+    font-size: 20px;
+    padding-bottom: 6%;
 }
 
 .myLoginButton {
-	background-color : #044F67;
-	#width : 40%;
-	#height : 35px;
-	border-radius : 0px;
-	#border-color : #F9690E;
-    border-color : white;
-	#font-size : 20px;
-	#padding-bottom: 13%;
+    background-color: #356E89;
+    #width: 40%;
+    #height: 35px;
+    border-radius: 0px;
+    #border-color: #F9690E;
+    border-color: white;
+    #font-size: 20px;
+    #padding-bottom: 13%;
 }
 
 .myCloseButton {
-	background-color : white;
-	#width : 40%;
-	#height : 35px;
-	border-radius : 0px;
-	#border-color : #F9690E;
-    border-color : white;
-	#font-size : 20px;
-	#padding-bottom: 13%;
-    color: #044F67;
+    background-color: white;
+    #width: 40%;
+    #height: 35px;
+    border-radius: 0px;
+    #border-color: #F9690E;
+    border-color: white;
+    #font-size: 20px;
+    #padding-bottom: 13%;
+    color: #356E89;
 }
 
 .loginModal {
@@ -106,11 +110,11 @@ body {
 }
 
 .jobSection {
-	#padding-top: 5%;
+    #padding-top: 5%;
 }
 
 .jobSectionHeading {
-	padding-left: 20%;
+    padding-left: 20%;
 }
 
 .panelRow {
@@ -119,40 +123,42 @@ body {
 }
 
 .jobPanel {
-	height: 200px;
-	border-radius: 0px;
+    #height: 200px;
+    border-radius: 0px;
     #padding-bottom: 20%;
     #border-style: solid;
+    color: #5F5F5F;
 }
 
 .jobPanelHeader {
-	background-color: white;
+    background-color: white;
     border-color: black;
 }
 
 .jobPanelTitle {
-	font-size: 30px;
+    font-size: 26px;
 }
 
 .jobPanelSubTitle {
-	font-size: 20px;
+    font-size: 20px;
+    padding-bottom: 1%;
 }
 
 .panel-default>.panel-heading {
     color: #434a54;
     background-color: white;
     border-color: #e6e9ed;
-	height: 200px;
-	border-radius: 0px;
+    #height: 200px;
+    border-radius: 0px;
 }
 
 .jobPanelFooter {
-	background-color:#044F67;
-	color: white;
+    background-color: #356E89;
+    color: white;
 }
 
 .compatLabel {
-	font-size: 14px;
+    font-size: 14px;
 }
 
 .dashboardButton {
@@ -160,52 +166,52 @@ body {
 }
 
 .pricing .viewJob {
-	padding-top: 20%;
-	width: 100%;
-	#height: 1000px;
-	border-style: none;
-	border-radius: 0px;
-	border-color: white;
+    padding-top: 20%;
+    width: 100%;
+    #height: 1000px;
+    border-style: none;
+    border-radius: 0px;
+    border-color: white;
 }
 
 .pricing .price-primary .viewJobTitle {
-	border-radius: 0px;
-	#border-style: solid;
-	#border-color: black;
-	-webkit-border-top-left-radius: 0px;
+    border-radius: 0px;
+    #border-style: solid;
+    #border-color: black;
+    -webkit-border-top-left-radius: 0px;
     -moz-border-radius-topleft: 0px;
     -webkit-border-top-right-radius: 0px;
-	height: 50%;
-	background-color:#044F67;
+    height: 50%;
+    background-color: #356E89;
 }
 
 .pricing .price-primary .viewJobBody {
-	height: 50%;
-	background-color: white;
-	border-bottom-right-radius: 0px;
+    height: 50%;
+    background-color: white;
+    border-bottom-right-radius: 0px;
 }
 
 .pricing .viewJobFooter {
-	background-color: white;
-	border-bottom-right-radius: 0px;
-	border-bottom-left-radius: 0px;
-	#border-style: solid;
+    background-color: white;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    #border-style: solid;
 }
 
 .myViewButton {
-	background-color : #044F67;
-	border-radius : 0px;
-	border-color : #044F67;
-	width: 40%;
+    background-color: #356E89;
+    border-radius: 0px;
+    border-color: #356E89;
+    width: 40%;
 }
 
 .myProgress {
-	height: 40%;
-	width: 100%;
+    height: 40%;
+    width: 100%;
 }
 
 .progressSection {
-	padding-top: 10%;
+    padding-top: 10%;
 }
 
 .myBadge {
@@ -214,9 +220,9 @@ body {
 }
 
 .mySelect {
- width: 100%;
- #height: 30px;
- position: relative;
+    width: 100%;
+    #height: 30px;
+    position: relative;
     z-index: 2;
     display: block;
     padding: 6px 10px;
@@ -239,10 +245,104 @@ body {
 }
 
 .info {
- padding-top: 5%;
- padding-bottom: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
+
 .myImg {
- max-width:100%;
- max-height:100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.logo {
+    max-width: 600%;
+    max-height: 600%;
+    #border-style: none;
+    #border-color: #356E89;
+    #box-sizing: none;
+    #background-color: #356E89;
+    #border: 0;
+    border-style: solid;
+    margin-top: -12px;
+}
+
+.myHeader {
+    height: 0px;
+    border-style: solid;
+}
+
+.jobLinks {
+    color: #5F5F5F;
+    font-weight: 700;
+}
+
+.jobLabel {
+    background-color: white;
+    color: #356E89;
+    border-color: #5F5F5F;
+    border-style: solid;
+    border-width: 2px;
+    width: 40px;
+    color: #5F5F5F;
+}
+
+.cardButton {
+    color: white;
+    font-weight: bold;
+}
+
+.cardButton:hover {
+    color: white;
+}
+
+.cardButton:after {
+    color: white;
+}
+
+.cardButton:visited {
+    color: white;
+}
+
+.skillLabel {
+    padding-bottom: 25px;
+    color: #5F5F5F;
+    border-color: #5F5F5F;
+}
+
+.myBadge {
+    color: black;
+    background-color: white;
+    border-style: solid;
+    border-width: 2px;
+    padding: 1% 1% 1% 1%;
+    border-radius: 5px;
+    display: inline-block;
+    color: #5F5F5F;
+    border-color: #5F5F5F;
+}
+
+.linksSection {
+    padding-top: 1%;
+}
+
+.jobPanelIcon {
+    #padding-top: 15%;
+    font-size: 18px;
+    #border-style: solid;
+}
+
+.jobPanelProps {
+    font-size: 16px
+}
+
+.arrow-section {
+    padding-left: 10%;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-top: 60px solid #356E89;
 }

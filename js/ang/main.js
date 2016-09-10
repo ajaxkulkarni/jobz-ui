@@ -324,6 +324,28 @@ app.service('jobService', function ($http, $q) {
         response = deferred.promise;
         return $q.when(response);
     }
+    
+    this.deleteJob = function ($scope) {
+        
+        var dataObj = {
+            postJobRequested: {
+                id: $scope.jobToDelete.id
+            }
+        }
+        //alert("calling" + JSON.stringify(dataObj));
+        deferred = $q.defer();
+        var res = $http.post(root + '/deleteJob', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
 });
 
 

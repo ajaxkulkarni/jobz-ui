@@ -101,6 +101,11 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         window.location.href = "postJob.html";
         
     };
+    
+    $scope.showDeleteJob = function (job) {
+        $scope.jobToDelete = job;
+        $("#deleteJobModal").modal('show');
+    };
 
     $scope.logout = function () {
         userService.logout();
@@ -137,7 +142,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.candidates = [];
         $scope.postedJobs = [];
         var profile = JSON.parse(localStorage.profile);
-        $scope.myCandidates = profile.profileInterests;
+        $scope.candidates = profile.profileInterests;
         $scope.header = "My Candidates";
         if (drawerState == "open") {
             $("#drawer-toggle").click();
@@ -146,7 +151,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     };
 
     $scope.showInterestCandidates = function (job) {
-        $scope.myCandidates = job.interestCandidates;
+        $scope.candidates = job.interestCandidates;
         localStorage.currentJob = JSON.stringify(job);
         $scope.jobsList = [];
         $scope.postedJobs = [];
@@ -156,7 +161,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     };
     
     $scope.showAppliedCandidates = function (job) {
-        $scope.myCandidates = job.applications;
+        $scope.candidates = job.applications;
         localStorage.currentJob = JSON.stringify(job);
         $scope.jobsList = [];
         $scope.postedJobs = [];
@@ -167,7 +172,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     
     $scope.showAcceptedCandidates = function (drawerState) {
         //alert("Here!");
-        $scope.myCandidates = $scope.profile.acceptedProfiles;
+        $scope.candidates = $scope.profile.acceptedProfiles;
         //localStorage.currentJob = JSON.stringify(job);
         $scope.jobsList = [];
         $scope.postedJobs = [];
@@ -186,7 +191,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.candidates = [];
         $scope.myCandidates = [];
         var profile = JSON.parse(localStorage.profile);
-        $scope.jobsList = profile.availableJobs;
+        $scope.postedJobs = profile.availableJobs;
         $scope.header = "Jobs For you";
         if (drawerState == "open") {
             $("#drawer-toggle").click();
@@ -200,7 +205,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.candidates = [];
         $scope.myCandidates = [];
         var profile = JSON.parse(localStorage.profile);
-        $scope.jobsList = profile.appliedJobs;
+        $scope.postedJobs = profile.appliedJobs;
         $scope.header = "Applied By you";
         if (drawerState == "open") {
             $("#drawer-toggle").click();
@@ -214,7 +219,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.candidates = [];
         $scope.myCandidates = [];
         var profile = JSON.parse(localStorage.profile);
-        $scope.jobsList = profile.acceptedJobs;
+        $scope.postedJobs = profile.acceptedJobs;
         $scope.header = "Job Contacts for You";
         localStorage.viewType = "AcceptedJobs";
     };
@@ -225,7 +230,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.candidates = [];
         $scope.myCandidates = [];
         var profile = JSON.parse(localStorage.profile);
-        $scope.jobsList = profile.jobRequests;
+        $scope.postedJobs = profile.jobRequests;
         $scope.header = "Job Requests for You";
         localStorage.viewType = "JobRequests";
     };
@@ -279,6 +284,21 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                 loadProfile();
             } else {
                 $scope.applyJobResponse = response.statusText;
+            }
+        });
+    };
+    
+    $scope.deleteJob = function () {
+        //$scope.job = $scope.jobToDelete;
+        $.skylo('start');
+        $.skylo('inch', 5);
+        jobService.deleteJob($scope).then(function (response) {
+            $.skylo('end');
+            if (response.status == 200) {
+                $scope.deleteJobResponse = "Job Post deleted successfully!";
+                loadProfile();
+            } else {
+                $scope.deleteJobResponse = response.statusText;
             }
         });
     };
