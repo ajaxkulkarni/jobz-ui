@@ -1,5 +1,6 @@
 angular.module("app").controller('register', function ($scope, userService) {
 
+    //alert("Here!");
     $scope.loggedIn = null;
     if (localStorage.user != null) {
         $scope.loggedIn = JSON.parse(localStorage.user);
@@ -22,21 +23,21 @@ angular.module("app").controller('register', function ($scope, userService) {
 
 
     $scope.registerUser = function (formValid) {
-        if(!formValid) {
+        if (!formValid) {
             $scope.registerShowErrors = true;
             return;
         }
-        
-        if($scope.user.password != $scope.user.confirmPassword) {
+
+        if ($scope.user.password != $scope.user.confirmPassword) {
             $scope.registerShowErrors = true;
             $scope.registerForm.cpassword.$invalid = true;
             return;
         }
-        
+
         $scope.showProgress = true;
         $.skylo('start');
         $.skylo('inch', 5);
-        if($scope.user.type == null) {
+        if ($scope.user.type == null) {
             $scope.user.type = localStorage.intent;
         }
         userService.register($scope).then(function (response) {
@@ -69,15 +70,22 @@ angular.module("app").controller('register', function ($scope, userService) {
                     //alert($scope.loginResponse);
                     return;
                 }
-                
+
             });
             if (intent == 'Seeker') {
                 window.location.href = 'dashboard.html';
                 localStorage.viewType = "AvailableJobs";
+                //alert("Seeker!");
+                return;
+            } else if (intent == 'Poster') {
+                localStorage.viewType = "PostedJobs";
+                window.location.href = 'postJob.html';
+                //alert("Poster!");
                 return;
             }
-            localStorage.viewType = "PostedJobs";
-            window.location.href = 'postJob.html';
+            //alert("Here!");
+            window.location.href = 'dashboard.html';
+            localStorage.viewType = "AvailableJobs";
             return;
         }
         $scope.user.type = localStorage.intent;
@@ -111,11 +119,11 @@ angular.module("app").controller('register', function ($scope, userService) {
 });
 
 function postLogin($scope) {
-    if($scope.user.type == null) {
+    if ($scope.user.type == null) {
         $scope.user.type = localStorage.intent;
     }
     localStorage.user = JSON.stringify($scope.user);
-    if ($scope.user.type == 'Poster') {
+    if ($scope.user.type == 'Poster' && localStorage.intent == 'Poster') {
         window.location.href = 'postJob.html';
     } else if ($scope.user.type == 'Seeker' && $scope.user.description == null || $scope.user.description.length == 0) {
         window.location.href = 'updateProfile.html';

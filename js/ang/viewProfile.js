@@ -1,11 +1,15 @@
 angular.module("app").controller('viewProfile', function ($scope, userService, $http) {
     
+    //alert("Here!");
+    
     if(localStorage.user == null) {
         window.location.href = "index.html";
         return;
     }
     
     $scope.loggedIn = JSON.parse(localStorage.user);
+    
+    
     
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";

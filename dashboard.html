@@ -17,6 +17,8 @@
     <script type="text/javascript" src="js/site.min.js"></script>
 
     <script src="js/skylo.js"></script>
+    
+    <script src="js/date.js"></script>
 
     <script src="js/angular.min.js"></script>
 
@@ -51,7 +53,7 @@
                 <div class="col-md-3 col-md-offset-1 optionList">
                     <div class="list-group" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
-                        <div id="poster" class="collapse in">
+                        <div id="poster" class="userOptions collapse in">
                             <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>My Candidates</a>
                             <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.acceptedProfiles.length}}</span>Accepted Candidates</a>
                             <a class="list-group-item"></a>
@@ -63,7 +65,7 @@
                     <br/>
                     <div class="list-group" ng-show="profile.type == 'Seeker' || profile.type == null">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#seeker"><span class="listSpan" style="float:right"></span>Job Seeker&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
-                        <div id="seeker" class="collapse in">
+                        <div id="seeker" class="userOptions collapse in">
                             <a href="#" class="list-group-item" ng-click="showJobRequests()"><span class="badge badge-primary">{{profile.jobRequests.length}}</span>Interests Received</a>
                             <a href="#" class="list-group-item" ng-click="showAppliedJobs('open')"><span class="badge badge-default">{{profile.appliedJobs.length}}</span>Applications sent</a>
                             <a href="#" class="list-group-item" ng-click="showAcceptedJobs()"><span class="badge badge-primary">{{profile.acceptedJobs.length}}</span>My Contacts</a>
@@ -159,9 +161,11 @@
                                         </div>
                                     </div>
                                     <br/>
-                                    <div class="row collapse" id="{{job.id}}">
+                                    <div class="row collapse" id="job{{job.id}}">
                                         <div class="col-md-12">
                                             {{job.description}}
+                                            <br/><br/>
+                                            <p><b>Job Offer Valid Till :</b> {{job.expiryDateString}}</p>
                                         </div>
                                     </div>
                                     <br/>
@@ -179,7 +183,7 @@
                                     <div class="row panel-body jobPanelFooter" ng-show="profile.type == 'Seeker' || profile.type == null">
 
                                         <div class="col-xs-2 col-md-4">
-                                            <a href="#" style="color:white" class="cardButton">Read More</a>
+                                            <a href="#job{{job.id}}" data-toggle="collapse" style="color:white" class="cardButton">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster != 'Y'">
                                             <a href="#" style="color:white" class="cardButton">Show Interest</a>
@@ -615,10 +619,10 @@
             //alert("asd");
             if ($(window).width() < 768) {
                 //alert($(window).width());
-                $("#demo").removeClass("in");
+                $(".userOptions").removeClass("in");
                 $(".listSpan").addClass("glyphicon glyphicon-plus");
             } else {
-                $("#demo").addClass("in");
+                $(".userOptions").addClass("in");
                 $(".listSpan").removeClass("glyphicon glyphicon-plus");
             }
         }

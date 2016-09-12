@@ -1,5 +1,8 @@
 angular.module("app").controller('dashboard', function ($scope, userService, jobService, $http) {
 
+    localStorage.intent = null;
+    $scope.isDashboard = true;
+    
     if(localStorage.user == null) {
         window.location.href = "index.html";
         return;

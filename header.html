@@ -19,13 +19,13 @@
                             <ul class="dropdown-menu" role="menu">
                                 <!--<li><a href="dashboard.html">Dashboard</a></li>-->
                                 <li><a href="updateProfile.html">Profile</a></li>
-                                <li><a href="#" ng-click="updateType('Seeker')" ng-show="profile.type == 'Poster'">Switch to Job Seeker</a>
-                                    <a href="#" ng-click="updateType('Poster')" ng-show="profile.type == 'Seeker' || profile.type == null">Switch to Job Poster</a></li>
+                                <li><a href="#" ng-click="updateType('Seeker')" ng-show="profile.type == 'Poster' && isDashboard">Switch to Job Seeker</a>
+                                    <a href="#" ng-click="updateType('Poster')" ng-show="(profile.type == 'Seeker' || profile.type == null) && isDashboard">Switch to Job Poster</a></li>
                                 <li><a href="#" ng-click="logout()">Logout</a></li>
                             </ul>
                         </li>
                         <a href="#" class="navbar-text navbar-right myNav" data-toggle="modal" data-target="#myModal" ng-show="loggedIn == null">Login</a>
-                        <a href="dashboard.html" class="navbar-text navbar-right myNav" data-toggle="modal" data-target="#myModal" ng-show="loggedIn != null">Dashboard</a>
+                        <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn != null">Dashboard</a>
                     </ul>
                 </div>
             </div>

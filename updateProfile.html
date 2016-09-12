@@ -19,41 +19,120 @@
     <script src="js/angular.min.js"></script>
     <script src="js/ang/main.js"></script>
     <script src="js/ang/postJob.js"></script>
+
+    <style>
+        a.tip {
+            outline: none;
+        }
+        
+        a.tip strong {
+            line-height: 30px;
+        }
+        
+        a.tip:hover {
+            text-decoration: none;
+        }
+        
+        a.tip span {
+            z-index: 10;
+            display: none;
+            padding: 14px 20px;
+            margin-top: -50px;
+            margin-left: 28px;
+            width: 300px;
+            line-height: 16px;
+        }
+        
+        a.tip:hover span {
+            display: inline;
+            position: absolute;
+            color: #111;
+            border: 1px solid #DCA;
+            background: #fffAF0;
+        }
+        
+        .callout {
+            z-index: 20;
+            position: absolute;
+            top: 20px;
+            border: 0;
+            left: -12px;
+        }
+        /*CSS3 extras*/
+        
+        a.tip span {
+            border-radius: 4px;
+            box-shadow: 5px 5px 8px #CCC;
+        }
+    </style>
+
+
 </head>
 
 <body ng-app="app" ng-controller="postJob">
 
-
-
-
     <div class="container-fluid">
         <div ng-include="'header.html'"></div>
-
+        <!--<div class="row tooltip-demo">
+                  <div class="col-md-12"><button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button></div>
+                  <div class="col-md-12"><button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button></div>
+                  <div class="col-md-12"><button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button></div>
+                  <div class="col-md-12"><button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button></div>
+                </div>-->
         <div class="row">
+
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h3>Profile Information</h3>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <select ng-model="user.sector.id" class="mySelect">
-                        <option value="">Please select the field of job</option>
-                        <option value="1">Information Technology</option>
-                        <option value="2">Telecommunication</option>
-                        <option value="3">Mechanical</option>
-                        <option value="4">Industrial</option>
-                    </select>
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" value="{{profile.experience}}" class="form-control" placeholder="Experience" ng-model="user.experience">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Your Skills" ng-model="skill.name" ng-keyup="onKeyUp($event)">
-                    <span class="badge myBadge" ng-click="removeSkill(s)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span>&nbsp;
-                    <ul class="list-group">
-                        <a href="#">
-                            <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
-                        </a>
-                    </ul>
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
+                <ng-form name="profileForm">
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <select ng-model="user.sector.id" class="mySelect" ng-required="true" name="sector" data-toggle="tooltip" data-placement="top" title="Select your industry/field of work e.g. Mechanical, Information technology..">
+                            <option value="">Please select the field of job</option>
+                            <option value="1">Information Technology</option>
+                            <option value="2">Telecommunication</option>
+                            <option value="3">Mechanical</option>
+                            <option value="4">Industrial</option>
+                        </select>
+                        <p ng-show="showProfileError && profileForm.sector.$invalid">Please choose a sector</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" value="{{profile.experience}}" class="form-control" placeholder="Experience" ng-model="user.experience" ng-required="true" name="exp" maxlength="5" ng-focus="showHint('expHint')" ng-blur="hideHint('expHint')">
+                        <div id="expHint" style="display:none">
+                            <div class="hint-down-pos">
+                                <div class="hint-down"></div>
+                            </div>
+                            <div class="hint">
+                                <p>Write your experience in years e.g. 1.5 years ,0 years</p>
+                            </div>
+                        </div>
+                        <p ng-show="showProfileError && profileForm.exp.$invalid">Please enter your job experience (0 for freshers)</p>
+                        <p ng-show="!showProfileError">{{expError}}</p>
+                        <!--<a class="tip">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <span>
+                            <img class="callout" src="img/callout.gif" />
+                            Write your experience in years e.g. 1.5 years ,0 years
+                            </span>
+                                </div>
+                            </div>
+                            
+                        </a>-->
+
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" placeholder="Your Skills" ng-model="skill.name" ng-keyup="onKeyUp($event)">
+                        <span class="badge myBadge" ng-click="removeSkill(s)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <ul class="list-group">
+                            <a href="#">
+                                <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
+                            </a>
+                        </ul>
+                        <p>{{skillsError}}</p>
+                    </div>
+                    <!--<div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Your Qualifications" ng-model="education.name" ng-keyup="onKeyUpEdu($event)">
                     <span class="badge myBadge" ng-click="removeEdu(s)" ng-repeat="s in user.educations">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span>&nbsp;
                     <ul class="list-group">
@@ -61,25 +140,27 @@
                             <li class="list-group-item" ng-click="itemClickEdu(s)" ng-repeat="s in matchingEducations">{{s.name}}</li>
                         </a>
                     </ul>
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Job Title" ng-model="user.designation">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" value="{{profile.company}}" placeholder="Company" ng-model="user.company">
-                </div>
-                
-                
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <textarea class="form-control" placeholder="About yourself .." ng-model="user.description"></textarea>
-                </div>
+                </div>-->
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" placeholder="Job Title" ng-model="user.designation" maxlength="50">
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" value="{{profile.company}}" placeholder="Company" ng-model="user.company" maxlength="50">
+                    </div>
 
 
-                <div class="col-md-8 col-md-offset-2 text-center mySubmit">
-                    <button type="button" class="btn btn-block mySubmitButton" ng-click="saveProfile()">Submit</button>
-                </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <textarea class="form-control" placeholder="About yourself .." ng-model="user.description" ng-required="true" maxlength="250" name="description"></textarea>
+                        <p ng-show="showProfileError && profileForm.description.$invalid">Please enter something about yourself</p>
+
+                    </div>
 
 
+                    <div class="col-md-8 col-md-offset-2 text-center mySubmit">
+                        <button type="button" class="btn btn-block mySubmitButton" ng-click="saveProfile(profileForm.$valid)">Submit</button>
+                    </div>
+
+                </ng-form>
 
             </div>
         </div>
@@ -89,8 +170,14 @@
 
     </div>
     <script>
+        $(document).ready(function () {
+            /*$('[data-toggle="tooltip"]').tooltip();*/
+        });
+
         $(function () {
-            $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+            $("#datepicker").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
         });
     </script>
 

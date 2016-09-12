@@ -5,7 +5,7 @@ body {
 .mainSection {
     #background-color: #356E89;
     background-color: #356E89;
-    height: 500px;
+    #height: 500px;
     background-image: url('../img/connect_blur.png');
     #opacity: 0.5;
 }
@@ -16,8 +16,9 @@ body {
 
 .mainTitles {
     #color: white;
-    padding-top: 20%;
+    padding-top: 15%;
     padding-left: 3%;
+    padding-bottom: 15%;
 }
 
 .myButton {
@@ -251,7 +252,7 @@ body {
 }
 
 .optionList {
-    padding-top: 5.5%;
+    padding-top: 4.2%;
 }
 
 .info {
