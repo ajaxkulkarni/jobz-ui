@@ -60,40 +60,53 @@
                
                 <button type="button" class="btn btn-block myButton" ng-click="selectIntent('Recruiter')">I'm a Recruiter</button>
             </div>-->
-            
+
         </div>
         <div class="row">
-                <div class="col-md-3 arrow-section">
-                    
-                    <div class="arrow-down"></div>
-                </div>
+            <div class="col-md-3 arrow-section">
+
+                <div class="arrow-down"></div>
             </div>
+        </div>
+
         <div class="row info">
             <div class="col-md-4 col-md-offset-2 text-center">
-                <h3>Post your interests</h3>
-                <p>Browse through jobs and express your interest. If the job poster is also interested, get the contact.</p>
+                <h3>Find/Post Job</h3>
+                <p>Our intelligent algorithm suggests you jobs matching your profile or profiles matching your job post. Simple!</p>
             </div>
             <div class="col-md-4 text-center">
-                <img src="img/pic1.png" class="myImg"></img>
+                <img src="img/pic3.png" class="myImg"></img>
             </div>
 
+        </div>
+
+        <div class="row info">
+            <div class="col-md-4 col-md-offset-2 text-center">
+                <img src="img/pic1.png" class="myImg"></img>
+            </div>
+            <div class="col-md-4 text-center">
+                <h3>Post your interests</h3>
+                <p>Browse through jobs and express your interest.Browse through candidate profiles to express interests.</p>
+            </div>
 
         </div>
+
+
 
         <div class="row info">
             <!--<h1>Get Jobzz Easily!</h1>-->
             <div class="col-md-4 col-md-offset-2 text-center">
-                <img src="img/pic2.png" class="myImg"></img>
+                <h3>Get contacts</h3>
+                <p>If job poster and job seeker both are interested, an oppurtunity is created. </p>
             </div>
             <div class="col-md-4 text-center">
-                <h3>Some Text</h3>
-                <p>Browse through jobs and express your interest. If the job poster is also interested, get the contact.</p>
+                <img src="img/pic2.png" class="myImg"></img>
             </div>
 
         </div>
 
         <div class="row" id="register" ng-show="loggedIn == null">
-            
+
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h3>Register</h3>
 
@@ -106,27 +119,33 @@
                     </div>
                 </div>
 
+                <ng-form name="registerForm">
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" ng-model="user.name" ng-required="true">
+                        <p ng-show="registerShowErrors == true && registerForm.name.$invalid">Please Enter your name</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" ng-model="user.email" ng-required="true">
+                        <p ng-show="registerShowErrors == true && registerForm.email.$invalid">Please Enter a valid Email ID</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" ng-model="user.phone" ng-required="true">
+                        <p ng-show="registerShowErrors == true && registerForm.phone.$invalid">Please Enter a contact number</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" ng-model="user.password" ng-required="true">
+                        <p ng-show="registerShowErrors == true && registerForm.password.$invalid">Please Enter password</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm Password" ng-model="user.confirmPassword" ng-required="true">
+                        <p ng-show="registerShowErrors == true && registerForm.cpassword.$invalid">Please Repeat the password</p>
+                    </div>
 
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Name" ng-model="user.name">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Email" ng-model="user.email">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Phone" ng-model="user.phone">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="password" class="form-control" placeholder="Password" ng-model="user.password">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="password" class="form-control" placeholder="Confirm Password">
-                </div>
 
-
-                <div class="col-md-8 col-md-offset-2 text-center mySubmit">
-                    <button type="button" class="btn btn-block mySubmitButton" ng-click="registerUser()">Submit</button>
-                </div>
+                    <div class="col-md-8 col-md-offset-2 text-center mySubmit">
+                        <button ng-disabled="false" type="button" class="btn btn-block mySubmitButton" ng-click="registerUser(registerForm.$valid)">Submit</button>
+                    </div>
+                </ng-form>
             </div>
         </div>
 

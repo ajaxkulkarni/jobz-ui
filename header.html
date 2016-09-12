@@ -9,23 +9,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand"><img src="img/logo.png" class="logo"></img></a>
+                    <a  href="index.html" class="navbar-brand"><img src="img/logo.png" class="logo"></img>
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
-                        <p class="navbar-text navbar-right myNavText" data-toggle="modal" data-target="#myModal" ng-show="loggedIn == null">Login</p>
-                        <li class="dropdown navbar-right" ng-show="loggedIn != null">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{loggedIn.name}} <b class="caret"></b></a>
+                        <li class="dropdown navbar-right myNav" ng-show="loggedIn != null">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">{{loggedIn.name}} <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="dashboard.html">Dashboard</a></li>
+                                <!--<li><a href="dashboard.html">Dashboard</a></li>-->
                                 <li><a href="updateProfile.html">Profile</a></li>
+                                <li><a href="#" ng-click="updateType('Seeker')" ng-show="profile.type == 'Poster'">Switch to Job Seeker</a>
+                                    <a href="#" ng-click="updateType('Poster')" ng-show="profile.type == 'Seeker' || profile.type == null">Switch to Job Poster</a></li>
                                 <li><a href="#" ng-click="logout()">Logout</a></li>
                             </ul>
                         </li>
+                        <a href="#" class="navbar-text navbar-right myNav" data-toggle="modal" data-target="#myModal" ng-show="loggedIn == null">Login</a>
+                        <a href="dashboard.html" class="navbar-text navbar-right myNav" data-toggle="modal" data-target="#myModal" ng-show="loggedIn != null">Dashboard</a>
                     </ul>
-
-
-
                 </div>
             </div>
         </nav>

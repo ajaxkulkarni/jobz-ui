@@ -21,10 +21,24 @@ angular.module("app").controller('register', function ($scope, userService) {
     });
 
 
-    $scope.registerUser = function () {
+    $scope.registerUser = function (formValid) {
+        if(!formValid) {
+            $scope.registerShowErrors = true;
+            return;
+        }
+        
+        if($scope.user.password != $scope.user.confirmPassword) {
+            $scope.registerShowErrors = true;
+            $scope.registerForm.cpassword.$invalid = true;
+            return;
+        }
+        
         $scope.showProgress = true;
         $.skylo('start');
         $.skylo('inch', 5);
+        if($scope.user.type == null) {
+            $scope.user.type = localStorage.intent;
+        }
         userService.register($scope).then(function (response) {
             $.skylo('end');
             $scope.showProgress = false;
@@ -40,9 +54,10 @@ angular.module("app").controller('register', function ($scope, userService) {
 
     };
 
-
+    //alert(localStorage.intent);
     $scope.selectIntent = function (intent) {
         localStorage.intent = intent;
+        //alert(localStorage.intent);
         if ($scope.loggedIn != null) {
             $.skylo('start');
             $.skylo('inch', 5);
@@ -65,7 +80,7 @@ angular.module("app").controller('register', function ($scope, userService) {
             window.location.href = 'postJob.html';
             return;
         }
-        $scope.user.intent = localStorage.intent;
+        $scope.user.type = localStorage.intent;
         $('html, body').animate({
             scrollTop: $("#register").offset().top
         }, 2000);
@@ -96,10 +111,13 @@ angular.module("app").controller('register', function ($scope, userService) {
 });
 
 function postLogin($scope) {
+    if($scope.user.type == null) {
+        $scope.user.type = localStorage.intent;
+    }
     localStorage.user = JSON.stringify($scope.user);
-    if (localStorage.intent == 'Poster') {
+    if ($scope.user.type == 'Poster') {
         window.location.href = 'postJob.html';
-    } else if (localStorage.intent == 'Seeker' && $scope.user.description == null || $scope.user.description.length == 0) {
+    } else if ($scope.user.type == 'Seeker' && $scope.user.description == null || $scope.user.description.length == 0) {
         window.location.href = 'updateProfile.html';
     } else {
         window.location.href = 'dashboard.html';

@@ -52,22 +52,25 @@
                     <div class="list-group" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
                         <div id="poster" class="collapse in">
-                            <a href="#" class="list-group-item" ng-click="showPostedJobs('open')"><span class="badge badge-default">{{profile.postedJobs.length}}</span>Posted Jobs</a>
-                            <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="badge badge-primary">{{profile.profileInterests.length}}</span>My Candidates</a>
-                            <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="badge badge-success">{{profile.acceptedProfiles.length}}</span>Accepted Candidates</a>
+                            <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>My Candidates</a>
+                            <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.acceptedProfiles.length}}</span>Accepted Candidates</a>
+                            <a class="list-group-item"></a>
+                            <!--<a href="#" ng-click="updateType('Seeker')" class="list-group-item">Switch to Job Seeker</a>-->
+                            <a href="#" class="list-group-item" ng-click="showPostedJobs('open')"><span class="label label-success compatLabel jobLabel">{{profile.postedJobs.length}}</span>Posted Jobs</a>
                             <a href="postJob.html" class="list-group-item">Post a New Job</a>
-                            <a href="#" ng-click="updateType('Seeker')" class="list-group-item">Switch to Job Seeker</a>
                         </div>
                     </div>
                     <br/>
                     <div class="list-group" ng-show="profile.type == 'Seeker' || profile.type == null">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#seeker"><span class="listSpan" style="float:right"></span>Job Seeker&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
                         <div id="seeker" class="collapse in">
-                            <a class="list-group-item" ng-click="showAppliedJobs('open')"><span class="badge badge-default">{{profile.appliedJobs.length}}</span>Applied Jobs</a>
-                            <a class="list-group-item" ng-click="showAvailableJobs('open')"><span class="badge badge-primary">{{profile.availableJobs.length}}</span>Available Jobs</a>
-                            <a class="list-group-item" ng-click="showJobRequests()"><span class="badge badge-primary">{{profile.jobRequests.length}}</span>Job Requests</a>
-                            <a class="list-group-item" ng-click="showAcceptedJobs()"><span class="badge badge-primary">{{profile.acceptedJobs.length}}</span>Accepted Job Requests</a>
-                            <a href="#" ng-click="updateType('Poster')" class="list-group-item">Switch to Job Poster</a>
+                            <a href="#" class="list-group-item" ng-click="showJobRequests()"><span class="badge badge-primary">{{profile.jobRequests.length}}</span>Interests Received</a>
+                            <a href="#" class="list-group-item" ng-click="showAppliedJobs('open')"><span class="badge badge-default">{{profile.appliedJobs.length}}</span>Applications sent</a>
+                            <a href="#" class="list-group-item" ng-click="showAcceptedJobs()"><span class="badge badge-primary">{{profile.acceptedJobs.length}}</span>My Contacts</a>
+                            <li class="list-group-item"> </li>
+                            <a href="#" class="list-group-item" ng-click="showAvailableJobs('open')"><span class="badge badge-primary">{{profile.availableJobs.length}}</span>Available Jobs</a>
+
+                            <!--<a href="#" ng-click="updateType('Poster')" class="list-group-item">Switch to Job Poster</a>-->
                         </div>
                     </div>
                 </div>
@@ -91,6 +94,24 @@
 
 
                     <h3>{{header}}</h3>
+                    <div class="row" ng-show="postedJobs.length == 0">
+                        <p ng-show="viewType == 'PostedJobs'">
+                            There are currently No Jobs posted by you. <a href="postJob.html"> Post a new Job</a> and find matching candidates right away!
+                        </p>
+                        <p ng-show="viewType == 'AvailableJobs'">
+                            There are currently No Jobs available to you. <a href="updateProfile.html"> Update your profile</a> and find matching jobs right away!
+                        </p>
+                    </div>
+
+                    <!--<div class="row" ng-show="candidates.length == 0 && profile.type != 'Seeker' && profile.type != null">
+                        <p ng-show="viewType == 'MatchingProfiles'">
+                            There are currently No matching profiles for Job posted by you. <a href="postJob.html"> Update a new Job</a> and find matching candidates right away!
+                        </p>
+                        <p ng-show="profile.type == 'Seeker' || profile.type == null">
+                            There are currently No Jobs available to you. <a href="postJob.html"> Update your profile</a> and find matching jobs right away!
+                        </p>
+                    </div>-->
+
                     <div class="row" ng-repeat="job in postedJobs">
                         <div class="col-md-12">
                             <div class="panel panel-default jobPanel">
@@ -122,8 +143,8 @@
 
                                             <p><a href="#" class="jobLinks" ng-click="showInterestCandidates(job)">Interests &nbsp;<span class="label label-success compatLabel jobLabel" style="float:right">{{job.interestCandidates.length}}</span></a></p>
                                         </div>
-                                        
-                                        <div class="col-md-4" ng-show="profile.type == 'Seeker'">
+
+                                        <div class="col-md-4" ng-show="profile.type == 'Seeker' || profile.type == null">
                                             <p><a href="#" class="jobLinks">Compatibility &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.compatibility}}</span></a></p>
 
                                         </div>
@@ -155,8 +176,8 @@
                                             <a href="#" style="color:white" class="cardButton">Delete</a>
                                         </div>
                                     </div>
-                                    <div class="row panel-body jobPanelFooter" ng-show="profile.type == 'Seeker'">
-                                    
+                                    <div class="row panel-body jobPanelFooter" ng-show="profile.type == 'Seeker' || profile.type == null">
+
                                         <div class="col-xs-2 col-md-4">
                                             <a href="#" style="color:white" class="cardButton">Read More</a>
                                         </div>
@@ -172,7 +193,7 @@
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster == 'Y'">
                                             <a href="#" style="color:white" class="cardButton">Accept Request</a>
                                         </div>
-                                    
+
                                     </div>
                                 </div>
 
@@ -336,7 +357,7 @@
 
 
                                         </div>
-                                        
+
                                         <div class="col-md-4">
                                             <p><a href="#" class="jobLinks">Compatibility &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{candidate.compatibility}}</span></a></p>
 
@@ -360,7 +381,7 @@
                                     <br/>
                                     <div class="row panel-body jobPanelFooter">
                                         <div class="col-xs-2 col-md-4">
-                                            <a href="#candi{{candidate.id}}" style="color:white" class="cardButton">Read More</a>
+                                            <a href="#candi{{candidate.id}}" data-toggle="collapse" style="color:white" class="cardButton">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4">
                                             <a href="#" style="color:white" class="cardButton" ng-show="candidate.seekerInterested != 'Y' && candidate.posterInterested != 'Y'" ng-click="showInterestCandidate(candidate)">Show Interest</a>
@@ -369,7 +390,7 @@
                                             <a href="#" style="color:white" class="cardButton" ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested == 'Y'" ng-click="viewContact(candidate)">View Contact</a>
 
                                         </div>
-                                    
+
                                     </div>
                                 </div>
 
@@ -378,7 +399,7 @@
                         </div>
 
                     </div>
-                    
+
                     <!--<div class="row" ng-repeat="candidate in candidates" class="panelRow">
                         <div class="col-md-12">
                             <div class="panel panel-default jobPanel">
@@ -621,6 +642,23 @@
             });
             $(this).addClass("active");
         });
+
+        /*window.onbeforeunload = function () {
+            f(window.event) {
+                if (window.event.clientX < 40 && window.event.clientY < 0) {
+                    alert("Browser back button is clicked…");
+                } else {
+                    alert("Browser refresh button is clicked…");
+                }
+            } else {
+                if (event.currentTarget.performance.navigation.type == 1) {
+                    alert("Browser refresh button is clicked…");
+                }
+                if (event.currentTarget.performance.navigation.type == 2) {
+                    alert("Browser back button is clicked…");
+                }
+            }
+        };*/
     </script>
 
 

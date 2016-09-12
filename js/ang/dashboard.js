@@ -56,6 +56,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                     //alert($scope.profile.profileInterests.length);
                     //alert("2:" + response.candidateProfile.postedJobs);
                     //$scope.header = "Posted Jobs";
+                    $scope.viewType = localStorage.viewType;
                     var job = JSON.parse(localStorage.currentJob);
                     if (localStorage.viewType == "MatchingProfiles") {
                         

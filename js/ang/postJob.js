@@ -24,7 +24,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     
     if (localStorage.profile != null) {
         $scope.user = JSON.parse(localStorage.profile);
-        if($scope.user.sector.id != null) {
+        if($scope.user != null && $scope.user.sector.id != null) {
             $scope.user.sector.id = $scope.user.sector.id.toString();
         }
         //alert($scope.user.jobSkills);
@@ -47,7 +47,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         $scope.user.educations = [];
     }
 
-    $scope.itemClick = function ($skill) {
+    $scope.itemClick = function ($skill,$event) {
         //alert($scope.user);
         if ($scope.user != null) {
             //alert($scope.user.jobSkills);
@@ -61,12 +61,15 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         $("#skillInput").val("");
         $scope.matchingSkills = [];
         //alert($scope.skills);
+        $event.preventDefault();
+        return false;
     };
 
     $scope.onKeyUp = function ($event) {
         //alert("Here!" + $event.keyCode);
         if ($event.keyCode == 13) {
             //alert($scope.user);
+            $scope.matchingSkills = [];
             if ($scope.user != null) {
                 //alert($scope.user.jobSkills);
                 $scope.user.jobSkills.push($scope.skill);
@@ -75,7 +78,7 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
                 $scope.job.skillsRequired.push($scope.skill);
             }
             $scope.skill = "";
-            $("#skillInput").val("");
+            //$("#skillInput").val("");
         } else {
             //alert("Calling..");
             if ($scope.skill && $scope.skill.name != null && $scope.skill.name.length > 0) {
@@ -86,15 +89,24 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
 
             //alert($scope.matchingSkills);
         }
+        $event.preventDefault();
+        return false;
     };
 
-    $scope.removeSkill = function ($skill) {
+    $scope.removeSkill = function ($skill,$event) {
+        
         if ($scope.user != null) {
-            $scope.user.jobSkills.pop($skill);
+            var index = $scope.user.jobSkills.indexOf($skill);
+            $scope.user.jobSkills.splice(index, 1);
+            //$scope.user.jobSkills.pop($skill);
         }
         if ($scope.job != null) {
-            $scope.job.skillsRequired.pop($skill);
+            var index = $scope.job.skillsRequired.indexOf($skill);
+            $scope.job.skillsRequired.splice(index, 1);
+            //$scope.job.skillsRequired.pop($skill);
         }
+        $event.preventDefault();
+        return false;
     };
 
 
@@ -134,7 +146,28 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     };
 
 
-    $scope.saveJob = function () {
+    $scope.saveJob = function (formValid) {
+        //alert(formValid);
+        if(!formValid) {
+            $scope.showPostJobError = true;
+            return;
+        }
+        //alert(angular.isNumber($scope.job.minExperience) + ":" + angular.isNumber($scope.job.maxExperience));
+        if(isNaN($scope.job.minExperience) || isNaN($scope.job.maxExperience)) {
+           $scope.expError = "Please enter valid Min and Max Experience";
+           //alert("Here!");
+           return; 
+        }
+        
+        if((parseInt($scope.job.minExperience) > parseInt($scope.job.maxExperience))) {
+            $scope.expError = "Please enter valid Min and Max Experience";
+            //alert("Here 2!");
+            return;
+        }
+        if($scope.job.skillsRequired.length == 0) {
+            $scope.skillsError = "Please enter atleast one skill required for this job";
+            return;
+        }
         //$scope.job.skills = $scope.skills;
         //$scope.job.intent = localStorage.intent;
         localStorage.postJob = JSON.stringify($scope.job);
@@ -142,15 +175,32 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         window.location.href = "viewJob.html";
     };
 
-    $scope.saveProfile = function () {
-        //$scope.user.skills = $scope.skills;
-        //$scope.user.educations = $scope.educations;
-        //$scope.user.intent = localStorage.intent;
-        //alert($(".selecter_2"));
+    $scope.saveProfile = function (formValid) {
+        if(!formValid) {
+            $scope.showProfileError = true;
+            return;
+        }
+        //alert(angular.isNumber($scope.job.minExperience) + ":" + angular.isNumber($scope.job.maxExperience));
+        if(isNaN($scope.user.experience) || parseInt($scope.user.experience) < 0) {
+           $scope.expError = "Please enter valid Experience";
+           //alert("Here!");
+           return; 
+        }
+        
+        if($scope.user.jobSkills.length == 0) {
+            $scope.skillsError = "Please enter atleast one skill for your profile";
+            return;
+        }
         localStorage.viewProfile = JSON.stringify($scope.user);
         window.location.href = "viewProfile.html";
     };
 
-
+    $scope.showHint = function (hint) {
+        $("#" + hint).show();
+    };
+    
+    $scope.hideHint = function (hint) {
+        $("#" + hint).hide();
+    };
 
 });

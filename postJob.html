@@ -27,81 +27,90 @@
 
 
     <div class="container-fluid">
-        
         <div ng-include="'header.html'"></div>
 
         <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
                 <h3>Job Information</h3>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <select ng-model="job.type" class="mySelect">
-                        <!--<option value="">I'm a nobody</option>-->
-                        <option value="Referrer">I'm a Referrer</option>
-                        <option value="Recruiter">I'm a Recruiter</option>
-                    </select>
-                    
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <select ng-model="job.sector.id" class="mySelect">
-                        <option value="">Please select the field of job</option>
-                        <option value="1">Information Technology</option>
-                        <option value="2">Telecommunication</option>
-                        <option value="3">Mechanical</option>
-                        <option value="4">Industrial</option>
-                    </select>
-                    
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Job Title" ng-model="job.jobTitle">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Company" ng-model="job.companyName">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Min. Experience (years)" ng-model="job.minExperience">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Max. Experience (years)" ng-model="job.maxExperience">
-                        </div>
+                <ng-form name="postJobForm">
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <select name="type" ng-model="job.type" class="mySelect" ng-required="true">
+                            <!--<option value="">I'm a nobody</option>-->
+                            <option value="Referrer">I'm a Referrer</option>
+                            <option value="Recruiter">I'm a Recruiter</option>
+                        </select>
                     </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <select ng-model="job.sector.id" name="sector" class="mySelect" ng-required="true">
+                            <option value="">Please select the field of job</option>
+                            <option value="1">Information Technology</option>
+                            <option value="2">Telecommunication</option>
+                            <option value="3">Mechanical</option>
+                            <option value="4">Industrial</option>
+                        </select>
+                        <p ng-show="showPostJobError && postJobForm.sector.$invalid">Please select something</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" name="title" placeholder="Job Title" ng-model="job.jobTitle" ng-required="true">
+                        <p ng-show="showPostJobError && postJobForm.title.$invalid">Please enter Job Title</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" name="company" placeholder="Company" ng-model="job.companyName" ng-required="true">
+                        <p ng-show="showPostJobError && postJobForm.company.$invalid">Please enter Company Name</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input min="0" class="form-control" name="minExp" type="text" placeholder="Min. Experience (years)" ng-model="job.minExperience" ng-required="true">
+                               
+                            </div>
+                            <div class="col-md-6">
+                                <input min="0" class="form-control" name="maxExp" type="text" placeholder="Max. Experience (years)" ng-model="job.maxExperience" ng-required="true">
+                                
+                            </div>
+                            <p ng-show="showPostJobError && (postJobForm.minExp.$invalid || postJobForm.maxExp.$invalid)">Please enter the full experience range</p>
+                            <p>{{expError}}</p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" name="location" placeholder="Location" ng-model="job.location" ng-required="true">
+                        <p ng-show="showPostJobError && postJobForm.location.$invalid">Please enter job location</p>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <input type="text" class="form-control" name="skills" placeholder="Skills required" ng-model="skill.name" ng-keyup="onKeyUp($event)">
+                        <a href="#"><span class="myBadge" ng-click="removeSkill(s,$event)" ng-repeat="s in job.skillsRequired">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span></a>&nbsp;
+                        <ul class="list-group">
+                            <a href="#">
+                                <li class="list-group-item" ng-click="itemClick(s,$event)" ng-repeat="s in matchingSkills">{{s.name}}</li>
+                            </a>
+                        </ul>
+                        <p>{{skillsError}}</p>
+                    </div>
+                    <!--<div class="col-md-8 col-md-offset-2 myText">
                     
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Location" ng-model="job.location">
-                </div>
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <input type="text" class="form-control" placeholder="Skills required" ng-model="skill.name" ng-keyup="onKeyUp($event)">
-                    <span class="badge" ng-click="removeSkill(s)" ng-repeat="s in job.skillsRequired">{{s.name}}</span>&nbsp;
+                </div>-->
+                    <!--<div class="col-md-8 col-md-offset-2">
                     <ul class="list-group">
                         <a href="#">
                             <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
                         </a>
                     </ul>
-                </div>
-                <!--<div class="col-md-8 col-md-offset-2 myText">
-                    
                 </div>-->
-                <!--<div class="col-md-8 col-md-offset-2">
-                    <ul class="list-group">
-                        <a href="#">
-                            <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
-                        </a>
-                    </ul>
-                </div>-->
-                <div class="col-md-8 col-md-offset-2 myText">
-                    <textarea class="form-control" placeholder="About the Job" ng-model="job.description"></textarea>
-                </div>
+                    <div class="col-md-8 col-md-offset-2 myText">
+                        <textarea class="form-control" name="description" placeholder="About the Job" ng-model="job.description" ng-required="true"></textarea>
+                        <p ng-show="showPostJobError && postJobForm.description.$invalid">Please enter the job description</p>
+                    </div>
 
-                <div class="col-md-8 col-md-offset-2 text-center myText">
-                    <input type="text" class="form-control" id="datepicker" placeholder="Job offer valid till" ng-model="job.expiryDate">
-                </div>
+                    <div class="col-md-8 col-md-offset-2 text-center myText">
+                        <input type="text" class="form-control" name="expiry" id="datepicker" placeholder="Job offer valid till" ng-model="job.expiryDate" ng-required="true">
+                        <p ng-show="showPostJobError && postJobForm.expiry.$invalid">Please enter the date till which job offer is valid</p>
+                    </div>
 
-                <div class="col-md-8 col-md-offset-2 text-center mySubmit">
-                    <button type="button" class="btn btn-block mySubmitButton" ng-click="saveJob()">Submit</button>
-                </div>
-
+                    <div class="col-md-8 col-md-offset-2 text-center mySubmit">
+                        <button type="button" ng-disabled="false" class="btn btn-block mySubmitButton" ng-click="saveJob(postJobForm.$valid)">Submit</button>
+                    </div>
+                </ng-form>
 
 
             </div>

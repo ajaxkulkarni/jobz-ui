@@ -55,7 +55,7 @@ app.service('userService', function ($http, $q) {
                 email: $scope.user.email,
                 password: $scope.user.password,
                 phone: $scope.user.phone,
-                type: $scope.user.intent
+                type: $scope.user.type
             }
         };
         deferred = $q.defer();
@@ -84,6 +84,7 @@ app.service('userService', function ($http, $q) {
         localStorage.profile = null;
         localStorage.viewProfile = null;
         localStorage.viewType = null;
+        localStorage.intent = null;
         window.location.href = "index.html";
     }
     
