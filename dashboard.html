@@ -51,11 +51,12 @@
 
             <div class="row jobSection">
                 <div class="col-md-3 col-md-offset-1 optionList">
-                    <div class="list-group" ng-show="profile.type == 'Poster'">
+                    <div class="list-group posterOptions" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
                         <div id="poster" class="userOptions collapse in">
-                            <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>My Candidates</a>
-                            <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.acceptedProfiles.length}}</span>Accepted Candidates</a>
+                            <!--<a href="#" class="list-group-item" ng-click="showAppliedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Applications received</a>
+                            <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Interests sent</a>-->
+                            <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.acceptedProfiles.length}}</span>My Contacts</a>
                             <a class="list-group-item"></a>
                             <!--<a href="#" ng-click="updateType('Seeker')" class="list-group-item">Switch to Job Seeker</a>-->
                             <a href="#" class="list-group-item" ng-click="showPostedJobs('open')"><span class="label label-success compatLabel jobLabel">{{profile.postedJobs.length}}</span>Posted Jobs</a>

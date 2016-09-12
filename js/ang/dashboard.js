@@ -123,6 +123,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.postedJobs = [];
         $scope.header = "Matching Candidates for " + job.jobTitle;
         localStorage.viewType = "MatchingProfiles";
+        $scope.viewType = localStorage.viewType;
     };
 
     $scope.showPostedJobs = function (drawerState) {
@@ -134,6 +135,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.postedJobs = profile.postedJobs;
         $scope.header = "Posted Jobs";
         localStorage.viewType = "PostedJobs";
+        $scope.viewType = localStorage.viewType;
         if (drawerState == "open") {
             $("#drawer-toggle").click();
         }
@@ -152,6 +154,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $("#drawer-toggle").click();
         }
         localStorage.viewType = "MyCandidates";
+        $scope.viewType = localStorage.viewType;
     };
 
     $scope.showInterestCandidates = function (job) {
@@ -159,9 +162,10 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         localStorage.currentJob = JSON.stringify(job);
         $scope.jobsList = [];
         $scope.postedJobs = [];
-        $scope.candidates = [];
+        //$scope.candidates = [];
         $scope.header = "My Candidates for " + job.jobTitle;
         localStorage.viewType = "InterestShown";
+        $scope.viewType = localStorage.viewType;
     };
     
     $scope.showAppliedCandidates = function (job) {
@@ -169,9 +173,10 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         localStorage.currentJob = JSON.stringify(job);
         $scope.jobsList = [];
         $scope.postedJobs = [];
-        $scope.candidates = [];
+        //$scope.candidates = [];
         $scope.header = "Candidates Applied for " + job.jobTitle;
         localStorage.viewType = "AppliedCandidates";
+        $scope.viewType = localStorage.viewType;
     };
     
     $scope.showAcceptedCandidates = function (drawerState) {
@@ -186,6 +191,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $("#drawer-toggle").click();
         }
         localStorage.viewType = "AcceptedCandidates";
+        $scope.viewType = localStorage.viewType;
     };
 
 
@@ -201,6 +207,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $("#drawer-toggle").click();
         }
         localStorage.viewType = "AvailableJobs";
+        $scope.viewType = localStorage.viewType;
     };
             
     $scope.showAppliedJobs = function (drawerState) {
@@ -215,6 +222,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $("#drawer-toggle").click();
         }
         localStorage.viewType = "AppliedJobs";
+        $scope.viewType = localStorage.viewType;
     };
     
     $scope.showAcceptedJobs = function () {
@@ -226,6 +234,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.postedJobs = profile.acceptedJobs;
         $scope.header = "Job Contacts for You";
         localStorage.viewType = "AcceptedJobs";
+        $scope.viewType = localStorage.viewType;
     };
     
     $scope.showJobRequests = function () {
@@ -237,6 +246,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.postedJobs = profile.jobRequests;
         $scope.header = "Job Requests for You";
         localStorage.viewType = "JobRequests";
+        $scope.viewType = localStorage.viewType;
     };
 
     $scope.showInterestCandidate = function (candidate) {

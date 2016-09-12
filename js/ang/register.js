@@ -1,18 +1,22 @@
 angular.module("app").controller('register', function ($scope, userService) {
 
-    //alert("Here!");
-    $scope.loggedIn = null;
-    if (localStorage.user != null) {
-        $scope.loggedIn = JSON.parse(localStorage.user);
-        //alert($scope.loggedIn.email);
-    }
-    //alert($scope.loggedIn.email);
-    //alert("Here!");
-    $scope.user = {};
+    
     $scope.response = {};
-    $scope.loginResponse = null;
+    /*$scope.loginResponse = null;
     $scope.registerResponse = null;
-    $scope.showProgress = false;
+    $scope.showProgress = false;*/
+    
+    
+    $scope.loggedIn = null;
+    if (localStorage.user != null && localStorage.user != 'null') {
+        $scope.loggedIn = JSON.parse(localStorage.user);
+        $scope.user = $scope.loggedIn;
+    } 
+    if($scope.user == null) {
+        $scope.user = {};
+        //alert($scope.user);
+    }
+   
 
     $.skylo({
         state: 'success',
@@ -99,6 +103,7 @@ angular.module("app").controller('register', function ($scope, userService) {
         $.skylo('inch', 5);
         userService.login($scope).then(function (response) {
             $.skylo('end');
+            //alert(response.status);
             if (response.status != 200) {
                 $scope.loginResponse = response.responseText;
                 return;
@@ -125,7 +130,7 @@ function postLogin($scope) {
     localStorage.user = JSON.stringify($scope.user);
     if ($scope.user.type == 'Poster' && localStorage.intent == 'Poster') {
         window.location.href = 'postJob.html';
-    } else if ($scope.user.type == 'Seeker' && $scope.user.description == null || $scope.user.description.length == 0) {
+    } else if ($scope.user.type == 'Seeker' && ($scope.user.description == null || $scope.user.description.length == 0)) {
         window.location.href = 'updateProfile.html';
     } else {
         window.location.href = 'dashboard.html';

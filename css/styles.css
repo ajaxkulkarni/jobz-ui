@@ -253,6 +253,12 @@ body {
 
 .optionList {
     padding-top: 4.2%;
+    #border-style: solid;
+}
+
+.posterOptions {
+    margin-top: 6%;
+    #border-style: solid;
 }
 
 .info {
