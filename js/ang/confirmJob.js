@@ -1,5 +1,5 @@
 angular.module("app").controller('confirmJob', function ($scope, jobService, $http) {
-
+    //alert("Posting new Job");
     if (localStorage.user == null) {
         window.location.href = "index.html";
         return;
@@ -42,7 +42,8 @@ angular.module("app").controller('confirmJob', function ($scope, jobService, $ht
                 }
                 localStorage.postJob = null;
                 localStorage.viewType = "PostedJobs";
-                window.location.href = "dashboard.html";
+                //window.location.href = "dashboard.html";
+                window.location.replace("dashboard.html");
             });
         } else {
             jobService.postJob($scope).then(function (response) {
@@ -54,11 +55,20 @@ angular.module("app").controller('confirmJob', function ($scope, jobService, $ht
                 }
                 localStorage.postJob = null;
                 localStorage.viewType = "PostedJobs";
-                window.location.href = "dashboard.html";
+                //window.location.href = "dashboard.html";
+                window.location.replace("dashboard.html");
             });
         }
 
 
+    };
+    
+    $scope.back = function() {
+        window.location.replace("postJob.html");  
+    };
+    
+    $scope.logout = function () {
+        userService.logout();
     };
 
 });

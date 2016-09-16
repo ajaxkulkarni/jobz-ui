@@ -185,7 +185,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         //localStorage.currentJob = JSON.stringify(job);
         $scope.jobsList = [];
         $scope.postedJobs = [];
-        $scope.candidates = [];
+        //$scope.candidates = [];
         $scope.header = "Candidate contacts available to you";
         if (drawerState == "open") {
             $("#drawer-toggle").click();
@@ -348,6 +348,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     $scope.wipe = function() {
         $scope.showInterestResponse = null;
         $scope.applyJobResponse= null;
+        $scope.deleteJobResponse = null;
     };
 
 

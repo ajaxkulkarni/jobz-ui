@@ -45,9 +45,17 @@ angular.module("app").controller('viewProfile', function ($scope, userService, $
                 //alert($scope.loginResponse);
                 return;
             }
-            localStorage.viewType = "AvailableJobs";
+            //localStorage.viewType = "AvailableJobs";
             window.location.href = "dashboard.html";
         });
+    };
+    
+    $scope.back = function() {
+        window.location.replace("updateProfile.html");  
+    };
+    
+    $scope.logout = function () {
+        userService.logout();
     };
 
 });

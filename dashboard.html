@@ -172,7 +172,7 @@
                                     <br/>
                                     <div class="row panel-body jobPanelFooter" ng-show="profile.type != 'Seeker' && profile.type!= null">
                                         <div class="col-xs-2 col-md-4">
-                                            <a data-toggle="collapse" href="#{{job.id}}" class="cardButton">Read More</a>
+                                            <a data-toggle="collapse" href="#job{{job.id}}" class="cardButton">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="editJob(job)">
                                             <a href="#" style="color:white" class="cardButton">Edit</a>
@@ -649,7 +649,8 @@
         });
 
         /*window.onbeforeunload = function () {
-            f(window.event) {
+            //alert("Changed!");
+            if(window.event) {
                 if (window.event.clientX < 40 && window.event.clientY < 0) {
                     alert("Browser back button is clicked…");
                 } else {
@@ -663,6 +664,10 @@
                     alert("Browser back button is clicked…");
                 }
             }
+        };
+        
+        window.onhashchange = function() {
+            alert("Hash changed!");
         };*/
     </script>
 

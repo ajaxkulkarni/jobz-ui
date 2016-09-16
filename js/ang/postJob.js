@@ -1,5 +1,5 @@
 angular.module("app").controller('postJob', function ($scope, generic, $http) {
-
+    
     if(localStorage.user == null) {
         window.location.href = "index.html";
         return;
@@ -69,15 +69,17 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         //alert("Here!" + $event.keyCode);
         if ($event.keyCode == 13) {
             //alert($scope.user);
-            $scope.matchingSkills = [];
+            var skill = matchSkill($scope);
+            //alert(skill.name);
             if ($scope.user != null) {
                 //alert($scope.user.jobSkills);
-                $scope.user.jobSkills.push($scope.skill);
+                $scope.user.jobSkills.push(skill);
             }
             if ($scope.job != null) {
-                $scope.job.skillsRequired.push($scope.skill);
+                $scope.job.skillsRequired.push(skill);
             }
             $scope.skill = "";
+            $scope.matchingSkills = [];
             //$("#skillInput").val("");
         } else {
             //alert("Calling..");
@@ -172,7 +174,8 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         //$scope.job.intent = localStorage.intent;
         localStorage.postJob = JSON.stringify($scope.job);
         //alert($scope.job.intent);
-        window.location.href = "viewJob.html";
+        //window.location.href = "viewJob.html";
+        window.location.replace("viewJob.html");
     };
 
     $scope.saveProfile = function (formValid) {
@@ -202,5 +205,23 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
     $scope.hideHint = function (hint) {
         $("#" + hint).hide();
     };
+    
+    $scope.logout = function () {
+        userService.logout();
+    };
 
 });
+
+function matchSkill($scope) {
+    if($scope.matchingSkills != null && $scope.matchingSkills.length > 0) {
+        var i = 0;
+        var filteredSkill = $scope.skill.name.replace(/\s+/g, '');
+        for(i =0; i< $scope.matchingSkills.length; i++) {
+            var curSkill = $scope.matchingSkills[i].name.replace(/\s+/g, '');
+            if(curSkill.toUpperCase() == filteredSkill.toUpperCase()) {
+                return $scope.matchingSkills[i];
+            }
+        }
+    }
+    return $scope.skill;
+}

@@ -1,6 +1,5 @@
 angular.module("app").controller('register', function ($scope, userService) {
 
-    
     $scope.response = {};
     /*$scope.loginResponse = null;
     $scope.registerResponse = null;
@@ -119,6 +118,14 @@ angular.module("app").controller('register', function ($scope, userService) {
     $scope.logout = function () {
         userService.logout();
     };
+    
+    $scope.goToRegister = function() {
+        $("#myModal").modal('hide');
+        $('html, body').animate({
+            scrollTop: $("#register").offset().top
+        }, 2000);
+        
+    }
 
 
 });
@@ -137,3 +144,4 @@ function postLogin($scope) {
     }
 
 }
+

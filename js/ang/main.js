@@ -1,7 +1,7 @@
 var app = angular.module("app", []);
 
-//var root = "http://localhost:8080/jobz-app/service";
-var root = "http://115.124.124.220:8080/jobz/service";
+var root = "http://localhost:8080/jobz-app/service";
+//var root = "http://115.124.124.220:8080/jobz/service";
 
 
 
@@ -348,6 +348,35 @@ app.service('jobService', function ($http, $q) {
         return $q.when(response);
     }
 });
+
+/*app.run(function($rootScope, $location){
+    $rootScope.$on('$locationChangeSuccess', function() {
+        $rootScope.actualLocation = $location.path();
+        alert("Here!" + $rootScope.actualLocation);
+    });        
+
+   $rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
+       alert("watching!" + $rootScope.actualLocation + ":" + newLocation); 
+       if($rootScope.actualLocation === newLocation) {
+            alert('Why did you use history back?');
+        }
+    });
+});*/
+
+/*app.run(function($rootScope, $route, $location){
+   //Bind the `$locationChangeSuccess` event on the rootScope, so that we dont need to 
+   //bind in induvidual controllers.
+
+   $rootScope.$on('$locationChangeSuccess', function() {
+        $rootScope.actualLocation = $location.path();
+    });        
+
+   $rootScope.$watch(function () {return $location.path()}, function (newLocation, oldLocation) {
+        if($rootScope.actualLocation === newLocation) {
+            alert('Why did you use history back?');
+        }
+    });
+});*/
 
 
 /*app.directive('datepicker', function () {
