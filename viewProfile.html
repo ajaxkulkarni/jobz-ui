@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/site.min.css">
     <link rel="stylesheet" href="css/skylo.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
 
     <script type="text/javascript" src="js/site.min.js"></script>
     <script src="js/skylo.js"></script>
@@ -28,10 +30,12 @@
 
 
     <div class="container-fluid">
-        
+
         <div ng-include="'header.html'"></div>
 
-        <div class="row">
+        <h3 class="text-center">Profile at a Glance</h3>
+
+        <!--<div class="row">
             <div class="col-md-offset-3 col-md-6">
                 <div class="pricing">
                     <ul>
@@ -49,7 +53,7 @@
                                         {{user.experience}}
                                     </div>
                                     <div class="col-md-4">
-                                        <!--{{job.intent}}-->
+                                        {{job.intent}}
                                     </div>
                                 </div>
                             </div>
@@ -59,10 +63,7 @@
                                 <p><span class="myBadge" ng-repeat="s in user.jobSkills">{{s.name}}</span>&nbsp;
                                 </p>
 
-                                <!--<h4>Education</h4>
-                                <br/>
-                                <p><span class="label" ng-repeat="s in user.educations">{{s.name}}</span>&nbsp;
-                                </p>-->
+                              
 
                                 <p>
                                     {{user.description}}
@@ -76,9 +77,73 @@
                         </li>
                     </ul>
                 </div>
+
+
+            </div>
+        </div>-->
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default jobPanel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h2 class="panel-title jobPanelTitle">{{user.name}}</h2>
+                                <p class="panel-title jobPanelSubTitle">{{user.designation}}</p>
+
+                                <div class="row">
+                                    <!--<div class="col-md-4">
+                                        <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
+                                        <span class="jobPanelProps">&nbsp;{{candidate.company}}</span>
+                                    </div>-->
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-briefcase jobPanelIcon" style="font-size:20px"></span> <span class="jobPanelProps">&nbsp;{{user.experience}} years</span>
+                                    </div>
+                                </div>
+                                <br/>
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span ng-repeat="skill in user.jobSkills"><span class="myBadge">{{skill.name}}</span>&nbsp;&nbsp;</span>
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row" id="candi{{candidate.id}}">
+                            <div class="col-md-12">
+                                {{user.description}}
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row panel-body jobPanelFooter" style="padding-bottom:5%">
+                            <!--<div class="col-md-6">
+                                <a href="#" class="cardButton profileButton" ng-click="back()">Back</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="cardButton profileButton" ng-click="saveProfile()">Save</a>
+
+                            </div>-->
+
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
-
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="price-foot viewJobFooter">
+                    <button type="button" class="btn btn-primary myPanelButton myPanelButtonBack" ng-click="back()">Back</button>
+                    <button type="button" class="btn btn-primary myPanelButton myPanelButtonSave" ng-click="saveProfile()">Submit</button>
+                </div>
+            </div>
         </div>
     </div>
 

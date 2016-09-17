@@ -11,7 +11,9 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="css/site.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
 
     <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">-->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
@@ -81,7 +83,7 @@
                 </div>-->
         <div class="row">
 
-            <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="col-md-8 col-md-offset-2 text-center">
                 <h3>Your Profile</h3>
                 <ng-form name="profileForm">
                     <div class="col-md-8 col-md-offset-2 myText">
@@ -94,15 +96,17 @@
                             <option value="3">Mechanical</option>
                             <option value="4">Industrial</option>
                         </select>
-                        <p ng-show="showProfileError && profileForm.sector.$invalid">Please choose a sector</p>
+                        <p class="error" ng-show="showProfileError && profileForm.sector.$invalid">Please choose a sector</p>
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Specialization * </p>
                         <p class="fieldDesc text-left">Write your specialization based on interests/ current job title</p>
-                        <input type="text" class="form-control" placeholder="e.g. Java developer, Product designer etc." ng-model="user.designation" maxlength="50">
+                        <input type="text" class="form-control" placeholder="e.g. Java developer, Product designer etc." ng-model="user.designation" name="title"  maxlength="50" ng-required="true">
+                        <p class="error" ng-show="showProfileError && profileForm.title.$invalid">Please enter your specialization</p>
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Experience * </p>
+                        <p class="fieldDesc text-left">Write your work experience in years. Put 0 for freshers.</p>
                         <!--<p class="fieldDesc text-left" >Select your industry or field of work</p>-->
                         <input type="text" value="{{profile.experience}}" class="form-control" placeholder="e.g. 1.5, 2.5, 0 etc." ng-model="user.experience" ng-required="true" name="exp" maxlength="5">
                         <!--<div id="expHint" style="display:none">
@@ -113,8 +117,8 @@
                                 <p>Write your experience in years e.g. 1.5 years ,0 years</p>
                             </div>
                         </div>-->
-                        <p ng-show="showProfileError && profileForm.exp.$invalid">Please enter your job experience (0 for freshers)</p>
-                        <p ng-show="!showProfileError">{{expError}}</p>
+                        <p class="error" ng-show="showProfileError && profileForm.exp.$invalid">Please enter your job experience (0 for freshers)</p>
+                        <p class="error" ng-show="!showProfileError">{{expError}}</p>
                         <!--<a class="tip">
                             <div class="row">
                                 <div class="col-md-6">
@@ -135,13 +139,14 @@
                         <p class="fieldLabel text-left">Your Skills * </p>
                         <p class="fieldDesc text-left">List down things thar you're good at. It can be a tool, technology or soft skill. Be precise. Press enter after entering any skill to add it to your list.</p>
                         <input type="text" class="form-control" placeholder="C#, Java, Public speaking, Solidworks, Reporting etc." ng-model="skill.name" ng-keyup="onKeyUp($event)">
-                        <span class="badge myBadge" ng-click="removeSkill(s)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br/>
+                        <a href="#"><span class="badge myBadge" ng-click="removeSkill(s)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <ul class="list-group">
                             <a href="#">
                                 <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
                             </a>
                         </ul>
-                        <p>{{skillsError}}</p>
+                        <p class="error">{{skillsError}}</p>
                     </div>
                     <!--<div class="col-md-8 col-md-offset-2 myText">
                     <input type="text" class="form-control" placeholder="Your Qualifications" ng-model="education.name" ng-keyup="onKeyUpEdu($event)">
@@ -163,14 +168,18 @@
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">About yourself *</p>
                         <p class="fieldDesc text-left">Introduce yourself. Write about the best of you in minimal words.(200 max)</p>
-                        <textarea class="form-control" placeholder="About yourself .." ng-model="user.description" ng-required="true" maxlength="800" name="description"></textarea>
-                        <p ng-show="showProfileError && profileForm.description.$invalid">Hi, I am ..</p>
+                        <textarea class="form-control" placeholder="Hi, I am .." ng-model="user.description" ng-required="true" maxlength="800" name="description" rows="10"></textarea>
+                        <p class="error" ng-show="showProfileError && profileForm.description.$invalid">Please enter something about yourself</p>
 
                     </div>
-
-
-                    <div class="col-md-8 col-md-offset-2 text-center mySubmit">
-                        <button type="button" class="btn btn-block mySubmitButton" ng-click="saveProfile(profileForm.$valid)">Submit</button>
+                    
+                    <div class="col-md-8 col-md-offset-2">
+                       <p class="error" ng-show="showProfileError">Please enter all the mandatory fields</p>
+                    </div>
+                    
+                    
+                    <div class="col-md-8 col-md-offset-2 text-center mySubmit profileSubmit">
+                        <button type="button" class="btn btn-block mySubmitButton profileSubmitButton" ng-click="saveProfile(profileForm.$valid)">Continue</button>
                     </div>
 
                 </ng-form>

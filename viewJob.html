@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/site.min.css">
     <link rel="stylesheet" href="css/skylo.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
 
     <script type="text/javascript" src="js/site.min.js"></script>
     <script src="js/skylo.js"></script>
@@ -28,10 +30,10 @@
 
 
     <div class="container-fluid">
-        
+
         <div ng-include="'header.html'"></div>
-        
-        <div class="row">
+
+        <!--<div class="row">
             <div class="col-md-offset-3 col-md-6">
                 <div class="pricing">
                     <ul>
@@ -57,7 +59,7 @@
                                 <h4>Skills</h4>
                                 <br/>
                                 <p><span class="myBadge" ng-repeat="s in job.skillsRequired">{{s.name}}</span>&nbsp;
-                                    
+
                                 </p>
                                 <p>
                                     {{job.description}}
@@ -73,6 +75,70 @@
                 </div>
             </div>
 
+
+        </div>-->
+
+        <h3 class="text-center">Job Post at a Glance</h3>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-default jobPanel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
+                                <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
+                                        <span class="jobPanelProps">&nbsp;{{job.location}}</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="glyphicon glyphicon-briefcase jobPanelIcon" style="font-size:20px"></span> <span class="jobPanelProps">&nbsp;{{job.minExperience}} - {{job.maxExperience}} years</span>
+                                    </div>
+                                </div>
+                                <br/>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span ng-repeat="skill in job.skillsRequired"><span class="myBadge">{{skill.name}}</span>&nbsp;&nbsp;</span>
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row" id="job{{job.id}}">
+                            <div class="col-md-12">
+                                {{job.description}}
+                                <br/>
+                                <br/>
+                                <p><b>Job Offer Valid Till :</b> {{job.expiryDate}}</p>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row panel-body jobPanelFooter" style="padding-bottom:5%">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="price-foot viewJobFooter">
+                        <button type="button" class="btn btn-primary myPanelButton myPanelButtonBack" ng-click="back()">Back</button>
+                        <button type="button" class="btn btn-primary myPanelButton myPanelButtonSave" ng-click="postJob()">Submit</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

@@ -1,3 +1,4 @@
+<!--navbar-fixed-top-->
 <div class="row myNavBar">
     <div class="col-md-12">
         <nav class="navbar navbar-default myNavBar" role="navigation">
@@ -13,7 +14,7 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-2">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav navRight">
                         <li class="dropdown navbar-right myNav" ng-show="loggedIn != null">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white">{{loggedIn.name}} <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
@@ -26,6 +27,10 @@
                         </li>
                         <a href="#" class="navbar-text navbar-right myNav" data-toggle="modal" data-target="#myModal" ng-show="loggedIn == null">Login</a>
                         <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn != null">Dashboard</a>
+                        <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn == null">Contact Us</a>
+                        <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn == null">About Us</a>
+                        <a href="#" class="navbar-text navbar-right myNav" ng-show="loggedIn == null" ng-click="goToHow()">How It Works</a>
+                        
                     </ul>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-angular.module("app").controller('viewProfile', function ($scope, userService, $http) {
+angular.module("app").controller('viewProfile', function ($scope, userService,userService, $http) {
     
     //alert("Here!");
     

@@ -11,7 +11,9 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="css/site.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
 
     <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">-->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
@@ -30,7 +32,7 @@
         <div ng-include="'header.html'"></div>
 
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="col-md-8 col-md-offset-2 text-center">
                 <h3>Job Information</h3>
                 <ng-form name="postJobForm">
                     <div class="col-md-8 col-md-offset-2 myText">
@@ -51,19 +53,19 @@
                             <option value="3">Mechanical</option>
                             <option value="4">Industrial</option>
                         </select>
-                        <p ng-show="showPostJobError && postJobForm.sector.$invalid">Please select something</p>
+                        <p class="error" ng-show="showPostJobError && postJobForm.sector.$invalid">Please select something</p>
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Job Title * </p>
                         <p class="fieldDesc text-left">Mention the role/job title</p>
                         <input type="text" class="form-control" name="title" placeholder="Job Title" ng-model="job.jobTitle" ng-required="true">
-                        <p ng-show="showPostJobError && postJobForm.title.$invalid">e.g. Java Developer, Product designer, Admin Executive etc.</p>
+                        <p class="error" ng-show="showPostJobError && postJobForm.title.$invalid">e.g. Java Developer, Product designer, Admin Executive etc.</p>
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Company * </p>
                         <p class="fieldDesc text-left">Name of the recruiting company/ Business</p>
                         <input type="text" class="form-control" name="company" placeholder="e.g. Infosys, TATA Motors etc." ng-model="job.companyName" ng-required="true">
-                        <p ng-show="showPostJobError && postJobForm.company.$invalid">Please enter Company Name</p>
+                        <p class="error" ng-show="showPostJobError && postJobForm.company.$invalid">Please enter Company Name</p>
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Experience * </p>
@@ -73,15 +75,15 @@
                                 <input min="0" class="form-control" name="minExp" type="text" placeholder="e.g. 0, 1.5, 2" ng-model="job.minExperience" ng-required="true">
                                
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="font-size:20px">
                                to
                             </div>
                             <div class="col-md-5">
                                 <input min="0" class="form-control" name="maxExp" type="text" placeholder="e.g. 0, 1.5, 2" ng-model="job.maxExperience" ng-required="true">
                                 
                             </div>
-                            <p ng-show="showPostJobError && (postJobForm.minExp.$invalid || postJobForm.maxExp.$invalid)">Please enter the full experience range</p>
-                            <p>{{expError}}</p>
+                            <p class="error" ng-show="showPostJobError && (postJobForm.minExp.$invalid || postJobForm.maxExp.$invalid)">Please enter the full experience range</p>
+                            <p class="error">{{expError}}</p>
                         </div>
 
                     </div>
@@ -89,19 +91,20 @@
                         <p class="fieldLabel text-left">Location * </p>
                         <p class="fieldDesc text-left">Location of candidate placement</p>
                         <input type="text" class="form-control" name="location" placeholder="e.g. Pune, Delhi etc." ng-model="job.location" ng-required="true">
-                        <p ng-show="showPostJobError && postJobForm.location.$invalid">Please enter job location</p>
+                        <p class="error" ng-show="showPostJobError && postJobForm.location.$invalid">Please enter job location</p>
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Skills * </p>
                         <p class="fieldDesc text-left">Skills expected from the candidate. It can be a tool, technology or soft skill also. Be precise. Press enter after typing the skill to add it to the list.</p>
                         <input type="text" class="form-control" name="skills" placeholder="e.g. Java, C#, Auto-CAD, management, report writing etc." ng-model="skill.name" ng-keyup="onKeyUp($event)">
+                        <br/>
                         <a href="#"><span class="myBadge" ng-click="removeSkill(s,$event)" ng-repeat="s in job.skillsRequired">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span></a>&nbsp;
                         <ul class="list-group">
                             <a href="#">
                                 <li class="list-group-item" ng-click="itemClick(s,$event)" ng-repeat="s in matchingSkills">{{s.name}}</li>
                             </a>
                         </ul>
-                        <p>{{skillsError}}</p>
+                        <p class="error">{{skillsError}}</p>
                     </div>
                     <!--<div class="col-md-8 col-md-offset-2 myText">
                     
@@ -118,20 +121,27 @@
                         <p class="fieldLabel text-left">Job Un posting Date * </p>
                         <p class="fieldDesc text-left">Date till which the job is valid. It won't be available to the seekers after this date.</p>
                         <input type="text" class="form-control" name="expiry" id="datepicker" placeholder="Job offer valid till" ng-model="job.expiryDate" ng-required="true">
-                        <p ng-show="showPostJobError && postJobForm.expiry.$invalid">Please enter the date till which job offer is valid</p>
+                        <p class="error" ng-show="showPostJobError && postJobForm.expiry.$invalid">Please enter the date till which job offer is valid</p>
                     </div>
                     
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">About the Job * </p>
                         <p class="fieldDesc text-left">Describe the job in detail</p>
-                        <textarea class="form-control" name="description" placeholder="In this job profile .." ng-model="job.description" ng-required="true"></textarea>
-                        <p ng-show="showPostJobError && postJobForm.description.$invalid">Please enter the job description</p>
+                        <textarea class="form-control" name="description" placeholder="In this job profile .." ng-model="job.description" ng-required="true" rows="10"></textarea>
+                        <p class="error" ng-show="showPostJobError && postJobForm.description.$invalid">Please enter the job description</p>
                     </div>
-
+                    
+                    <div class="col-md-8 col-md-offset-2">
+                       <p class="error" ng-show="showPostJobError">Please enter all the mandatory fields</p>
+                    </div>
                     
 
-                    <div class="col-md-8 col-md-offset-2 text-center mySubmit">
+                    <!--<div class="col-md-8 col-md-offset-2 text-center mySubmit">
                         <button type="button" ng-disabled="false" class="btn btn-block mySubmitButton" ng-click="saveJob(postJobForm.$valid)">Submit</button>
+                    </div>-->
+                    
+                    <div class="col-md-8 col-md-offset-2 text-center mySubmit profileSubmit">
+                        <button type="button" class="btn btn-block mySubmitButton profileSubmitButton" ng-click="saveJob(postJobForm.$valid)">Continue</button>
                     </div>
                 </ng-form>
 

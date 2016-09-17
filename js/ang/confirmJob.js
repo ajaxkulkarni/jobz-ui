@@ -1,4 +1,4 @@
-angular.module("app").controller('confirmJob', function ($scope, jobService, $http) {
+angular.module("app").controller('confirmJob', function ($scope, jobService,userService, $http) {
     //alert("Posting new Job");
     if (localStorage.user == null) {
         window.location.href = "index.html";

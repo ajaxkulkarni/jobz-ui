@@ -12,7 +12,11 @@
     <!--<link rel="stylesheet" href="css/drawer.css">-->
     <link rel="stylesheet" href="css/skylo.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+    
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
+    
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">-->
 
     <script type="text/javascript" src="js/site.min.js"></script>
 
@@ -125,11 +129,11 @@
                                             <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
 
                                             <div class="row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
                                                     <span class="jobPanelProps">&nbsp;{{job.location}}</span>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <span class="glyphicon glyphicon-briefcase jobPanelIcon" style="font-size:20px"></span> <span class="jobPanelProps">&nbsp;{{job.minExperience}} - {{job.maxExperience}} years</span>
                                                 </div>
                                             </div>
@@ -140,11 +144,11 @@
 
 
                                         <div class="col-md-4" ng-show="profile.type != 'Seeker' && profile.type!= null">
-                                            <p><a href="#" ng-click="showMatchingProfiles(job)" class="jobLinks">Matching &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.matchingCandidates.length}}</span></a></p>
+                                            <p><a href="#" ng-click="showMatchingProfiles(job)" class="jobLinks">Matching Profiles &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.matchingCandidates.length}}</span></a></p>
 
                                             <p><a href="#" ng-click="showAppliedCandidates(job)" class="jobLinks">Applications &nbsp;<span class="label label-success compatLabel jobLabel" style="float:right">{{job.applications.length}}</span></a></p>
 
-                                            <p><a href="#" class="jobLinks" ng-click="showInterestCandidates(job)">Interests &nbsp;<span class="label label-success compatLabel jobLabel" style="float:right">{{job.interestCandidates.length}}</span></a></p>
+                                            <p><a href="#" class="jobLinks" ng-click="showInterestCandidates(job)">My Interests &nbsp;<span class="label label-success compatLabel jobLabel" style="float:right">{{job.interestCandidates.length}}</span></a></p>
                                         </div>
 
                                         <div class="col-md-4" ng-show="profile.type == 'Seeker' || profile.type == null">
@@ -175,10 +179,10 @@
                                             <a data-toggle="collapse" href="#job{{job.id}}" class="cardButton">Read More</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="editJob(job)">
-                                            <a href="#" style="color:white" class="cardButton">Edit</a>
+                                            <a href="#" style="color:white;float:right" class="cardButton">Edit</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="showDeleteJob(job)">
-                                            <a href="#" style="color:white" class="cardButton">Delete</a>
+                                            <a href="#" style="color:white;float:right" class="cardButton">Delete</a>
                                         </div>
                                     </div>
                                     <div class="row panel-body jobPanelFooter" ng-show="profile.type == 'Seeker' || profile.type == null">
@@ -209,136 +213,7 @@
                     </div>
                     <br/>
 
-                    <!--<div class="row" ng-repeat="job in postedJobs" class="panelRow">
-                        <div class="col-md-12">
-                            <div class="panel panel-default jobPanel">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
-                                            
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <a href="#" ng-click="showMatchingProfiles(job)">Matching &nbsp; <span class="label label-success compatLabel">{{job.matchingCandidates.length}}</span></a>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a href="#" ng-click="showAppliedCandidates(job)">Applications &nbsp;<span class="label label-success compatLabel">{{job.applications.length}}</span></a>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <a href="#" ng-click="showInterestCandidates(job)">My Interests &nbsp;<span class="label label-success compatLabel">{{job.interestCandidates.length}}</span></a>
-                                        </div>
-                                        <div class="col-md-3">
-                                            
-                                        </div>
-                                    </div>
-
-                                    <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            {{job.location}}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{job.minExperience}} - {{job.maxExperience}}
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <span class="badge" ng-repeat="skill in job.skillsRequired">{{skill.name}}</span>&nbsp;
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            {{job.description}}
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="panel-body jobPanelFooter">
-                                    <div class="row">
-                                        <div class="col-xs-2 col-md-4">
-                                            <a href="#" style="color:white">Read More</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4" ng-click="editJob(job)">
-                                            <a href="#" style="color:white">Edit</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <br/>
-                            <br/>
-                        </div>
-                        <br/>
-                        <br/>
-                    </div>-->
-
-                    <!--<div class="row" ng-repeat="job in jobsList" class="panelRow">
-                        <div class="col-md-12">
-                            
-                            <div class="panel panel-default jobPanel">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a>Compatibility &nbsp;<span class="label label-success compatLabel">{{job.compatibility}}</span></a>
-                                        </div>
-                                    </div>
-
-                                    <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            {{job.location}}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{job.minExperience}} - {{job.maxExperience}}
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <span class="badge" ng-repeat="skill in job.skillsRequired">{{skill.name}}</span>&nbsp;
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            {{job.description}}
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="panel-body jobPanelFooter">
-                                    <div class="row">
-                                        <div class="col-xs-2 col-md-4">
-                                            <a href="#" style="color:white">Read More</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster != 'Y'">
-                                            <a href="#" style="color:white">Show Interest</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster != 'Y'">
-                                            <a href="#" style="color:white">Interest Shown</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4" ng-click="viewContact(job.postedBy)" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster == 'Y'">
-                                            <a href="#" style="color:white">View Contact</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster == 'Y'">
-                                            <a href="#" style="color:white">Accept Request</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <br/>
-                            <br/>
-                        </div>
-                        <br/>
-                        <br/>
-                    </div>-->
+                    
 
                     <div class="row" ng-repeat="candidate in candidates">
                         <div class="col-md-12">
@@ -405,123 +280,7 @@
 
                     </div>
 
-                    <!--<div class="row" ng-repeat="candidate in candidates" class="panelRow">
-                        <div class="col-md-12">
-                            <div class="panel panel-default jobPanel">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h2 class="panel-title jobPanelTitle">{{candidate.name}}</h2>
-                                        </div>
-                                        <div class="col-md-4">
-                                            
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a>Compatibility &nbsp;<span class="label label-success compatLabel">{{candidate.compatibility}}</span></a>
-                                        </div>
-                                    </div>
-
-                                    <p class="panel-title jobPanelSubTitle">{{candidate.designation}}</p>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            {{candiate.company}}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{candidate.experience}}
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <span class="badge" ng-repeat="skill in candidate.jobSkills">{{skill.name}}</span>&nbsp;
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            {{candidate.description}}
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="panel-body jobPanelFooter">
-                                    <div class="row">
-                                        <div class="col-xs-2 col-md-4">
-                                            <a href="#" style="color:white">Read More</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4" ng-click="showInterestCandidate(candidate)">
-                                            <a href="#" style="color:white">Show Interest</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <br/>
-                            <br/>
-                        </div>
-                        <br/>
-                        <br/>
-                    </div>-->
-
-
-                    <!--<div class="row" ng-repeat="candidate in myCandidates" class="panelRow">
-                        <div class="col-md-12">
-                            <div class="panel panel-default jobPanel">
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <h2 class="panel-title jobPanelTitle">{{candidate.name}}</h2>
-                                        </div>
-                                        <div class="col-md-4">
-                                            
-                                        </div>
-                                        <div class="col-md-4">
-                                            <a>Compatibility &nbsp;<span class="label label-success compatLabel">{{candidate.compatibility}}</span></a>
-                                        </div>
-                                    </div>
-
-                                    <p class="panel-title jobPanelSubTitle">{{candidate.designation}}</p>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            {{candiate.company}}
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{candidate.experience}}
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <span class="badge" ng-repeat="skill in candidate.jobSkills">{{skill.name}}</span>&nbsp;
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            {{candidate.description}}
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="panel-body jobPanelFooter">
-                                    <div class="row">
-                                        <div class="col-xs-2 col-md-4">
-                                            <a href="#" style="color:white">Read More</a>
-                                        </div>
-                                        <div class="col-xs-2 col-md-4">
-                                            <a href="#" style="color:white"><span ng-show="candidate.seekerInterested != 'Y' && candidate.posterInterested == 'Y' ">Interest shown</span></a>
-                                            <a href="#" style="color:white"><span ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested != 'Y' " ng-click="acceptInterestCandidate(candidate)">Accept Interest</span></a>
-                                            <a href="#" style="color:white"><span ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested == 'Y'" ng-click="viewContact(candidate)">View Contact</span></a>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <br/>
-                            <br/>
-                        </div>
-                        <br/>
-                        <br/>
-                    </div>-->
+                    
 
                 </div>
             </div>

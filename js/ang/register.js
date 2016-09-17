@@ -126,6 +126,13 @@ angular.module("app").controller('register', function ($scope, userService) {
         }, 2000);
         
     }
+    
+    $scope.goToHow = function() {
+        $('html, body').animate({
+            scrollTop: $("#how").offset().top
+        }, 2000);
+        
+    }
 
 
 });

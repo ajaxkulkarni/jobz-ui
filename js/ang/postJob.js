@@ -1,4 +1,4 @@
-angular.module("app").controller('postJob', function ($scope, generic, $http) {
+angular.module("app").controller('postJob', function ($scope, generic,userService, $http) {
     
     if(localStorage.user == null) {
         window.location.href = "index.html";
@@ -157,17 +157,20 @@ angular.module("app").controller('postJob', function ($scope, generic, $http) {
         //alert(angular.isNumber($scope.job.minExperience) + ":" + angular.isNumber($scope.job.maxExperience));
         if(isNaN($scope.job.minExperience) || isNaN($scope.job.maxExperience)) {
            $scope.expError = "Please enter valid Min and Max Experience";
+           $scope.showPostJobError = true;
            //alert("Here!");
            return; 
         }
         
         if((parseInt($scope.job.minExperience) > parseInt($scope.job.maxExperience))) {
             $scope.expError = "Please enter valid Min and Max Experience";
+            $scope.showPostJobError = true;
             //alert("Here 2!");
             return;
         }
         if($scope.job.skillsRequired.length == 0) {
             $scope.skillsError = "Please enter atleast one skill required for this job";
+            $scope.showPostJobError = true;
             return;
         }
         //$scope.job.skills = $scope.skills;
