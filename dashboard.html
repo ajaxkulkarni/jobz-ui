@@ -66,8 +66,8 @@
                         <span class="glyphicon glyphicon-arrow-left dashBack"></span>
                     </a>
                     <br/>
-                    <div class="list-group posterOptions" ng-show="profile.type == 'Poster'">
-                        <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
+                    <div class="list-group posterOptions" id="optionsDiv" ng-show="profile.type == 'Poster'">
+                        <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span><b>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;</b><span class=""></span></li>
                         <div id="poster" class="userOptions collapse in">
                             <!--<a href="#" class="list-group-item" ng-click="showAppliedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Applications received</a>
                             <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Interests sent</a>-->
@@ -79,14 +79,16 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="list-group" ng-show="profile.type == 'Seeker' || profile.type == null">
-                        <li class="list-group-item listMain" data-toggle="collapse" data-target="#seeker"><span class="listSpan" style="float:right"></span>Job Seeker&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
+                    <div class="list-group seekerOptions" ng-show="profile.type == 'Seeker' || profile.type == null">
+                        <li class="list-group-item listMain" data-toggle="collapse" data-target="#seeker"><span class="listSpan" style="float:right"></span><b>Job Seeker&nbsp;&nbsp;&nbsp;&nbsp;</b><span class=""></span></li>
                         <div id="seeker" class="userOptions collapse in">
-                            <a href="#" class="list-group-item" ng-click="showJobRequests()"><span class="badge badge-primary">{{profile.jobRequests.length}}</span>Interests Received</a>
-                            <a href="#" class="list-group-item" ng-click="showAppliedJobs('open')"><span class="badge badge-default">{{profile.appliedJobs.length}}</span>Applications sent</a>
-                            <a href="#" class="list-group-item" ng-click="showAcceptedJobs()"><span class="badge badge-primary">{{profile.acceptedJobs.length}}</span>My Contacts</a>
+                            <a href="#" class="list-group-item" ng-click="showAvailableJobs('open')"><span class="label label-success compatLabel jobLabel">{{profile.availableJobs.length}}</span>Available Jobs</a>
                             <li class="list-group-item"> </li>
-                            <a href="#" class="list-group-item" ng-click="showAvailableJobs('open')"><span class="badge badge-primary">{{profile.availableJobs.length}}</span>Available Jobs</a>
+                            <a href="#" class="list-group-item" ng-click="showJobRequests()"><span class="label label-success compatLabel jobLabel">{{profile.jobRequests.length}}</span>Interests Received</a>
+                            <a href="#" class="list-group-item" ng-click="showAppliedJobs('open')"><span class="label label-success compatLabel jobLabel">{{profile.appliedJobs.length}}</span>Applications sent</a>
+                            <a href="#" class="list-group-item" ng-click="showAcceptedJobs()"><span class="label label-success compatLabel jobLabel">{{profile.acceptedJobs.length}}</span>My Contacts</a>
+
+
 
                             <!--<a href="#" ng-click="updateType('Poster')" class="list-group-item">Switch to Job Poster</a>-->
                         </div>
@@ -113,34 +115,35 @@
 
                     <h3>{{header}}</h3>
                     <div class="row" ng-show="postedJobs.length == 0">
-                        <p ng-show="viewType == 'PostedJobs'">
-                            There are currently No Jobs posted by you. <a href="postJob.html"> Post a new Job</a> and find matching candidates right away!
+                        <p class="dashInfo" ng-show="viewType == 'PostedJobs'">
+                            There are currently no Jobs posted by you. <a href="postJob.html"> Post a new Job</a> and find matching candidates right away!
                         </p>
-                        <p ng-show="viewType == 'AvailableJobs'">
-                            There are currently No Jobs available to you. <a href="updateProfile.html"> Update your profile</a> and find matching jobs right away!
+                        <p class="dashInfo" ng-show="viewType == 'AvailableJobs'">
+                            There are currently no Jobs available to you. <a href="updateProfile.html"> Update your profile</a> and find matching jobs right away!
                         </p>
-                        <p ng-show="viewType == 'AppliedJobs'">
-                            You have not applied to any jobs right now. Start applying to jobs by browsing <a href="#" ng-click="showAvailableJobs('open')"> Available Jobs </a>.
+                        <p class="dashInfo" ng-show="viewType == 'AppliedJobs'">
+                            You have not applied to any jobs yet. Start applying to jobs by browsing
+                            <br/> <a href="#" ng-click="showAvailableJobs('open')"> Available Jobs </a>.
                         </p>
-                        <p ng-show="viewType == 'AcceptedJobs'">
+                        <p class="dashInfo" ng-show="viewType == 'AcceptedJobs'">
                             You do not have any confirmed job offers as of now. You will get the contact details of the job poster only if the poster also accepts your profile.
                         </p>
-                        <p ng-show="viewType == 'JobRequests'">
+                        <p class="dashInfo" ng-show="viewType == 'JobRequests'">
                             You do not have any job offers as of now. Start applying to jobs yourself by browsing <a href="#" ng-click="showAvailableJobs('open')"> Available Jobs </a>.
                         </p>
                     </div>
 
                     <div class="row" ng-show="candidates.length == 0">
-                        <p ng-show="viewType == 'MatchingProfiles'">
-                            There are currently No matching profiles for the Job posted by you. <a href="postJob.html"> Post another job </a> and find matching candidates right away!
+                        <p class="dashInfo" ng-show="viewType == 'MatchingProfiles'">
+                            There are currently no matching profiles for this job. <a href="postJob.html"> Post another job </a> and find matching candidates right away!
                         </p>
-                        <p ng-show="viewType == 'InterestShown'">
-                            You have not shortlisted any candidate for this job post. Browse <a href="#" ng-click="showMatchingProfiles(curJob)">Matching Candidates</a> and start shortlisting compatible candidates right away!
+                        <p class="dashInfo" ng-show="viewType == 'InterestShown'">
+                            You have not shortlisted any candidate for this job post yet. Browse <a href="#" ng-click="showMatchingProfiles(curJob)">Matching Candidates</a> and start shortlisting compatible candidates right away!
                         </p>
-                        <p ng-show="viewType == 'AppliedCandidates'">
+                        <p class="dashInfo" ng-show="viewType == 'AppliedCandidates'">
                             There are currently no candidates who applied for this job post. Browse <a href="#" ng-click="showMatchingProfiles(curJob)">Matching Candidates</a> and start shortlisting compatible candidates yourself!
                         </p>
-                        <p ng-show="viewType == 'AcceptedCandidates'">
+                        <p class="dashInfo" ng-show="viewType == 'AcceptedCandidates'">
                             You do not have any candidate contacts right now. You can get the contacts of the candidates only when candidate also accepts the job offer.
                         </p>
 
@@ -436,6 +439,36 @@
             });
             $(this).addClass("active");
         });
+
+        /*$(window).scroll(function () {
+            $("#optionsDiv")
+                .stop()
+                .animate({
+                    "marginTop": ($(window).scrollTop())
+                }, "slow");
+        });*/
+
+        /*var fixmeTop = $('#optionsDiv').offset().top; // get initial position of the element
+
+        $(window).scroll(function () { // assign scroll event listener
+
+            var currentScroll = $(window).scrollTop(); // get current position
+
+            if (currentScroll >= fixmeTop) { // apply position: fixed if you
+                $('#optionsDiv').css({ // scroll to that element or below it
+                    position: 'fixed',
+                    top: '0',
+                    left: '0',
+                    width: '30%'
+                });
+            } else { // apply position: static
+                $('#optionsDiv').css({ // if you scroll above it
+                    position: 'relative',
+                    display: 'block'
+                });
+            }
+
+        });*/
 
         /*window.onbeforeunload = function () {
             //alert("Changed!");
