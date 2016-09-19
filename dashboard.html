@@ -13,15 +13,15 @@
     <link rel="stylesheet" href="css/skylo.css">
     <link rel="stylesheet" href="css/styles.css">
     <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
-    
+
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
-    
+
     <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">-->
 
     <script type="text/javascript" src="js/site.min.js"></script>
 
     <script src="js/skylo.js"></script>
-    
+
     <script src="js/date.js"></script>
 
     <script src="js/angular.min.js"></script>
@@ -52,9 +52,20 @@
         <div ng-include="'header.html'"></div>
 
         <div class="row">
-
             <div class="row jobSection">
+                <!--<div class="row">
+                    <div class="col-md-4 col-md-offset-3 dashBack">
+                        
+                    </div>
+                </div>-->
                 <div class="col-md-3 col-md-offset-1 optionList">
+                    <a href="#" ng-click="showPostedJobs('open')" ng-show="profile.type == 'Poster'">
+                        <span class="glyphicon glyphicon-arrow-left dashBack"></span>
+                    </a>
+                    <a href="#" ng-click="showAvailableJobs('open')" ng-show="profile.type == 'Seeker' || profile.type == null">
+                        <span class="glyphicon glyphicon-arrow-left dashBack"></span>
+                    </a>
+                    <br/>
                     <div class="list-group posterOptions" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;<span class=""></span></li>
                         <div id="poster" class="userOptions collapse in">
@@ -108,16 +119,34 @@
                         <p ng-show="viewType == 'AvailableJobs'">
                             There are currently No Jobs available to you. <a href="updateProfile.html"> Update your profile</a> and find matching jobs right away!
                         </p>
+                        <p ng-show="viewType == 'AppliedJobs'">
+                            You have not applied to any jobs right now. Start applying to jobs by browsing <a href="#" ng-click="showAvailableJobs('open')"> Available Jobs </a>.
+                        </p>
+                        <p ng-show="viewType == 'AcceptedJobs'">
+                            You do not have any confirmed job offers as of now. You will get the contact details of the job poster only if the poster also accepts your profile.
+                        </p>
+                        <p ng-show="viewType == 'JobRequests'">
+                            You do not have any job offers as of now. Start applying to jobs yourself by browsing <a href="#" ng-click="showAvailableJobs('open')"> Available Jobs </a>.
+                        </p>
                     </div>
 
-                    <!--<div class="row" ng-show="candidates.length == 0 && profile.type != 'Seeker' && profile.type != null">
+                    <div class="row" ng-show="candidates.length == 0">
                         <p ng-show="viewType == 'MatchingProfiles'">
-                            There are currently No matching profiles for Job posted by you. <a href="postJob.html"> Update a new Job</a> and find matching candidates right away!
+                            There are currently No matching profiles for the Job posted by you. <a href="postJob.html"> Post another job </a> and find matching candidates right away!
                         </p>
-                        <p ng-show="profile.type == 'Seeker' || profile.type == null">
-                            There are currently No Jobs available to you. <a href="postJob.html"> Update your profile</a> and find matching jobs right away!
+                        <p ng-show="viewType == 'InterestShown'">
+                            You have not shortlisted any candidate for this job post. Browse <a href="#" ng-click="showMatchingProfiles(curJob)">Matching Candidates</a> and start shortlisting compatible candidates right away!
                         </p>
-                    </div>-->
+                        <p ng-show="viewType == 'AppliedCandidates'">
+                            There are currently no candidates who applied for this job post. Browse <a href="#" ng-click="showMatchingProfiles(curJob)">Matching Candidates</a> and start shortlisting compatible candidates yourself!
+                        </p>
+                        <p ng-show="viewType == 'AcceptedCandidates'">
+                            You do not have any candidate contacts right now. You can get the contacts of the candidates only when candidate also accepts the job offer.
+                        </p>
+
+                    </div>
+
+
 
                     <div class="row" ng-repeat="job in postedJobs">
                         <div class="col-md-12">
@@ -169,7 +198,8 @@
                                     <div class="row collapse" id="job{{job.id}}">
                                         <div class="col-md-12">
                                             {{job.description}}
-                                            <br/><br/>
+                                            <br/>
+                                            <br/>
                                             <p><b>Job Offer Valid Till :</b> {{job.expiryDateString}}</p>
                                         </div>
                                     </div>
@@ -213,7 +243,7 @@
                     </div>
                     <br/>
 
-                    
+
 
                     <div class="row" ng-repeat="candidate in candidates">
                         <div class="col-md-12">
@@ -280,7 +310,7 @@
 
                     </div>
 
-                    
+
 
                 </div>
             </div>
