@@ -1,7 +1,7 @@
 var app = angular.module("app", []);
 
-var root = "http://localhost:8080/jobz-app/service";
-//var root = "http://115.124.124.220:8080/jobz/service";
+//var root = "http://localhost:8080/jobz-app/service";
+var root = "http://115.124.124.220:8080/jobz/service";
 
 
 

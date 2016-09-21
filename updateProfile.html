@@ -140,10 +140,10 @@
                         <p class="fieldDesc text-left">List down things thar you're good at. It can be a tool, technology or soft skill. Be precise. Press enter after entering any skill to add it to your list.</p>
                         <input type="text" class="form-control" placeholder="C#, Java, Public speaking, Solidworks, Reporting etc." ng-model="skill.name" ng-keyup="onKeyUp($event)">
                         <br/>
-                        <a href="#"><span class="badge myBadge" ng-click="removeSkill(s)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#"><span class="badge myBadge" ng-click="removeSkill(s,$event)" ng-repeat="s in user.jobSkills">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
                         <ul class="list-group">
                             <a href="#">
-                                <li class="list-group-item" ng-click="itemClick(s)" ng-repeat="s in matchingSkills">{{s.name}}</li>
+                                <li class="list-group-item" ng-click="itemClick(s,$event)" ng-repeat="s in matchingSkills">{{s.name}}</li>
                             </a>
                         </ul>
                         <p class="error">{{skillsError}}</p>

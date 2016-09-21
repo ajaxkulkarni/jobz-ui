@@ -21,7 +21,7 @@
                                 <!--<li><a href="dashboard.html">Dashboard</a></li>-->
                                 <li><a href="updateProfile.html">Profile</a></li>
                                 <li><a href="#" ng-click="updateType('Seeker')" ng-show="profile.type == 'Poster' && isDashboard">Switch to Job Seeker</a>
-                                    <a href="#" ng-click="updateType('Poster')" ng-show="(profile.type == 'Seeker' || profile.type == null) && isDashboard">Switch to Job Poster</a></li>
+                                    <a href="#" ng-click="updateType('Poster')" ng-show="profile.type != 'Poster' && isDashboard">Switch to Job Poster</a></li>
                                 <li><a href="#" ng-click="logout()">Logout</a></li>
                             </ul>
                         </li>

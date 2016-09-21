@@ -16,14 +16,16 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     }
 
     $scope.user = JSON.parse(localStorage.user);
-
     
-    if (localStorage.viewType == null) {
+    //alert(localStorage.viewType);
+    
+    if (localStorage.viewType == null || localStorage.viewType == 'null') {
         
-        if ($scope.loggedIn.type == "Seeker") {
-            viewType = "AvailableJobs";
+        if ($scope.loggedIn.type == "Seeker" || $scope.loggedIn.type == null || $scope.loggedIn.type == 'null' ) {
+            localStorage.viewType = "AvailableJobs";
+            //alert($scope.loggedIn.type);
         } else {
-            viewType = "PostedJobs";
+            localStorage.viewType = "PostedJobs";
         }
 
     }
@@ -77,6 +79,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                     } else if (localStorage.viewType == "InterestShown") {
                         $scope.showInterestCandidates(job);
                     } else if (localStorage.viewType == "AvailableJobs") {
+                        //alert("Seek");
                         $scope.showAvailableJobs("close");
                     } else if (localStorage.viewType == "PostedJobs") {
                         $scope.showPostedJobs("close");

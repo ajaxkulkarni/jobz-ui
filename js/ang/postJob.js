@@ -32,6 +32,7 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
     //alert(localStorage.postJob!= 'null');
     if(localStorage.postJob != null && localStorage.postJob != 'null') {
         $scope.job = JSON.parse(localStorage.postJob);
+        //alert(localStorage.postJob);
         $scope.job.expiryDate = new Date($scope.job.expiryDate).toString('yyyy-MM-dd');
         if($scope.job.sector.id != null) {
             $scope.job.sector.id = $scope.job.sector.id.toString();
@@ -47,26 +48,29 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
         $scope.user.educations = [];
     }
 
-    $scope.itemClick = function ($skill,$event) {
+    $scope.itemClick = function (skill,$event) {
         //alert($scope.user);
+        
+        if ($scope.job != null) {
+            //alert($scope.job.type);
+            $scope.job.skillsRequired.push(skill);
+        }
         if ($scope.user != null) {
             //alert($scope.user.jobSkills);
-            $scope.user.jobSkills.push($skill);
-        }
-        if ($scope.job != null) {
-            $scope.job.skillsRequired.push($skill);
+            $scope.user.jobSkills.push(skill);
         }
         //alert($scope.job.skills);
         $scope.skill = "";
-        $("#skillInput").val("");
+        //alert($event);
+        //$("#skillInput").val("");
         $scope.matchingSkills = [];
-        //alert($scope.skills);
+        //alert("Prevent");
         $event.preventDefault();
         return false;
     };
 
     $scope.onKeyUp = function ($event) {
-        //alert("Here!" + $event.keyCode);
+       // alert("Here!" + $event.keyCode);
         if ($event.keyCode == 13) {
             //alert($scope.user);
             var skill = matchSkill($scope);
@@ -120,6 +124,7 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
         $scope.education = {};
         $("#educationInput").val("");
         $scope.matchingEducations = [];
+        $event.preventDefault();
         //alert($scope.skills);
     };
 

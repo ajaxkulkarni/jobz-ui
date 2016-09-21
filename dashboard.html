@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="list-group seekerOptions" ng-show="profile.type == 'Seeker' || profile.type == null">
+                    <div class="list-group seekerOptions" ng-show="profile.type == 'Seeker' || profile.type == null || profile.type == 'null'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#seeker"><span class="listSpan" style="float:right"></span><b>Job Seeker&nbsp;&nbsp;&nbsp;&nbsp;</b><span class=""></span></li>
                         <div id="seeker" class="userOptions collapse in">
                             <a href="#" class="list-group-item" ng-click="showAvailableJobs('open')"><span class="label label-success compatLabel jobLabel">{{profile.availableJobs.length}}</span>Available Jobs</a>
