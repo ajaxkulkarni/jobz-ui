@@ -133,6 +133,13 @@ angular.module("app").controller('register', function ($scope, userService) {
         }, 2000);
         
     }
+    
+    $scope.goToContact = function() {
+        $('html, body').animate({
+            scrollTop: $("#contact").offset().top
+        }, 2000);
+        
+    }
 
 
 });

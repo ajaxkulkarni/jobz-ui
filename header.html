@@ -27,8 +27,8 @@
                         </li>
                         <a href="#" class="navbar-text navbar-right myNav" data-toggle="modal" data-target="#myModal" ng-show="loggedIn == null">Login</a>
                         <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn != null">Dashboard</a>
-                        <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn == null">Contact Us</a>
-                        <a href="dashboard.html" class="navbar-text navbar-right myNav" ng-show="loggedIn == null">About Us</a>
+                        <a href="#" class="navbar-text navbar-right myNav" ng-show="loggedIn == null" ng-click="goToContact()">Contact Us</a>
+                        <a href="aboutUs.html" class="navbar-text navbar-right myNav" ng-show="loggedIn == null">About Us</a>
                         <a href="#" class="navbar-text navbar-right myNav" ng-show="loggedIn == null" ng-click="goToHow()">How It Works</a>
                         
                     </ul>
