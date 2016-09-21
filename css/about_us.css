@@ -1,0 +1,96 @@
+       @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700';
+.banner1{
+    background-color: #1F4864;
+    height: 100px;
+}
+
+
+
+.arrow_box {
+	position: relative;
+	background: #1F4864;
+}
+.arrow_box:after {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(31, 72, 100, 0);
+	border-top-color: #1F4864;
+	border-width: 70px;
+	margin-left: -70px;
+}
+
+
+
+
+.banner2{
+/*      background-color: #264FA1;*/
+    background-image: url(img/download.png);
+    font-family: 'Roboto', sans-serif;
+    height: 500px;
+    margin-top: 84px;
+    margin-bottom: 32px;
+	background-color: white;
+}
+
+.bann2_para{
+    text-align: center;
+           font-family: 'Roboto', sans-serif;
+    color: rgba(255, 255, 255, 0.77);
+    font-size: 16px;
+    padding: 32px;
+	color: black;
+	color: #424242;
+}
+.proj_div{
+    margin: 16px auto;   
+}
+.proj_heading{
+    font-family: 'Roboto', sans-serif;
+    margin: 32px;
+}
+
+
+
+
+.circleBase {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    display: block;
+    margin:16px auto;
+}
+
+.type1 {
+    width: 150px;
+    height: 150px;
+    background: #1F4864;
+    border: 3px solid #1F4864;
+}
+
+.proj_img{
+    width: 130px;
+    height: 130px;
+    display: block;
+    margin: auto;
+}
+
+
+
+#about_footer{
+    background-color: #1F4864;
+    height: 100px;
+	color: white;
+}
+
+
+@media only screen and (min-width: 667px) {
+.bann2_para{
+    font-size: 28px;
+}
+    
+}
