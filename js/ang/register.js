@@ -103,6 +103,9 @@ angular.module("app").controller('register', function ($scope, userService) {
         userService.login($scope).then(function (response) {
             $.skylo('end');
             //alert(response.status);
+            if (response == null) {
+                $scope.loginResponse = "Error connecting server ..";
+            }
             if (response.status != 200) {
                 $scope.loginResponse = response.responseText;
                 return;

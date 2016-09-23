@@ -1,7 +1,10 @@
 var app = angular.module("app", []);
 
-//var root = "http://localhost:8080/jobz-app/service";
-var root = "http://115.124.124.220:8080/jobz/service";
+var host = "http://localhost:8080/jobz-app";
+//var host = "http://115.124.124.220:8080/jobz";
+var root = host + "/service";
+var rootAdmin = host + "/adminService";
+
 
 
 
@@ -336,6 +339,63 @@ app.service('jobService', function ($http, $q) {
         //alert("calling" + JSON.stringify(dataObj));
         deferred = $q.defer();
         var res = $http.post(root + '/deleteJob', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+});
+
+app.service('adminService', function ($http, $q) {
+    
+    var deferred;
+    var response = {};
+    
+    this.getAllPostedJobs = function () {
+        var dataObj = {
+        };
+        deferred = $q.defer();
+        var res = $http.post(rootAdmin + '/adminGetAllPostedJobs', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+    
+    this.getAllPendingJobs = function () {
+        var dataObj = {
+        };
+        deferred = $q.defer();
+        var res = $http.post(rootAdmin + '/adminGetAllPendingJobs', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+    
+    this.getAllAcceptedJobs = function () {
+        var dataObj = {
+        };
+        deferred = $q.defer();
+        var res = $http.post(rootAdmin + '/adminGetAllAcceptedJobs', dataObj);
         res.success(function (data, status, headers, config) {
             response = data;
             deferred.resolve(response);

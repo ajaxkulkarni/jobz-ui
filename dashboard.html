@@ -59,13 +59,7 @@
                     </div>
                 </div>-->
                 <div class="col-md-3 col-md-offset-1 optionList">
-                    <a href="#" ng-click="showPostedJobs('open')" ng-show="profile.type == 'Poster'">
-                        <span class="glyphicon glyphicon-arrow-left dashBack"></span>
-                    </a>
-                    <a href="#" ng-click="showAvailableJobs('open')" ng-show="profile.type == 'Seeker' || profile.type == null">
-                        <span class="glyphicon glyphicon-arrow-left dashBack"></span>
-                    </a>
-                    <br/>
+                    
                     <div class="list-group posterOptions" id="optionsDiv" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span><b>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;</b><span class=""></span></li>
                         <div id="poster" class="userOptions collapse in">
@@ -93,6 +87,13 @@
                             <!--<a href="#" ng-click="updateType('Poster')" class="list-group-item">Switch to Job Poster</a>-->
                         </div>
                     </div>
+                    <a href="#" class="dashBack" ng-click="showPostedJobs('open')" ng-show="profile.type == 'Poster'">
+                        <span class="glyphicon glyphicon-arrow-left"></span>  <span style="font-size:18px">Back</span>
+                    </a>
+                    <a href="#" class="dashBack" ng-click="showAvailableJobs('open')" ng-show="profile.type == 'Seeker' || profile.type == null">
+                        <span class="glyphicon glyphicon-arrow-left"></span> <span style="font-size:18px">Back</span>  
+                    </a>
+                    <br/>
                 </div>
                 <div class="col-md-6">
 
