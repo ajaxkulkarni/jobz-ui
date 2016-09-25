@@ -90,9 +90,10 @@
                     <th>Expiry Date</th>
                     <th>Email</th>
 					<th>Phone</th>
-					<th>Interactions</th>
+					<!--<th>Interactions</th>-->
 					<th>Poster Interest</th>
                     <th>Seeker Interest</th>
+                    <!--<th>Applied Date</th>-->
                   </tr>
                 </thead>
                 <tbody>
@@ -104,8 +105,42 @@
 					<td>{{job.postedDateString}}</td>
                     <td>{{job.expiryDateString}}</td>
                     <td>{{job.postedBy.email}}</td>
+                    <td>{{job.postedBy.phone}}</td>
                     <td>{{job.interestShownByPoster}}</td>
 					<td>{{job.interestShownBySeeker}}</td>
+                    <!--<td>{{job.appliedDateString}}</td>-->
+                  </tr>
+                </tbody>
+              </table>
+            
+            <table class="table" ng-show="showAccepted">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Job Title</th>
+                    <th>Company</th>
+					<th>Posted Date</th>
+                    <th>Expiry Date</th>
+                    <th>Email</th>
+					<th>Phone</th>
+					<!--<th>Interactions</th>-->
+					<!--<th>Poster Interest</th>
+                    <th>Seeker Interest</th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="job in response.acceptedJobs">
+                    <td>{{job.id}}</td>
+                    <td>{{job.postedBy.name}}</td>
+                    <td>{{job.jobTitle}}</td>
+                    <td>{{job.companyname}}</td>
+					<td>{{job.postedDateString}}</td>
+                    <td>{{job.expiryDateString}}</td>
+                    <td>{{job.postedBy.email}}</td>
+                    <td>{{job.postedBy.phone}}</td>
+                    <!--<td>{{job.interestShownByPoster}}</td>
+					<td>{{job.interestShownBySeeker}}</td>-->
                    
                   </tr>
                 </tbody>

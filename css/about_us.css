@@ -31,7 +31,7 @@
 .banner2{
 /*      background-color: #264FA1;*/
     background-image: url(img/download.png);
-    font-family: 'Roboto', sans-serif;
+    #font-family: 'Roboto', sans-serif;
     height: 500px;
     margin-top: 84px;
     margin-bottom: 32px;
@@ -40,9 +40,9 @@
 
 .bann2_para{
     text-align: center;
-           font-family: 'Roboto', sans-serif;
+    #font-family: 'Roboto', sans-serif;
     color: rgba(255, 255, 255, 0.77);
-    font-size: 16px;
+    font-size: 15px;
     padding: 32px;
 	color: black;
 	color: #424242;
@@ -51,7 +51,7 @@
     margin: 16px auto;   
 }
 .proj_heading{
-    font-family: 'Roboto', sans-serif;
+    #font-family: 'Roboto', sans-serif;
     margin: 32px;
 }
 
@@ -88,9 +88,8 @@
 }
 
 
+ 
 @media only screen and (min-width: 667px) {
 .bann2_para{
-    font-size: 28px;
-}
-    
+    font-size: 22px;
 }

@@ -41,7 +41,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = false;
                 $scope.showAccepted = false;
                 $scope.showPosted = true;
-                $scope.response = response.adminResponse;
+                $scope.response.postedJobs = response.adminResponse.postedJobs;
                 //alert($scope.response);
                 return;
             }
@@ -64,7 +64,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = true;
                 $scope.showAccepted = false;
                 $scope.showPosted = false;
-                $scope.response = response.adminResponse;
+                $scope.response.pendingJobs = response.adminResponse.postedJobs;
                 //alert($scope.response);
                 return;
             }
@@ -87,8 +87,8 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = false;
                 $scope.showAccepted = true;
                 $scope.showPosted = false;
-                $scope.response = response.adminResponse;
-                //alert($scope.response);
+                $scope.response.acceptedJobs = response.adminResponse.postedJobs;
+                //alert($scope.response.pendingJobs);
                 return;
             }
         });
