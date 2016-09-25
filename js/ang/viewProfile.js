@@ -1,29 +1,29 @@
-angular.module("app").controller('viewProfile', function ($scope, userService,userService, $http) {
-    
+angular.module("app").controller('viewProfile', function ($scope, userService, userService, $http) {
+
     //alert("Here!");
-    
-    if(localStorage.user == null) {
+
+    if (localStorage.user == null) {
         window.location.href = "index.html";
         return;
     }
-    
+
     $scope.loggedIn = JSON.parse(localStorage.user);
-    
-    
-    
+
+
+
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";
         return;
     }
-    
-    
+
+
     $.skylo({
         state: 'success',
         inchSpeed: 200,
         initialBurst: 30,
         flat: false
     });
-    
+
     if (localStorage != null && localStorage.viewProfile != null) {
         $scope.user = JSON.parse(localStorage.viewProfile);
         var user = JSON.parse(localStorage.user);
@@ -40,8 +40,13 @@ angular.module("app").controller('viewProfile', function ($scope, userService,us
         userService.update($scope).then(function (response) {
             $.skylo('end');
             //alert(JSON.stringify(response));
+            if (response == null) {
+                $scope.profileResponse = "Error connecting server ..";
+                return;
+            }
+
             if (response.status != 200) {
-                $scope.postJobResponse = response.responseText;
+                $scope.profileResponse = response.responseText;
                 //alert($scope.loginResponse);
                 return;
             }
@@ -49,11 +54,11 @@ angular.module("app").controller('viewProfile', function ($scope, userService,us
             window.location.href = "dashboard.html";
         });
     };
-    
-    $scope.back = function() {
-        window.location.replace("updateProfile.html");  
+
+    $scope.back = function () {
+        window.location.replace("updateProfile.html");
     };
-    
+
     $scope.logout = function () {
         userService.logout();
     };

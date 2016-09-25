@@ -48,6 +48,11 @@ angular.module("app").controller('confirmJob', function ($scope, jobService,user
         } else {
             jobService.postJob($scope).then(function (response) {
                 $.skylo('end');
+                if(response == null) {
+                    $scope.postJobResponse = "Error connecting server ..";
+                    return;
+                }
+                
                 if (response.status != 200) {
                     $scope.postJobResponse = response.responseText;
                     //alert($scope.loginResponse);

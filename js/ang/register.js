@@ -41,7 +41,11 @@ angular.module("app").controller('register', function ($scope, userService) {
         $.skylo('start');
         $.skylo('inch', 5);
         if ($scope.user.type == null) {
-            $scope.user.type = localStorage.intent;
+            if(localStorage.intent != null) {
+                $scope.user.type = localStorage.intent;
+            } else {
+                $scope.user.type = "Seeker";
+            }
         }
         userService.register($scope).then(function (response) {
             $.skylo('end');

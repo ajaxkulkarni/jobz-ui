@@ -90,7 +90,7 @@
                     <a href="#" class="dashBack" ng-click="showPostedJobs('open')" ng-show="profile.type == 'Poster'">
                         <span class="glyphicon glyphicon-arrow-left"></span>  <span style="font-size:18px">Back</span>
                     </a>
-                    <a href="#" class="dashBack" ng-click="showAvailableJobs('open')" ng-show="profile.type == 'Seeker' || profile.type == null">
+                    <a href="#" class="dashBack" ng-click="showAvailableJobs('open')" ng-show="profile.type != 'Poster'">
                         <span class="glyphicon glyphicon-arrow-left"></span> <span style="font-size:18px">Back</span>  
                     </a>
                     <br/>

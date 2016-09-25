@@ -35,52 +35,13 @@
 
         <h3 class="text-center">Profile at a Glance</h3>
 
-        <!--<div class="row">
-            <div class="col-md-offset-3 col-md-6">
-                <div class="pricing">
-                    <ul>
-                        <li class="unit price-primary viewJob">
-                            <div class="price-title viewJobTitle">
-                                <h3>{{user.name}}</h3>
-                                <br/>
-                                <p>{{user.company}}</p>
-                                <br/>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        {{user.designation}}
-                                    </div>
-                                    <div class="col-md-4">
-                                        {{user.experience}}
-                                    </div>
-                                    <div class="col-md-4">
-                                        {{job.intent}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="price-body viewJobBody">
-                                <h4>Skills</h4>
-                                <br/>
-                                <p><span class="myBadge" ng-repeat="s in user.jobSkills">{{s.name}}</span>&nbsp;
-                                </p>
-
-                              
-
-                                <p>
-                                    {{user.description}}
-
-                                </p>
-                            </div>
-                            <div class="price-foot viewJobFooter">
-                                <button type="button" class="btn btn-primary myPanelButton" ng-click="back()">Back</button>
-                                <button type="button" class="btn btn-primary myPanelButton" ng-click="saveProfile()">Save</button>
-                            </div>
-                        </li>
-                    </ul>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="alert alert-danger" ng-show="profileResponse != null && profileResponse.length > 0">
+                    <strong>Oh snap!</strong> {{profileResponse}}
                 </div>
-
-
             </div>
-        </div>-->
+        </div>
 
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
