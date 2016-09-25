@@ -23,9 +23,20 @@ body {
     opacity: 0.5;
 }
 
+.heading {
+    color: white;
+    font-size: 60px;
+    padding-top: 7%;
+}
+
+.sub-heading {
+    color: #D4D4E1;
+}
+
 .mainTitles {
     #color: white;
     padding-top: 25%;
+    #padding-top: 10%;
     padding-left: 3%;
     padding-bottom: 5%;
 }
