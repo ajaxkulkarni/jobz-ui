@@ -59,7 +59,7 @@
                     </div>
                 </div>-->
                 <div class="col-md-3 col-md-offset-1 optionList">
-                    
+
                     <div class="list-group posterOptions" id="optionsDiv" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span><b>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;</b><span class=""></span></li>
                         <div id="poster" class="userOptions collapse in">
@@ -88,10 +88,10 @@
                         </div>
                     </div>
                     <a href="#" class="dashBack" ng-click="showPostedJobs('open')" ng-show="profile.type == 'Poster'">
-                        <span class="glyphicon glyphicon-arrow-left"></span>  <span style="font-size:18px">Back</span>
+                        <span class="glyphicon glyphicon-arrow-left"></span> <span style="font-size:18px">Back</span>
                     </a>
                     <a href="#" class="dashBack" ng-click="showAvailableJobs('open')" ng-show="profile.type != 'Poster'">
-                        <span class="glyphicon glyphicon-arrow-left"></span> <span style="font-size:18px">Back</span>  
+                        <span class="glyphicon glyphicon-arrow-left"></span> <span style="font-size:18px">Back</span>
                     </a>
                     <br/>
                 </div>
@@ -162,12 +162,16 @@
                                             <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
 
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
                                                     <span class="jobPanelProps">&nbsp;{{job.location}}</span>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <span class="glyphicon glyphicon-briefcase jobPanelIcon" style="font-size:20px"></span> <span class="jobPanelProps">&nbsp;{{job.minExperience}} - {{job.maxExperience}} years</span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <span class="glyphicon glyphicon-user jobPanelIcon" style="font-size:20px"></span>
+                                                    <span class="jobPanelProps">&nbsp;{{job.type}}</span>
                                                 </div>
                                             </div>
                                             <br/>
