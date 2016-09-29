@@ -93,3 +93,13 @@
 .bann2_para{
     font-size: 22px;
 }
+
+    
+.leftCircle {
+    margin-left: 50%;
+    #border-style: solid;
+}
+    
+.rightCircle {
+    margin-right: 50%;
+}
