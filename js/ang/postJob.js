@@ -174,7 +174,7 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
             return;
         }
         if($scope.job.skillsRequired.length == 0) {
-            $scope.skillsError = "Please enter atleast one skill required for this job";
+            $scope.skillsError = "Please enter atleast one skill required for this job.Please make sure you press enter after typing the skill name to add it to the list.";
             $scope.showPostJobError = true;
             return;
         }
@@ -194,12 +194,14 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
         //alert(angular.isNumber($scope.job.minExperience) + ":" + angular.isNumber($scope.job.maxExperience));
         if(isNaN($scope.user.experience) || parseInt($scope.user.experience) < 0) {
            $scope.expError = "Please enter valid Experience";
+            $scope.showProfileError = true;
            //alert("Here!");
            return; 
         }
         
         if($scope.user.jobSkills.length == 0) {
-            $scope.skillsError = "Please enter atleast one skill for your profile";
+            $scope.skillsError = "Please enter atleast one skill for your profile. Please make sure you press enter after typing the skill name to add it to the list.";
+            $scope.showProfileError = true;
             return;
         }
         localStorage.viewProfile = JSON.stringify($scope.user);

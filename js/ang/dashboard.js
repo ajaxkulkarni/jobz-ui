@@ -268,6 +268,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     $scope.acceptInterestCandidate = function (candidate) {
         $scope.interestedProfile = candidate;
         $scope.showInterest();
+        $scope.showAcceptedCandidates("close");
         //$("#showInterestModal").modal('show');
     };
 

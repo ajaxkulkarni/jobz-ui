@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/site.min.css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">
     <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -10,8 +10,8 @@
       <script src="js/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="js/site.min.js"></script>
-    
-     <script src="js/skylo.js"></script>
+
+    <script src="js/skylo.js"></script>
 
     <script src="js/angular.min.js"></script>
 
@@ -22,14 +22,14 @@
 
 <body ng-app="app" ng-controller="admin">
 
-<div class="container-fluid">
- <div class="row">
-              <div class="col-md-offset-2 col-md-8">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
                 <ul class="nav nav-pills nav-justified">
-                  <li class="active"><a href="#" ng-click="getPostedJobs()">Posted <span class="badge">{{response.postedJobs.length}}</span></a></li>
-                  <li><a href="#" ng-click="getPendingJobs()">Pending <span class="badge badge-danger">{{response.pendingJobs.length}}</span></a></li>
-				  <li><a href="#" ng-click="getAcceptedJobs()">Accepted <span class="badge badge-danger">{{response.acceptedJobs.length}}</span></a></li>
-                  <!--<li class="dropdown">
+                    <li class="active"><a href="#" ng-click="getPostedJobs()">Posted <span class="badge">{{response.postedJobs.length}}</span></a></li>
+                    <li><a href="#" ng-click="getPendingJobs()">Pending <span class="badge badge-danger">{{response.pendingJobs.length}}</span></a></li>
+                    <li><a href="#" ng-click="getAcceptedJobs()">Accepted <span class="badge badge-danger">{{response.acceptedJobs.length}}</span></a></li>
+                    <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="#">@fat</a></li>
@@ -37,121 +37,132 @@
                     </ul>
                   </li>-->
                 </ul>
-              </div>
-	</div>
-	<br/>
-	<div class="row">
-		<div class="col-md-12">
-			<h2>{{heading}}</h2>
-            
-              <table class="table" ng-show="showPosted">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-					<th>Posted Date</th>
-                    <th>Expiry Date</th>
-                    <th>Email</th>
-					<th>Phone</th>
-					<th>Interactions</th>
-					<!--<th>Shortlisted</th>
-					<th>Matches</th>-->
-					<!--<th>Accepted</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="job in response.postedJobs">
-                    <td>{{job.id}}</td>
-                    <td>{{job.postedBy.name}}</td>
-                    <td>{{job.jobTitle}}</td>
-                    <td>{{job.companyname}}</td>
-					<td>{{job.postedDateString}}</td>
-                    <td>{{job.expiryDateString}}</td>
-                    <td>{{job.postedBy.email}}</td>
-                    <td>{{job.postedBy.phone}}</td>
-					<td>{{job.noOfApplications}}</td>
-                    <!--<td>{{job.interestCandidates}}</td>
-                    <td>{{job.matches}}</td>-->
-                    <!--<td>@mdo</td>-->
-                  </tr>
-                </tbody>
-              </table>
-            
-            <table class="table" ng-show="showPending">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-					<th>Posted Date</th>
-                    <th>Expiry Date</th>
-                    <th>Email</th>
-					<th>Phone</th>
-					<!--<th>Interactions</th>-->
-					<th>Poster Interest</th>
-                    <th>Seeker Interest</th>
-                    <!--<th>Applied Date</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="job in response.pendingJobs">
-                    <td>{{job.id}}</td>
-                    <td>{{job.postedBy.name}}</td>
-                    <td>{{job.jobTitle}}</td>
-                    <td>{{job.companyname}}</td>
-					<td>{{job.postedDateString}}</td>
-                    <td>{{job.expiryDateString}}</td>
-                    <td>{{job.postedBy.email}}</td>
-                    <td>{{job.postedBy.phone}}</td>
-                    <td>{{job.interestShownByPoster}}</td>
-					<td>{{job.interestShownBySeeker}}</td>
-                    <!--<td>{{job.appliedDateString}}</td>-->
-                  </tr>
-                </tbody>
-              </table>
-            
-            <table class="table" ng-show="showAccepted">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-					<th>Posted Date</th>
-                    <th>Expiry Date</th>
-                    <th>Email</th>
-					<th>Phone</th>
-					<!--<th>Interactions</th>-->
-					<!--<th>Poster Interest</th>
-                    <th>Seeker Interest</th>-->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="job in response.acceptedJobs">
-                    <td>{{job.id}}</td>
-                    <td>{{job.postedBy.name}}</td>
-                    <td>{{job.jobTitle}}</td>
-                    <td>{{job.companyname}}</td>
-					<td>{{job.postedDateString}}</td>
-                    <td>{{job.expiryDateString}}</td>
-                    <td>{{job.postedBy.email}}</td>
-                    <td>{{job.postedBy.phone}}</td>
-                    <!--<td>{{job.interestShownByPoster}}</td>
-					<td>{{job.interestShownBySeeker}}</td>-->
-                   
-                  </tr>
-                </tbody>
-              </table>
-            
-            
             </div>
-            
-          </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>{{heading}}</h2>
 
-</div>
+                <table class="table" ng-show="showPosted">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Posted Date</th>
+                            <th>Expiry Date</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Interactions</th>
+                            <!--<th>Shortlisted</th>
+					<th>Matches</th>-->
+                            <!--<th>Accepted</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="job in response.postedJobs">
+                            <td>{{job.id}}</td>
+                            <td>{{job.postedBy.name}}</td>
+                            <td>{{job.jobTitle}}</td>
+                            <td>{{job.companyName}}</td>
+                            <td>{{job.postedDateString}}</td>
+                            <td>{{job.expiryDateString}}</td>
+                            <td>{{job.postedBy.email}}</td>
+                            <td>{{job.postedBy.phone}}</td>
+                            <td>{{job.noOfApplications}}</td>
+                            <!--<td>{{job.interestCandidates}}</td>
+                    <td>{{job.matches}}</td>-->
+                            <!--<td>@mdo</td>-->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" ng-show="showPending">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Posted Date</th>
+                            <th>Expiry Date</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <!--<th>Interactions</th>-->
+                            <th>Seeker Name</th>
+                            <th>Seeker Email</th>
+                            <th>Seeker Phone</th>
+                            <th>Poster Interest</th>
+                            <th>Seeker Interest</th>
+                            <!--<th>Applied Date</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="job in response.pendingJobs">
+                            <td>{{job.id}}</td>
+                            <td>{{job.postedBy.name}}</td>
+                            <td>{{job.jobTitle}}</td>
+                            <td>{{job.companyName}}</td>
+                            <td>{{job.postedDateString}}</td>
+                            <td>{{job.expiryDateString}}</td>
+                            <td>{{job.postedBy.email}}</td>
+                            <td>{{job.postedBy.phone}}</td>
+                            <td>{{job.currentCandidate.name}}</td>
+                            <td>{{job.currentCandidate.email}}</td>
+                            <td>{{job.currentCandidate.phone}}</td>
+                            <td>{{job.interestShownByPoster}}</td>
+                            <td>{{job.interestShownBySeeker}}</td>
+                            <!--<td>{{job.appliedDateString}}</td>-->
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table" ng-show="showAccepted">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Posted Date</th>
+                            <th>Expiry Date</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Seeker Name</th>
+                            <th>Seeker Email</th>
+                            <th>Seeker Phone</th>
+                            <!--<th>Interactions</th>-->
+                            <!--<th>Poster Interest</th>
+                    <th>Seeker Interest</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="job in response.acceptedJobs">
+                            <td>{{job.id}}</td>
+                            <td>{{job.postedBy.name}}</td>
+                            <td>{{job.jobTitle}}</td>
+                            <td>{{job.companyName}}</td>
+                            <td>{{job.postedDateString}}</td>
+                            <td>{{job.expiryDateString}}</td>
+                            <td>{{job.postedBy.email}}</td>
+                            <td>{{job.postedBy.phone}}</td>
+                            <td>{{job.currentCandidate.name}}</td>
+                            <td>{{job.currentCandidate.email}}</td>
+                            <td>{{job.currentCandidate.phone}}</td>
+                            
+
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
 
 
 
