@@ -59,6 +59,7 @@ body {
     color: #356E89;
     border-radius: 12px;
     box-shadow: 3px 3px 2px #323232;
+    margin-left: 2.5%;
 }
 
 .myButton:hover {
@@ -73,6 +74,7 @@ body {
     color: #D4E4E1;
     border-style: solid;
     border-width: 5px;
+    margin-left: 2.5%;
 }
 
 .myNavBar {
