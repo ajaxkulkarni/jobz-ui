@@ -569,3 +569,9 @@ textarea {
     right:0;
     position:fixed;
 }
+
+.desc-cell {
+    #white-space: nowrap;
+    overflow: hidden;
+    width: 20px;
+}

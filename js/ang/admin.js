@@ -94,6 +94,30 @@ angular.module("app").controller('admin', function ($scope, adminService) {
         });
 
     };
+    
+    $scope.getAllUsers = function () {
+        $.skylo('start');
+        $.skylo('inch', 5);
+        
+        adminService.getAllUsers().then(function (response) {
+            $.skylo('end');
+            if (response == null) {
+                $scope.adminResponse = "Error connecting server ..";
+            }
+            
+            if (response.status == 200) {
+                $scope.heading = "Users"
+                $scope.showPending = false;
+                $scope.showAccepted = false;
+                $scope.showPosted = false;
+                $scope.response.candidates = response.adminResponse.candidates;
+                //alert($scope.response.pendingJobs);
+                return;
+            }
+        });
+
+    };
+
 
     $scope.getPostedJobs();
 

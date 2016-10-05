@@ -407,6 +407,23 @@ app.service('adminService', function ($http, $q) {
         response = deferred.promise;
         return $q.when(response);
     }
+    
+    this.getAllUsers = function () {
+        var dataObj = {
+        };
+        deferred = $q.defer();
+        var res = $http.post(rootAdmin + '/adminGetAllUsers', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
 });
 
 /*app.run(function($rootScope, $location){
