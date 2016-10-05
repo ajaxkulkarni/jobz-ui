@@ -44,17 +44,21 @@ body {
 .myButton {
     #background-color: #F9690E;
     #background-color: #356E89;
-    background-color: #356E89;
+    #background-color: #356E89;
+    background-color: white;
     width: 95%;
     #height: 70px;
     border-radius: 0px;
     #border-color: white;
     border-style: solid;
-    border-color: #356E89;
+    border-color: white;
     #ont-size: 24px;
     font-size: 50px;
     font-weight: bold;
     border-width: 5px;
+    color: #356E89;
+    border-radius: 12px;
+    box-shadow: 3px 3px 2px #323232;
 }
 
 .myButton:hover {
