@@ -166,6 +166,8 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Type</th>
+                            <th>Sector</th>
                             <th>Name</th>
                             <th>Designation</th>
                             <th>Company</th>
@@ -177,6 +179,8 @@
                     <tbody>
                         <tr ng-repeat="c in response.candidates">
                             <td>{{c.id}}</td>
+                            <td>{{c.type}}</td>
+                            <td>{{c.sector.name}}</td>
                             <td>{{c.name}}</td>
                             <td>{{c.designation}}</td>
                             <td>{{c.company}}</td>
