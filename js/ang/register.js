@@ -17,7 +17,7 @@ angular.module("app").controller('register', function ($scope, userService, $loc
     }
    
     if($scope.user.type == null) {
-        if(localStorage.intent != null) {
+        if(localStorage.intent != null && localStorage.intent != 'null') {
             $scope.user.type = localStorage.intent;
         } else {
             $scope.user.type = "Seeker";
