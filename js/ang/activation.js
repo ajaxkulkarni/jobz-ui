@@ -37,6 +37,7 @@ angular.module("app").controller('activation', function ($scope, userService, $l
                 $scope.registerResponse = response.responseText;
                 return;
             }
+            $scope.user = response.candidateProfile;
             $scope.user.status = "A";
             localStorage.user = JSON.stringify($scope.user);
             if($scope.user.type == "Poster") {
