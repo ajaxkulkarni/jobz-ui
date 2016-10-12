@@ -10,6 +10,7 @@ angular.module("app").controller('activation', function ($scope, userService, $l
     var code = $location.search().activationCode;
     var user = $location.search().activationUser;
     
+    alert(code + ":" + user);
    
     $.skylo({
         state: 'success',
