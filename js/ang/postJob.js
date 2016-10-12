@@ -1,6 +1,6 @@
 angular.module("app").controller('postJob', function ($scope, generic,userService, $http) {
     
-    if(localStorage.user == null) {
+    /*if(localStorage.user == null) {
         window.location.href = "index.html";
         return;
     }
@@ -10,7 +10,9 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";
         return;
-    }
+    }*/
+    
+    userService.validateUser($scope);
     
     //alert("Hi!");
     $scope.skills = [];

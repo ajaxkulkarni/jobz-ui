@@ -56,6 +56,8 @@
                             <th>Name</th>
                             <th>Job Title</th>
                             <th>Company</th>
+                            <th>Sector</th>
+                            <th>Experience</th>
                             <th>Posted Date</th>
                             <th>Expiry Date</th>
                             <th>Email</th>
@@ -72,6 +74,8 @@
                             <td>{{job.postedBy.name}}</td>
                             <td>{{job.jobTitle}}</td>
                             <td>{{job.companyName}}</td>
+                            <td>{{job.sector.name}}</td>
+                            <td>{{job.minExperience}} - {{job.maxExperience}}</td>
                             <td>{{job.postedDateString}}</td>
                             <td>{{job.expiryDateString}}</td>
                             <td>{{job.postedBy.email}}</td>

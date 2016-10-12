@@ -261,7 +261,7 @@
                                         <div class="col-md-8">
                                             <h2 class="panel-title jobPanelTitle">{{candidate.name}}</h2>
                                             <p class="panel-title jobPanelSubTitle">{{candidate.designation}}</p>
-
+                                            <p ng-show="viewType == 'AcceptedCandidates'">Shortlisted For : {{candidate.application.jobTitle}}</p>
                                             <div class="row">
                                                 <!--<div class="col-md-4">
                                                     <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>

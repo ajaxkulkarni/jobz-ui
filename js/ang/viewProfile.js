@@ -1,8 +1,8 @@
-angular.module("app").controller('viewProfile', function ($scope, userService, userService, $http) {
+angular.module("app").controller('viewProfile', function ($scope, userService, $http) {
 
     //alert("Here!");
 
-    if (localStorage.user == null) {
+    /*if (localStorage.user == null) {
         window.location.href = "index.html";
         return;
     }
@@ -14,7 +14,9 @@ angular.module("app").controller('viewProfile', function ($scope, userService, u
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";
         return;
-    }
+    }*/
+    
+    userService.validateUser($scope);
 
 
     $.skylo({

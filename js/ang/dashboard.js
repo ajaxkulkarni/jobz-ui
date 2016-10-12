@@ -3,19 +3,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     localStorage.intent = null;
     $scope.isDashboard = true;
     
-    if(localStorage.user == null) {
-        window.location.href = "index.html";
-        return;
-    }
-    
-    $scope.loggedIn = JSON.parse(localStorage.user);
-    //alert(localStorage.user);
-    if ($scope.loggedIn == null) {
-        window.location.href = "index.html";
-        return;
-    }
-
-    $scope.user = JSON.parse(localStorage.user);
+    userService.validateUser($scope);
     
     //alert(localStorage.viewType);
     

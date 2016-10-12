@@ -1,6 +1,6 @@
 angular.module("app").controller('confirmJob', function ($scope, jobService,userService, $http) {
     //alert("Posting new Job");
-    if (localStorage.user == null) {
+    /*if (localStorage.user == null) {
         window.location.href = "index.html";
         return;
     }
@@ -10,7 +10,9 @@ angular.module("app").controller('confirmJob', function ($scope, jobService,user
     if ($scope.loggedIn == null) {
         window.location.href = "index.html";
         return;
-    }
+    }*/
+    
+    userService.validateUser($scope);
 
     $.skylo({
         state: 'success',

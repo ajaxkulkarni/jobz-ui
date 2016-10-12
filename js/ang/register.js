@@ -1,11 +1,11 @@
-angular.module("app").controller('register', function ($scope, userService) {
+angular.module("app").controller('register', function ($scope, userService, $location) {
 
     $scope.response = {};
     /*$scope.loginResponse = null;
     $scope.registerResponse = null;
     $scope.showProgress = false;*/
     
-    
+    //alert($location.search().var2);
     $scope.loggedIn = null;
     if (localStorage.user != null && localStorage.user != 'null') {
         $scope.loggedIn = JSON.parse(localStorage.user);
@@ -16,6 +16,14 @@ angular.module("app").controller('register', function ($scope, userService) {
         //alert($scope.user);
     }
    
+    if($scope.user.type == null) {
+        if(localStorage.intent != null) {
+            $scope.user.type = localStorage.intent;
+        } else {
+            $scope.user.type = "Seeker";
+        }
+    }
+    
 
     $.skylo({
         state: 'success',
@@ -57,6 +65,7 @@ angular.module("app").controller('register', function ($scope, userService) {
                 $scope.registerResponse = response.responseText;
                 return;
             }
+            $scope.user.status = "I";
             postLogin($scope);
         });
 
@@ -156,7 +165,9 @@ function postLogin($scope) {
         $scope.user.type = localStorage.intent;
     }
     localStorage.user = JSON.stringify($scope.user);
-    if ($scope.user.type == 'Poster' && localStorage.intent == 'Poster') {
+    if($scope.user.status == "I") {
+        window.location.href = "activation.html"
+    } else if ($scope.user.type == 'Poster' && localStorage.intent == 'Poster') {
         window.location.href = 'postJob.html';
     } else if ($scope.user.type == 'Seeker' && ($scope.user.description == null || $scope.user.description.length == 0)) {
         window.location.href = 'updateProfile.html';
