@@ -177,6 +177,8 @@
                             <th>Company</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <td>Status</td>
+                            <td>Activation</td>
                             <th>Description</th>
                         </tr>
                     </thead>
@@ -190,6 +192,8 @@
                             <td>{{c.company}}</td>
                             <td>{{c.email}}</td>
                             <td>{{c.phone}}</td>
+                            <td>{{c.status}}</td>
+                            <td>{{c.activationCode}}</td>
                             <td>{{c.description | limitTo : 20 : 0}} ..</td>
                         </tr>
                     </tbody>

@@ -1,7 +1,7 @@
 var app = angular.module("app", []);
 
-var host = "http://localhost:8080/jobz-app";
-//var host = "http://115.124.124.220:8080/jobz";
+//var host = "http://localhost:8080/jobz-app";
+var host = "http://115.124.124.220:8080/jobz";
 var root = host + "/service";
 var rootAdmin = host + "/adminService";
 
