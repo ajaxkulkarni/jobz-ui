@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">Skills * </p>
-                        <p class="fieldDesc text-left">Skills expected from the candidate. It can be a tool, technology or soft skill also. Be precise. Press enter after typing the skill to add it to the list.</p>
+                        <p class="fieldDesc text-left">Skills expected from the candidate. It can be a tool, technology or soft skill also. Be precise. If the intended skill is not present in the suggestions, Press enter after typing the skill to add it to the list.</p>
                         <input type="text" class="form-control" name="skills" placeholder="e.g. Java, C#, Auto-CAD, management, report writing etc." ng-model="skill.name" ng-keyup="onKeyUp($event)">
                         <br/>
                         <a href="#"><span class="myBadge" ng-click="removeSkill(s,$event)" ng-repeat="s in job.skillsRequired">{{s.name}}&nbsp;&nbsp;&nbsp;&nbsp;x</span></a>&nbsp;
@@ -132,7 +132,7 @@
                     <div class="col-md-8 col-md-offset-2 myText">
                         <p class="fieldLabel text-left">About the Job * </p>
                         <p class="fieldDesc text-left">Describe the job in detail</p>
-                        <textarea class="form-control" name="description" placeholder="In this job profile .." ng-model="job.description" ng-required="true" rows="10"></textarea>
+                        <textarea class="form-control" name="description" placeholder="In this job profile .." ng-model="job.description" ng-required="true" rows="10" maxlength="1500"></textarea>
                         <p class="error" ng-show="showPostJobError && postJobForm.description.$invalid">Please enter the job description</p>
                     </div>
                     
