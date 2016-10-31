@@ -1,7 +1,7 @@
 var app = angular.module("app", []);
 
-//var host = "http://localhost:8080/jobz-app";
-var host = "http://115.124.124.220:8080/jobz";
+var host = "http://localhost:8080/jobz-app";
+//var host = "http://115.124.124.220:8080/jobz";
 var root = host + "/service";
 var rootAdmin = host + "/adminService";
 
@@ -231,7 +231,7 @@ app.service('userService', function ($http, $q) {
 
         $scope.user = JSON.parse(localStorage.user);
         //alert($scope.user);
-        if($scope.user.status == "I") {
+        if ($scope.user.status == "I") {
             window.location.href = "activation.html";
             return;
         }
@@ -348,7 +348,7 @@ app.service('jobService', function ($http, $q) {
     this.showInterest = function ($scope) {
 
         //user = JSON.parse(localStorage.user);
-        //alert($scope.interestedProfile.email);
+        //alert($scope.interestedJob);
         var dataObj = {
 
                 applyJobRequested: {
@@ -361,6 +361,7 @@ app.service('jobService', function ($http, $q) {
                     interestShownBySeeker: $scope.interestBySeeker
                 }
             }
+        //alert("Here2");
             //alert("calling" + JSON.stringify(dataObj));
         deferred = $q.defer();
         var res = $http.post(root + '/applyForJob', dataObj);

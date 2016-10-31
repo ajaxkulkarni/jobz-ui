@@ -265,7 +265,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
     $scope.acceptInterestCandidate = function (candidate) {
         $scope.interestedProfile = candidate;
         $scope.showInterest();
-        $scope.showAcceptedCandidates("close");
+        //$scope.showAcceptedCandidates("close");
         //$("#showInterestModal").modal('show');
     };
 
@@ -275,13 +275,25 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.interestedJob = JSON.parse(localStorage.currentJob);
         $.skylo('start');
         $.skylo('inch', 5);
+        if($scope.interestedJob == null) {
+            $scope.interestedJob = $scope.interestedProfile.application; 
+            if($scope.interestedJob != null) {
+                $scope.interestedJob.interestShownBySeeker = "Y";
+            }
+        }
         jobService.showInterest($scope).then(function (response) {
             $.skylo('end');
             $scope.showApplyProgress = false;
             if (response.status == 200) {
                 //alert("Done!");
+                if($scope.interestedJob.interestShownBySeeker == "Y") {
+                    $("#showInterestModal").modal('hide');
+                    $scope.viewContact($scope.interestedProfile);
+                    localStorage.viewType = "AcceptedCandidates";
+                } else {
+                    $scope.showInterestResponse = "Interest submitted successfully! You will get the full contact details of this profile only when the candidate also shows interest in this job. Now you can find this profile shortlisted under 'Interests sent'.";
+                }
                 loadProfile();
-                $scope.showInterestResponse = "Interest submitted successfully! You will get the full contact details of this profile only when the candidate also shows interest in this job. Now you can find this profile shortlisted under 'My Interests'.";
             } else {
                 $scope.showInterestResponse = response.statusText;
             }
@@ -298,7 +310,13 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $.skylo('end');
             if (response.status == 200) {
                 //alert("Done!");
-                $scope.applyJobResponse = "Application submitted successfully! You will get the full contact details for this job only when the job poster also shows interest in your profile. Now you can find this job listed under 'Applications Sent'.";
+                if($scope.interestedJob.interestShownByPoster == "Y") {
+                    $("#applyJobModal").modal('hide');
+                    $scope.viewContact($scope.interestedJob.postedBy);
+                    localStorage.viewType = "AcceptedJobs";
+                } else {
+                    $scope.applyJobResponse = "Application submitted successfully! You will get the full contact details for this job only when the job poster also shows interest in your profile. Now you can find this job listed under 'Applications Sent'.";
+                }
                 loadProfile();
             } else {
                 $scope.applyJobResponse = response.statusText;

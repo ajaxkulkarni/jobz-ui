@@ -147,11 +147,11 @@
                         <p class="dashInfo" ng-show="viewType == 'AcceptedCandidates'">
                             You do not have any candidate contacts right now. You can get the contacts of the candidates only when candidate also accepts the job offer.
                         </p>
-                        
+
                         <p class="dashInfo" ng-show="viewType == 'MyCandidates'">
                             You have not shortlisted any candidates right now. You can show interest in a candidate profile available in matching profiles section of any job post.
                         </p>
-                        
+
                         <p class="dashInfo" ng-show="viewType == 'InterestsReceived'">
                             You have not received any candidate application for any job yet. You can also show interest in a candidate profile available in matching profiles section of any job post.
                         </p>
@@ -196,9 +196,12 @@
                                             <p><a href="#" class="jobLinks" ng-click="showInterestCandidates(job)">My Interests &nbsp;<span class="label label-success compatLabel jobLabel" style="float:right">{{job.interestCandidates.length}}</span></a></p>
                                         </div>
 
-                                        <div class="col-md-4" ng-show="profile.type == 'Seeker' || profile.type == null">
+                                        <div class="col-md-4 compatStyle" ng-show="profile.type == 'Seeker' || profile.type == null">
                                             <!--<p><a href="#" class="jobLinks">Compatibility &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.compatibility}}</span></a></p>-->
-                                            Compatibility &nbsp;&nbsp;&nbsp;<span class="compatText" ng-show="candidate.compatibility <= 25" style="color:#D2D7D3">{{candidate.compatibility}} %</span>
+                                            Compatibility &nbsp;&nbsp;&nbsp;
+                                            <span class="compatText" ng-show="job.compatibility <= 25" style="color:#D2D7D3">{{job.compatibility}} %</span> 
+                                            <span class="compatText" ng-show="job.compatibility > 25">{{job.compatibility}} %</span>
+
 
                                         </div>
 
@@ -286,9 +289,11 @@
                                         </div>
 
                                         <div class="col-md-4 compatStyle">
-                                            <!--<p><a href="#" class="jobLinks">-->Compatibility &nbsp;&nbsp;&nbsp; <!--</a></p>-->
+                                            <!--<p><a href="#" class="jobLinks">-->Compatibility &nbsp;&nbsp;&nbsp;
+                                            <!--</a></p>-->
                                             <!--<p>--><span class="compatText" ng-show="candidate.compatibility > 25">{{candidate.compatibility}} %</span>
-                                            <span class="compatText" ng-show="candidate.compatibility <= 25" style="color:#D2D7D3">{{candidate.compatibility}} %</span><!--</p>-->
+                                            <span class="compatText" ng-show="candidate.compatibility <= 25" style="color:#D2D7D3">{{candidate.compatibility}} %</span>
+                                            <!--</p>-->
 
                                         </div>
 
@@ -414,8 +419,9 @@
                         <h4 class="modal-title">Contact Details</h4>
                     </div>
                     <div class="modal-body">
-                        <p>{{acceptedCandidate.email}}</p>
-                        <p>{{acceptedCandidate.phone}}</p>
+                        <p>Name : {{acceptedCandidate.name}}</p>
+                        <p>Email : {{acceptedCandidate.email}}</p>
+                        <p>Phone : {{acceptedCandidate.phone}}</p>
                     </div>
 
                     <div class="modal-footer">
