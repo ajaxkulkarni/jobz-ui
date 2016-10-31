@@ -63,7 +63,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                             }
                         }
                     } else if (localStorage.viewType == "MyCandidates") {
-                        $scope.showPosterInterests("close");
+                        $scope.showPosterInterests();
                     } else if (localStorage.viewType == "InterestShown") {
                         $scope.showInterestCandidates(job);
                     } else if (localStorage.viewType == "AvailableJobs") {
@@ -133,18 +133,27 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         }
 
     };
+    
+    $scope.showInterestsReceived = function () {
+        localStorage.currentJob = null;
+        $scope.jobsList = [];
+        $scope.candidates = [];
+        $scope.postedJobs = [];
+        var profile = JSON.parse(localStorage.profile);
+        $scope.candidates = profile.interestsReceived;
+        $scope.header = "Interests Received";
+        localStorage.viewType = "InterestsReceived";
+        $scope.viewType = localStorage.viewType;
+    };
 
-    $scope.showPosterInterests = function (drawerState) {
+    $scope.showPosterInterests = function () {
         localStorage.currentJob = null;
         $scope.jobsList = [];
         $scope.candidates = [];
         $scope.postedJobs = [];
         var profile = JSON.parse(localStorage.profile);
         $scope.candidates = profile.profileInterests;
-        $scope.header = "My Candidates";
-        if (drawerState == "open") {
-            $("#drawer-toggle").click();
-        }
+        $scope.header = "Interests Sent";
         localStorage.viewType = "MyCandidates";
         $scope.viewType = localStorage.viewType;
     };
@@ -272,7 +281,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             if (response.status == 200) {
                 //alert("Done!");
                 loadProfile();
-                $scope.showInterestResponse = "Interest submitted successfully!";
+                $scope.showInterestResponse = "Interest submitted successfully! You will get the full contact details of this profile only when the candidate also shows interest in this job. Now you can find this profile shortlisted under 'My Interests'.";
             } else {
                 $scope.showInterestResponse = response.statusText;
             }
@@ -289,7 +298,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
             $.skylo('end');
             if (response.status == 200) {
                 //alert("Done!");
-                $scope.applyJobResponse = "Application submitted successfully!";
+                $scope.applyJobResponse = "Application submitted successfully! You will get the full contact details for this job only when the job poster also shows interest in your profile. Now you can find this job listed under 'Applications Sent'.";
                 loadProfile();
             } else {
                 $scope.applyJobResponse = response.statusText;

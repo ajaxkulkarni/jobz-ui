@@ -63,8 +63,8 @@
                     <div class="list-group posterOptions" id="optionsDiv" ng-show="profile.type == 'Poster'">
                         <li class="list-group-item listMain" data-toggle="collapse" data-target="#poster"><span class="listSpan" style="float:right"></span><b>Job Poster&nbsp;&nbsp;&nbsp;&nbsp;</b><span class=""></span></li>
                         <div id="poster" class="userOptions collapse in">
-                            <!--<a href="#" class="list-group-item" ng-click="showAppliedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Applications received</a>
-                            <a href="#" class="list-group-item" ng-click="showPosterInterests('open')"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Interests sent</a>-->
+                            <a href="#" class="list-group-item" ng-click="showInterestsReceived()"><span class="label label-success compatLabel jobLabel">{{profile.interestsReceived.length}}</span>Applications received</a>
+                            <a href="#" class="list-group-item" ng-click="showPosterInterests()"><span class="label label-success compatLabel jobLabel">{{profile.profileInterests.length}}</span>Interests sent</a>
                             <a href="#" class="list-group-item" ng-click="showAcceptedCandidates('open')"><span class="label label-success compatLabel jobLabel">{{profile.acceptedProfiles.length}}</span>My Contacts</a>
                             <a class="list-group-item"></a>
                             <!--<a href="#" ng-click="updateType('Seeker')" class="list-group-item">Switch to Job Seeker</a>-->
@@ -147,6 +147,14 @@
                         <p class="dashInfo" ng-show="viewType == 'AcceptedCandidates'">
                             You do not have any candidate contacts right now. You can get the contacts of the candidates only when candidate also accepts the job offer.
                         </p>
+                        
+                        <p class="dashInfo" ng-show="viewType == 'MyCandidates'">
+                            You have not shortlisted any candidates right now. You can show interest in a candidate profile available in matching profiles section of any job post.
+                        </p>
+                        
+                        <p class="dashInfo" ng-show="viewType == 'InterestsReceived'">
+                            You have not received any candidate application for any job yet. You can also show interest in a candidate profile available in matching profiles section of any job post.
+                        </p>
 
                     </div>
 
@@ -189,7 +197,8 @@
                                         </div>
 
                                         <div class="col-md-4" ng-show="profile.type == 'Seeker' || profile.type == null">
-                                            <p><a href="#" class="jobLinks">Compatibility &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.compatibility}}</span></a></p>
+                                            <!--<p><a href="#" class="jobLinks">Compatibility &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.compatibility}}</span></a></p>-->
+                                            Compatibility &nbsp;&nbsp;&nbsp;<span class="compatText" ng-show="candidate.compatibility <= 25" style="color:#D2D7D3">{{candidate.compatibility}} %</span>
 
                                         </div>
 
@@ -261,7 +270,7 @@
                                         <div class="col-md-8">
                                             <h2 class="panel-title jobPanelTitle">{{candidate.name}}</h2>
                                             <p class="panel-title jobPanelSubTitle">{{candidate.designation}}</p>
-                                            <p ng-show="viewType == 'AcceptedCandidates'">Shortlisted For : {{candidate.application.jobTitle}}</p>
+                                            <p ng-show="viewType == 'AcceptedCandidates' || viewType == 'MyCandidates' || viewType == 'InterestsReceived'">Shortlisted For : {{candidate.application.jobTitle}}</p>
                                             <div class="row">
                                                 <!--<div class="col-md-4">
                                                     <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
@@ -276,8 +285,10 @@
 
                                         </div>
 
-                                        <div class="col-md-4">
-                                            <p><a href="#" class="jobLinks">Compatibility &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{candidate.compatibility}}</span></a></p>
+                                        <div class="col-md-4 compatStyle">
+                                            <!--<p><a href="#" class="jobLinks">-->Compatibility &nbsp;&nbsp;&nbsp; <!--</a></p>-->
+                                            <!--<p>--><span class="compatText" ng-show="candidate.compatibility > 25">{{candidate.compatibility}} %</span>
+                                            <span class="compatText" ng-show="candidate.compatibility <= 25" style="color:#D2D7D3">{{candidate.compatibility}} %</span><!--</p>-->
 
                                         </div>
 
