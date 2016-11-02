@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Talnote | Job Info</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/skylo.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
+
+    <script type="text/javascript" src="js/site.min.js"></script>
+    <script src="js/skylo.js"></script>
+    <script src="js/angular.min.js"></script>
+
+    <script src="js/ang/main.js"></script>
+
+    <script src="js/ang/admin.js"></script>
+	
+	<meta property="og:url"           content="http://www.talnote.com/index.html" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Talnote" />
+	<meta property="og:description"   content="Connecting the right individuals" />
+	<meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+
+</head>
+
+<body ng-app="app" ng-controller="adminViewJob">
+
+
+
+
+    <div class="container-fluid">
+
+		<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
+        <div ng-include="'header.html'"></div>
+
+
+        <h3 class="text-center">Job Post at a Glance</h3>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="alert alert-danger" ng-show="postJobResponse != null && postJobResponse.length > 0">
+                    <strong>Oh snap!</strong> {{postJobResponse}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <div class="panel panel-default jobPanel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
+                                <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
+								<a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
+								<div class="fb-share-button" 
+									data-href="http://www.talnote.com/index.html" 
+									data-layout="button_count">
+								</div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
+                                        <span class="jobPanelProps">&nbsp;{{job.location}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-briefcase jobPanelIcon" style="font-size:20px"></span> <span class="jobPanelProps">&nbsp;{{job.minExperience}} - {{job.maxExperience}} years</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-user jobPanelIcon" style="font-size:20px"></span> 
+                                        <span class="jobPanelProps">&nbsp;{{job.type}}</span>
+                                    </div>
+                                </div>
+                                <br/>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span ng-repeat="skill in job.skillsRequired"><span class="myBadge">{{skill.name}}</span>&nbsp;&nbsp;</span>
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row" id="job{{job.id}}">
+                            <div class="col-md-12">
+                                {{job.description}}
+                                <br/>
+                                <br/>
+                                <p><b>Job Offer Valid Till :</b> {{job.expiryDate}}</p>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row panel-body jobPanelFooter" style="padding-bottom:5%">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
