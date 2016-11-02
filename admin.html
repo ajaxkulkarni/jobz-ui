@@ -81,6 +81,7 @@
                             <td>{{job.postedBy.email}}</td>
                             <td>{{job.postedBy.phone}}</td>
                             <td>{{job.noOfApplications}}</td>
+			    <td><input type="button" value="View" ng-click="viewJob(job)"/></td>
                             <!--<td>{{job.interestCandidates}}</td>
                     <td>{{job.matches}}</td>-->
                             <!--<td>@mdo</td>-->
@@ -194,7 +195,7 @@
                             <td>{{c.phone}}</td>
                             <td>{{c.status}}</td>
                             <td>{{c.activationCode}}</td>
-                            <td>{{c.description | limitTo : 20 : 0}} ..</td>
+			    <td><input type="button" value="View" ng-click="viewProfile(c)"/></td>
                         </tr>
                     </tbody>
                 </table>
