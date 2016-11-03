@@ -121,9 +121,36 @@ angular.module("app").controller('admin', function ($scope, adminService) {
 
     $scope.getPostedJobs();
 
-   
+   $scope.viewProfile = function (user) {
+        localStorage.viewUser = JSON.stringify(user);
+		window.location.href = "adminViewProfile.html";
+    };
+	
+	$scope.viewJob = function (job) {
+        localStorage.viewJob = JSON.stringify(job);
+		window.location.href = "adminViewJob.html";
+    };
 
 
 });
 
 
+angular.module("app").controller('adminViewProfile', function ($scope, adminService) {
+	
+	if(localStorage.viewUser == null) {
+		return;
+	}
+	//alert(localStorage.viewUser);
+	$scope.user = JSON.parse(localStorage.viewUser);
+	
+});
+
+angular.module("app").controller('adminViewJob', function ($scope, adminService) {
+	
+	if(localStorage.viewJob == null) {
+		return;
+	}
+	//alert(localStorage.viewJob);
+	$scope.job = JSON.parse(localStorage.viewJob);
+	
+});
