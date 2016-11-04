@@ -306,6 +306,7 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.interestBySeeker = "Y";
         $.skylo('start');
         $.skylo('inch', 5);
+        //alert($scope.interestedProfile.designation);
         jobService.showInterest($scope).then(function (response) {
             $.skylo('end');
             if (response.status == 200) {

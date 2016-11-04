@@ -20,17 +20,32 @@
 
     <script src="js/ang/main.js"></script>
 
-    <script src="js/ang/confirmJob.js"></script>
+    <script src="js/ang/admin.js"></script>
+	
+	<meta property="og:url"           content="http://www.talnote.com/index.html" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Talnote" />
+	<meta property="og:description"   content="Connecting the right individuals" />
+	<meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
 
 </head>
 
-<body ng-app="app" ng-controller="confirmJob">
+<body ng-app="app" ng-controller="adminViewJob">
 
 
 
 
     <div class="container-fluid">
 
+		<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	
         <div ng-include="'header.html'"></div>
 
 
@@ -54,7 +69,11 @@
                             <div class="col-md-12">
                                 <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
                                 <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
-
+								<a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
+								<div class="fb-share-button" 
+									data-href="http://www.talnote.com/index.html" 
+									data-layout="button_count">
+								</div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
@@ -99,15 +118,6 @@
 
                 </div>
 
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="price-foot viewJobFooter">
-                        <button type="button" class="btn btn-primary myPanelButton myPanelButtonBack" ng-click="back()">Back</button>
-                        <button type="button" class="btn btn-primary myPanelButton myPanelButtonSave" ng-click="postJob()">Submit</button>
-                    </div>
-                </div>
             </div>
 
         </div>

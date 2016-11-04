@@ -28,6 +28,7 @@ angular.module("app").controller('confirmJob', function ($scope, jobService,user
 
     if (localStorage != null && localStorage.postJob != null) {
         $scope.job = JSON.parse(localStorage.postJob);
+        //alert($scope.job.description);
         $scope.job.intent = $scope.loggedIn.type;
     }
 

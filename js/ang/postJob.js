@@ -180,10 +180,11 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
             $scope.showPostJobError = true;
             return;
         }
+        //alert($scope.job.description);
         //$scope.job.skills = $scope.skills;
         //$scope.job.intent = localStorage.intent;
         localStorage.postJob = JSON.stringify($scope.job);
-        //alert($scope.job.intent);
+        //alert(localStorage.postJob);
         //window.location.href = "viewJob.html";
         window.location.replace("viewJob.html");
     };
