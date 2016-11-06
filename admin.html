@@ -104,6 +104,7 @@
                             <th>Seeker Name</th>
                             <th>Seeker Email</th>
                             <th>Seeker Phone</th>
+                            <th>Seeker Experience</th>
                             <th>Poster Interest</th>
                             <th>Seeker Interest</th>
                             <!--<th>Applied Date</th>-->
@@ -122,6 +123,7 @@
                             <td>{{job.currentCandidate.name}}</td>
                             <td>{{job.currentCandidate.email}}</td>
                             <td>{{job.currentCandidate.phone}}</td>
+                            <td>{{job.currentCandidate.experience}}</td>
                             <td>{{job.interestShownByPoster}}</td>
                             <td>{{job.interestShownBySeeker}}</td>
                             <!--<td>{{job.appliedDateString}}</td>-->
@@ -178,6 +180,7 @@
                             <th>Company</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <td>Experience</td>
                             <td>Status</td>
                             <td>Activation</td>
                             <th>Description</th>
@@ -193,6 +196,7 @@
                             <td>{{c.company}}</td>
                             <td>{{c.email}}</td>
                             <td>{{c.phone}}</td>
+                            <td>{{c.experience}}</td>
                             <td>{{c.status}}</td>
                             <td>{{c.activationCode}}</td>
 			    <td><input type="button" value="View" ng-click="viewProfile(c)"/></td>
