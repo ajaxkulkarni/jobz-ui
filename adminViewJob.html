@@ -69,7 +69,7 @@
                             <div class="col-md-12">
                                 <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
                                 <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
-								<a href="whatsapp://send?text=The text to share!" data-action="share/whatsapp/share">Share via Whatsapp</a>
+								<a href="whatsapp://send?text={{job.jobTitle}} required at {{job.companyName}} for experience {{job.minExperience}} - {{job.maxExperience}} years. Apply now at Talnote.com" data-action="share/whatsapp/share">Share via Whatsapp</a>
 								<div class="fb-share-button" 
 									data-href="http://www.talnote.com/index.html" 
 									data-layout="button_count">
