@@ -66,6 +66,30 @@ angular.module("app").controller('activation', function ($scope, userService, $l
     $scope.logout = function() {
         userService.logout();
     }
+    
+    $scope.sendPassword = function () {
+        
+        $scope.showProgress = true;
+        $.skylo('start');
+        $.skylo('inch', 5);
+        $scope.successResponse = "";
+        userService.forgotPassword($scope).then(function (response) {
+            $.skylo('end');
+            $scope.showProgress = false;
+            if (response == null) {
+                $scope.registerResponse = "Error connecting server ..";
+            }
+            if (response.status != 200) {
+                $scope.registerResponse = response.responseText;
+                return;
+            } else {
+                $scope.successResponse = "Password sent to your email successfully!";
+                return;
+            }
+            
+        });
+
+    };
 
 
 });

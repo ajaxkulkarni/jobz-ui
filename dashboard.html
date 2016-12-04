@@ -6,11 +6,12 @@
     <title>Talnote | Dashboard</title>
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <!--<link rel="stylesheet" href="css/fileupload.css">-->
     <link rel="stylesheet" href="css/site.min.css">
     <!--link rel="stylesheet" href="css/vertical_nav.css"-->
     <!--<link rel="stylesheet" href="css/drawer.css">-->
     <link rel="stylesheet" href="css/skylo.css">
+    
     <link rel="stylesheet" href="css/styles.css">
     <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
 
@@ -23,6 +24,8 @@
     <script src="js/skylo.js"></script>
 
     <script src="js/date.js"></script>
+    
+    <script src="js/fileupload.js"></script>
 
     <script src="js/angular.min.js"></script>
 
@@ -86,8 +89,7 @@
                             <a href="#" class="list-group-item" ng-click="showJobRequests()"><span class="label label-success compatLabel jobLabel">{{profile.jobRequests.length}}</span>Interests Received</a>
                             <a href="#" class="list-group-item" ng-click="showAppliedJobs('open')"><span class="label label-success compatLabel jobLabel">{{profile.appliedJobs.length}}</span>Applications sent</a>
                             <a href="#" class="list-group-item" ng-click="showAcceptedJobs()"><span class="label label-success compatLabel jobLabel">{{profile.acceptedJobs.length}}</span>My Contacts</a>
-
-
+                            <a href="#" class="list-group-item" data-toggle="modal" data-target="#uploadModal"><!--<span class="label label-success compatLabel jobLabel"></span>-->Upload Resume</a>
 
                             <!--<a href="#" ng-click="updateType('Poster')" class="list-group-item">Switch to Job Poster</a>-->
                         </div>
@@ -254,7 +256,7 @@
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster != 'Y'">
                                             <a href="#" style="color:white" class="cardButton">Show Interest</a>
                                         </div>
-                                        <div class="col-xs-2 col-md-4" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster != 'Y'">
+                                        <div class="col-xs-2 col-md-4" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster != 'Y' && job.interestShownByPoster != 'N'">
                                             <a href="#" style="color:white" class="cardButton">Interest Shown</a>
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="viewContact(job.postedBy)" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster == 'Y'">
@@ -262,6 +264,9 @@
                                         </div>
                                         <div class="col-xs-2 col-md-4" ng-click="showInterestJob(job)" ng-show="job.interestShownBySeeker != 'Y' && job.interestShownByPoster == 'Y'">
                                             <a href="#" style="color:white" class="cardButton">Accept Request</a>
+                                        </div>
+                                        <div class="col-xs-2 col-md-4" ng-show="job.interestShownBySeeker == 'Y' && job.interestShownByPoster == 'N'" style="color:#D2D7D3">
+                                            <a href="#" style="color:white" class="cardButton" >Rejected</a>
                                         </div>
 
                                     </div>
@@ -338,6 +343,10 @@
                                             <a href="#" style="color:white" class="cardButton" ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested == 'Y'" ng-click="viewContact(candidate)">View Contact</a>
 
                                         </div>
+                                        <div class="col-xs-2 col-md-4">
+                                            <a href="#" style="color:white" class="cardButton" ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested != 'Y'" ng-click="rejectInterestCandidate(candidate)">Reject</a>
+                                            <a href="{{downloadUrl}}{{candidate.email}}" style="color:white" class="cardButton" ng-show="candidate.seekerInterested == 'Y' && candidate.posterInterested == 'Y' && candidate.filePath != null" >Download Resume</a>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -375,7 +384,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="wipe()">Close</button>
-                        <button type="button" class="btn btn-success" ng-click="showInterest()" ng-show="showInterestResponse == null">Send</button>
+                        <button type="button" class="btn btn-success" ng-click="showInterest('Y')" ng-show="showInterestResponse == null">Send</button>
                     </div>
                 </div>
             </div>
@@ -436,6 +445,50 @@
                     </div>
 
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="rejectModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Reject request</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p ng-show="showInterestResponse == null">Are you sure you want to reject this candidate application ? ({{interestedProfile.name}})</p>
+                        <p ng-show="showInterestResponse != null">{{showInterestResponse}}</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="rejectCandidate()" ng-show="showInterestResponse == null">Reject</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="uploadModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Upload Resume</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p ng-show="uploadResponse == null">Please upload your latest resume in order to make your profile complete.</p>
+                        <p><input type="file" file-model = "myFile" /></p>
+                        <p ng-show="uploadResponse != null">{{uploadResponse}}</p>
+                    </div>
+                    
+                      
+                   
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="uploadFile()" ng-show="uploadResponse == null">Upload</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>

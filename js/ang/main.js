@@ -14,10 +14,17 @@ app.service('generic', function ($http) {
         var dataObj = {
             jobSkillRequested: skillName
         };
+        var genSkill = {
+            id: -1,
+            name: "Press Enter to add this skill to your list."
+        };
         var res = $http.post(root + '/searchSkill', dataObj);
         res.success(function (data, status, headers, config) {
             //alert(data.matchingJobSkills);
             $scope.matchingSkills = data.matchingJobSkills;
+            if ($scope.matchingSkills.length == 0) {
+                $scope.matchingSkills = [genSkill];
+            }
         });
         res.error(function (data, status, headers, config) {
             alert("failure message: " + JSON.stringify({
@@ -216,6 +223,30 @@ app.service('userService', function ($http, $q) {
         return $q.when(response);
     }
 
+    this.forgotPassword = function ($scope) {
+        //alert("In service");
+        var dataObj = {
+            requestedBy: {
+                name: $scope.user.name,
+                email: $scope.user.email,
+                password: $scope.user.password,
+                phone: $scope.user.phone
+            }
+        };
+        deferred = $q.defer();
+        var res = $http.post(root + '/forgotPassword', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+
     this.validateUser = function ($scope) {
         if (localStorage.user == null) {
             window.location.href = "index.html";
@@ -235,6 +266,34 @@ app.service('userService', function ($http, $q) {
             window.location.href = "activation.html";
             return;
         }
+    }
+
+    this.uploadCV = function ($scope) {
+        //alert("Here!" + file);
+        
+        var fd = new FormData();
+        fd.append('file',$scope.myFile);
+        fd.append('email',$scope.profile.email);
+        
+        deferred = $q.defer();
+        var res = $http.post(root + "/upload", fd, {
+            transformRequest: angular.identity,
+            headers: {
+                'Content-Type': undefined
+            }
+        });
+        res.success(function (data, status, headers, config) {
+            //alert("DOne!");
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            alert("Error!" + status + ":" + data);
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
     }
 
 });
@@ -361,7 +420,7 @@ app.service('jobService', function ($http, $q) {
                     interestShownBySeeker: $scope.interestBySeeker
                 }
             }
-        //alert("Here2");
+            //alert("Here2");
             //alert("calling" + JSON.stringify(dataObj));
         deferred = $q.defer();
         var res = $http.post(root + '/applyForJob', dataObj);
@@ -472,6 +531,22 @@ app.service('adminService', function ($http, $q) {
         return $q.when(response);
     }
 });
+
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function () {
+                scope.$apply(function () {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
 
 /*app.config(function($routeProvider, $locationProvider){
     $routeProvider.when('/validate', {

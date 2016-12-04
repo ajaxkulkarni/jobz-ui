@@ -1,5 +1,5 @@
-angular.module("app").controller('postJob', function ($scope, generic,userService, $http) {
-    
+angular.module("app").controller('postJob', function ($scope, generic, userService, $http) {
+
     /*if(localStorage.user == null) {
         window.location.href = "index.html";
         return;
@@ -11,9 +11,9 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
         window.location.href = "index.html";
         return;
     }*/
-    
+
     userService.validateUser($scope);
-    
+
     //alert("Hi!");
     $scope.skills = [];
     $scope.educations = [];
@@ -21,38 +21,42 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
     $scope.job.skillsRequired = [];
     $scope.job.type = "Referrer";
     //$scope.job.sector.id = "IT";
-    
+
     //alert(localStorage.profile);
-    
+
     if (localStorage.profile != null) {
         $scope.user = JSON.parse(localStorage.profile);
-        if($scope.user != null && $scope.user.sector.id != null) {
+        if ($scope.user != null && $scope.user.sector.id != null) {
             $scope.user.sector.id = $scope.user.sector.id.toString();
         }
         //alert($scope.user.jobSkills);
     }
     //alert(localStorage.postJob!= 'null');
-    if(localStorage.postJob != null && localStorage.postJob != 'null') {
+    if (localStorage.postJob != null && localStorage.postJob != 'null') {
         $scope.job = JSON.parse(localStorage.postJob);
         //alert(localStorage.postJob);
         $scope.job.expiryDate = new Date($scope.job.expiryDate).toString('yyyy-MM-dd');
-        if($scope.job.sector.id != null) {
+        if ($scope.job.sector.id != null) {
             $scope.job.sector.id = $scope.job.sector.id.toString();
-        }   
+        }
         //alert($scope.job.skillsRequired);
     }
     //$scope.job.sector.id = "2";
     //alert($scope.user.experience);
-    if($scope.user == null) {
+    if ($scope.user == null) {
         //alert($scope.user);
         $scope.user = {};
         $scope.user.jobSkills = [];
         $scope.user.educations = [];
     }
 
-    $scope.itemClick = function (skill,$event) {
+    $scope.itemClick = function (skill, $event) {
         //alert($scope.user);
-        
+        if (skill.id < 0) {
+            $event.preventDefault();
+            return false;
+        }
+
         if ($scope.job != null) {
             //alert($scope.job.type);
             $scope.job.skillsRequired.push(skill);
@@ -72,8 +76,8 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
     };
 
     $scope.onKeyUp = function ($event) {
-       // alert("Here!" + $event.keyCode);
-        if ($event.keyCode == 13) {
+        //alert("Here!" + $event.keyCode);
+        if ($event.keyCode == 13 || $event.keyCode == 188) {
             //alert($scope.user);
             var skill = matchSkill($scope);
             //alert(skill.name);
@@ -101,8 +105,8 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
         return false;
     };
 
-    $scope.removeSkill = function ($skill,$event) {
-        
+    $scope.removeSkill = function ($skill, $event) {
+
         if ($scope.user != null) {
             var index = $scope.user.jobSkills.indexOf($skill);
             $scope.user.jobSkills.splice(index, 1);
@@ -157,25 +161,25 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
 
     $scope.saveJob = function (formValid) {
         //alert(formValid);
-        if(!formValid) {
+        if (!formValid) {
             $scope.showPostJobError = true;
             return;
         }
         //alert(angular.isNumber($scope.job.minExperience) + ":" + angular.isNumber($scope.job.maxExperience));
-        if(isNaN($scope.job.minExperience) || isNaN($scope.job.maxExperience)) {
-           $scope.expError = "Please enter valid Min and Max Experience";
-           $scope.showPostJobError = true;
-           //alert("Here!");
-           return; 
+        if (isNaN($scope.job.minExperience) || isNaN($scope.job.maxExperience)) {
+            $scope.expError = "Please enter valid Min and Max Experience";
+            $scope.showPostJobError = true;
+            //alert("Here!");
+            return;
         }
-        
-        if((parseInt($scope.job.minExperience) > parseInt($scope.job.maxExperience))) {
+
+        if ((parseInt($scope.job.minExperience) > parseInt($scope.job.maxExperience))) {
             $scope.expError = "Please enter valid Min and Max Experience";
             $scope.showPostJobError = true;
             //alert("Here 2!");
             return;
         }
-        if($scope.job.skillsRequired.length == 0) {
+        if ($scope.job.skillsRequired.length == 0) {
             $scope.skillsError = "Please enter atleast one skill required for this job.Please make sure you press enter after typing the skill name to add it to the list.";
             $scope.showPostJobError = true;
             return;
@@ -190,19 +194,19 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
     };
 
     $scope.saveProfile = function (formValid) {
-        if(!formValid) {
+        if (!formValid) {
             $scope.showProfileError = true;
             return;
         }
         //alert(angular.isNumber($scope.job.minExperience) + ":" + angular.isNumber($scope.job.maxExperience));
-        if(isNaN($scope.user.experience) || parseInt($scope.user.experience) < 0) {
-           $scope.expError = "Please enter valid Experience";
+        if (isNaN($scope.user.experience) || parseInt($scope.user.experience) < 0) {
+            $scope.expError = "Please enter valid Experience";
             $scope.showProfileError = true;
-           //alert("Here!");
-           return; 
+            //alert("Here!");
+            return;
         }
-        
-        if($scope.user.jobSkills.length == 0) {
+
+        if ($scope.user.jobSkills.length == 0) {
             $scope.skillsError = "Please enter atleast one skill for your profile. Please make sure you press enter after typing the skill name to add it to the list.";
             $scope.showProfileError = true;
             return;
@@ -214,11 +218,11 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
     $scope.showHint = function (hint) {
         $("#" + hint).show();
     };
-    
+
     $scope.hideHint = function (hint) {
         $("#" + hint).hide();
     };
-    
+
     $scope.logout = function () {
         userService.logout();
     };
@@ -226,12 +230,14 @@ angular.module("app").controller('postJob', function ($scope, generic,userServic
 });
 
 function matchSkill($scope) {
-    if($scope.matchingSkills != null && $scope.matchingSkills.length > 0) {
+    var commas = new RegExp(',', 'g');
+    $scope.skill.name = $scope.skill.name.replace(commas, '');
+    if ($scope.matchingSkills != null && $scope.matchingSkills.length > 0) {
         var i = 0;
         var filteredSkill = $scope.skill.name.replace(/\s+/g, '');
-        for(i =0; i< $scope.matchingSkills.length; i++) {
+        for (i = 0; i < $scope.matchingSkills.length; i++) {
             var curSkill = $scope.matchingSkills[i].name.replace(/\s+/g, '');
-            if(curSkill.toUpperCase() == filteredSkill.toUpperCase()) {
+            if (curSkill.toUpperCase() == filteredSkill.toUpperCase()) {
                 return $scope.matchingSkills[i];
             }
         }
