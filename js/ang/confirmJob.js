@@ -1,4 +1,4 @@
-angular.module("app").controller('confirmJob', function ($scope, jobService,userService, $http) {
+angular.module("app").controller('confirmJob', function ($scope, jobService,userService,adminService, $http) {
     //alert("Posting new Job");
     /*if (localStorage.user == null) {
         window.location.href = "index.html";
@@ -67,12 +67,40 @@ angular.module("app").controller('confirmJob', function ($scope, jobService,user
                 window.location.replace("dashboard.html");
             });
         }
+        
+        
 
+
+    };
+    
+    $scope.postJobAdmin = function () {
+        $.skylo('start');
+        $.skylo('inch', 5);
+
+        adminService.postJob($scope).then(function (response) {
+            $.skylo('end');
+            if (response == null) {
+                $scope.postJobResponse = "Error connecting server ..";
+                return;
+            }
+
+            if (response.status != 200) {
+                $scope.postJobResponse = response.responseText;
+                //alert($scope.loginResponse);
+                return;
+            }
+            localStorage.postJob = null;
+            window.location.replace("admin.html");
+        });
 
     };
     
     $scope.back = function() {
         window.location.replace("postJob.html");  
+    };
+    
+    $scope.adminBack = function() {
+        window.location.replace("adminPostJob.html");  
     };
     
     $scope.logout = function () {

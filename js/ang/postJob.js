@@ -192,6 +192,13 @@ angular.module("app").controller('postJob', function ($scope, generic, userServi
         //window.location.href = "viewJob.html";
         window.location.replace("viewJob.html");
     };
+    
+    $scope.saveJobAdmin = function (formValid) {
+        $scope.saveJob(formValid);
+        window.location.replace("adminViewPostedJob.html");
+    };
+    
+    
 
     $scope.saveProfile = function (formValid) {
         if (!formValid) {

@@ -417,7 +417,8 @@ app.service('jobService', function ($http, $q) {
                         email: $scope.interestedProfile.email
                     },
                     interestShownByPoster: $scope.interestByPoster,
-                    interestShownBySeeker: $scope.interestBySeeker
+                    interestShownBySeeker: $scope.interestBySeeker,
+                    attachCv : $scope.attachCv
                 }
             }
             //alert("Here2");
@@ -524,6 +525,64 @@ app.service('adminService', function ($http, $q) {
             deferred.resolve(response);
         });
         res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+    
+    this.postJob = function ($scope) {
+        //alert("In service  " + localStorage.user);
+        user = JSON.parse(localStorage.user);
+        //alert(user);
+        var date = new Date();
+        //alert($scope.job.expiryDate);
+        var expiryDate = new Date($scope.job.expiryDate);
+        //alert(expiryDate);
+        var dataObj = {
+
+                postJobRequested: {
+                    postedDate: date,
+                    expiryDate: expiryDate,
+                    location: $scope.job.location,
+                    type: $scope.job.type,
+                    minExperience: $scope.job.minExperience,
+                    maxExperience: $scope.job.maxExperience,
+                    salary: $scope.job.salary,
+                    description: $scope.job.description,
+                    maxApplicants: 15,
+                    jobTitle: $scope.job.jobTitle,
+                    companyName: $scope.job.companyName,
+                    postedBy: {
+                        name: user.name,
+                        designation: "",
+                        company: "",
+                        email: user.email,
+                        password: user.password
+                    },
+                    skillsRequired: $scope.job.skillsRequired,
+                    sector: {
+                        id: $scope.job.sector.id
+                    },
+                    poc: {
+                        email: $scope.job.poc.email,
+                        phone: $scope.job.poc.phone
+                       
+                    }
+                }
+            }
+        //alert(dataObj.postJobRequested.poc.email);
+        deferred = $q.defer();
+        var res = $http.post(root + '/postJob', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            alert("failure message: " + JSON.stringify({
+                data: data
+            }));
             response = data;
             deferred.resolve(response);
         });

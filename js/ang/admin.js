@@ -2,8 +2,8 @@ angular.module("app").controller('admin', function ($scope, adminService) {
 
     //alert("Here!");
     $scope.response = {};
-    
-    
+
+
     $scope.loggedIn = null;
     /*if (localStorage.user != null && localStorage.user != 'null') {
         $scope.loggedIn = JSON.parse(localStorage.user);
@@ -13,7 +13,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
         $scope.user = {};
         //alert($scope.user);
     }*/
-   
+
 
     $.skylo({
         state: 'success',
@@ -23,19 +23,19 @@ angular.module("app").controller('admin', function ($scope, adminService) {
     });
 
     //
-    
+
     //alert("Here!");
 
     $scope.getPostedJobs = function () {
         $.skylo('start');
         $.skylo('inch', 5);
-        
+
         adminService.getAllPostedJobs().then(function (response) {
             $.skylo('end');
             if (response == null) {
                 $scope.adminResponse = "Error connecting server ..";
             }
-            
+
             if (response.status == 200) {
                 $scope.heading = "Posted Jobs"
                 $scope.showPending = false;
@@ -48,17 +48,17 @@ angular.module("app").controller('admin', function ($scope, adminService) {
         });
 
     };
-    
+
     $scope.getPendingJobs = function () {
         $.skylo('start');
         $.skylo('inch', 5);
-        
+
         adminService.getAllPendingJobs().then(function (response) {
             $.skylo('end');
             if (response == null) {
                 $scope.adminResponse = "Error connecting server ..";
             }
-            
+
             if (response.status == 200) {
                 $scope.heading = "Peding Jobs"
                 $scope.showPending = true;
@@ -71,17 +71,17 @@ angular.module("app").controller('admin', function ($scope, adminService) {
         });
 
     };
-    
+
     $scope.getAcceptedJobs = function () {
         $.skylo('start');
         $.skylo('inch', 5);
-        
+
         adminService.getAllAcceptedJobs().then(function (response) {
             $.skylo('end');
             if (response == null) {
                 $scope.adminResponse = "Error connecting server ..";
             }
-            
+
             if (response.status == 200) {
                 $scope.heading = "Accepted Jobs"
                 $scope.showPending = false;
@@ -94,17 +94,17 @@ angular.module("app").controller('admin', function ($scope, adminService) {
         });
 
     };
-    
+
     $scope.getAllUsers = function () {
         $.skylo('start');
         $.skylo('inch', 5);
-        
+
         adminService.getAllUsers().then(function (response) {
             $.skylo('end');
             if (response == null) {
                 $scope.adminResponse = "Error connecting server ..";
             }
-            
+
             if (response.status == 200) {
                 $scope.heading = "Users"
                 $scope.showPending = false;
@@ -121,36 +121,38 @@ angular.module("app").controller('admin', function ($scope, adminService) {
 
     $scope.getPostedJobs();
 
-   $scope.viewProfile = function (user) {
+    $scope.viewProfile = function (user) {
         localStorage.viewUser = JSON.stringify(user);
-		window.location.href = "adminViewProfile.html";
+        window.location.href = "adminViewProfile.html";
     };
-	
-	$scope.viewJob = function (job) {
+
+    $scope.viewJob = function (job) {
         localStorage.viewJob = JSON.stringify(job);
-		window.location.href = "adminViewJob.html";
+        window.location.href = "adminViewJob.html";
     };
+
+   
 
 
 });
 
 
 angular.module("app").controller('adminViewProfile', function ($scope, adminService) {
-	
-	if(localStorage.viewUser == null) {
-		return;
-	}
-	//alert(localStorage.viewUser);
-	$scope.user = JSON.parse(localStorage.viewUser);
-	
+
+    if (localStorage.viewUser == null) {
+        return;
+    }
+    //alert(localStorage.viewUser);
+    $scope.user = JSON.parse(localStorage.viewUser);
+
 });
 
 angular.module("app").controller('adminViewJob', function ($scope, adminService) {
-	
-	if(localStorage.viewJob == null) {
-		return;
-	}
-	//alert(localStorage.viewJob);
-	$scope.job = JSON.parse(localStorage.viewJob);
-	
+
+    if (localStorage.viewJob == null) {
+        return;
+    }
+    //alert(localStorage.viewJob);
+    $scope.job = JSON.parse(localStorage.viewJob);
+
 });

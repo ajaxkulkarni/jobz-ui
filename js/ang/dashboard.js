@@ -263,6 +263,21 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
         $scope.interestedJob = job;
         $("#applyJobModal").modal('show');
     };
+    
+    $scope.applyForJob = function() {
+        //alert($scope.attachCv);
+        if(!$scope.attachCv) {
+            $scope.applyJob();
+            return;
+        }
+        if($scope.profile.filePath != null && $scope.profile.filePath.length > 0) {
+            $scope.applyJob();
+        } else  {
+            $("#uploadModal").modal('show');
+        }
+        
+        
+    }
 
     $scope.acceptInterestCandidate = function (candidate) {
         $scope.interestedProfile = candidate;
@@ -402,6 +417,11 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
                 //loadProfile();
             } else {
                 $scope.uploadResponse = response.statusText;
+            }
+            //alert($scope.attachCv);
+            if($scope.attachCv) {
+                $("#uploadModal").modal('hide');
+                $scope.applyJob();
             }
         });
     };

@@ -399,13 +399,14 @@
                         <h4 class="modal-title">Apply</h4>
                     </div>
                     <div class="modal-body">
-                        <p ng-show="applyJobResponse == null">Are you sure you want to apply for this profile? ({{interestedJob.companyName}})</p>
+                        <p ng-show="applyJobResponse == null">Are you sure you want to apply for this job? ({{interestedJob.companyName}})</p>
+                        <p ng-show="applyJobResponse == null"><input type="checkbox" class="" ng-model="attachCv">&nbsp;&nbsp;Send Resume</p>
                         <p ng-show="applyJobResponse != null">{{applyJobResponse}}</p>
                     </div>
-
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="wipe()">Close</button>
-                        <button type="button" class="btn btn-success" ng-click="applyJob()" ng-show="applyJobResponse == null">Apply</button>
+                        <button type="button" class="btn btn-success" ng-click="applyForJob()" ng-show="applyJobResponse == null">Apply</button>
                     </div>
                 </div>
             </div>
