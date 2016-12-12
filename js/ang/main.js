@@ -589,6 +589,32 @@ app.service('adminService', function ($http, $q) {
         response = deferred.promise;
         return $q.when(response);
     }
+    
+    this.sendMail = function($scope) {
+        var dataObj = {
+                mailer: {
+                    type: $scope.mailer.type,
+                    message: $scope.mailer.message,
+                    subject: $scope.mailer.subject
+                }
+            }
+        deferred = $q.defer();
+        var res = $http.post(rootAdmin + '/sendToAll', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            /*alert("failure message: " + JSON.stringify({
+                data: data
+            }));*/
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    
+    }
 });
 
 app.directive('fileModel', ['$parse', function ($parse) {

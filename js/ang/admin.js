@@ -131,8 +131,27 @@ angular.module("app").controller('admin', function ($scope, adminService) {
         window.location.href = "adminViewJob.html";
     };
 
-   
+   $scope.sendMail = function() {
+       $.skylo('start');
+       $.skylo('inch', 5);
 
+       adminService.sendMail($scope).then(function (response) {
+            $.skylo('end');
+            if (response == null) {
+                $scope.sendResponse = "Error connecting server ..";
+            }
+
+            if (response.status == 200) {
+                $scope.sendResponse = "Mail sent successfully!";
+                return;
+            }
+        });
+
+   }
+
+   $scope.wipe = function() {
+       $scope.sendResponse = null;   
+   }
 
 });
 

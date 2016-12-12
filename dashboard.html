@@ -198,7 +198,7 @@
 
 
                                         <div class="col-md-4" ng-show="profile.type != 'Seeker' && profile.type!= null && !job.expired">
-                                            <p><a href="#" ng-click="showMatchingProfiles(job)" class="jobLinks">Matching Profiles &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.matchingCandidates.length}}</span></a></p>
+                                            <p><a href="#" ng-click="showMatchingProfiles(job)" class="jobLinks" style="color:#FFB61E">Matching Profiles &nbsp; <span class="label label-success compatLabel jobLabel" style="float:right">{{job.matchingCandidates.length}}</span></a></p>
 
                                             <p><a href="#" ng-click="showAppliedCandidates(job)" class="jobLinks">Applications &nbsp;<span class="label label-success compatLabel jobLabel" style="float:right">{{job.applications.length}}</span></a></p>
 
@@ -483,6 +483,7 @@
                         <p ng-show="uploadResponse == null">Please upload your latest resume in order to make your profile complete.</p>
                         <p><input type="file" file-model = "myFile" /></p>
                         <p ng-show="uploadResponse != null">{{uploadResponse}}</p>
+                        <p ng-show="uploadError != null && uploadResponse == null">{{uploadError}}</p>
                     </div>
                     
                       
@@ -490,6 +491,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" ng-click="uploadFile()" ng-show="uploadResponse == null">Upload</button>
+                        <a href="{{downloadUrl}}{{profile.email}}"><button type="button" class="btn btn-success" ng-show="profile.filePath != null">View</button></a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>

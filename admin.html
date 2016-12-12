@@ -49,6 +49,8 @@
             <div class="col-md-12">
                 <h2>{{heading}}</h2>
                 <a href="adminPostJob.html">Post New Job</a>
+                <a href="#mailModal" data-toggle="modal">Send mail</a>
+                
                 <table class="table" ng-show="showPosted">
                     <thead>
                         <tr>
@@ -208,8 +210,41 @@
             </div>
 
         </div>
+        
+        <div class="modal" id="mailModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Send Mail</h4>
+                    </div>
+                    <div class="modal-body" ng-show="sendResponse == null">
+                       <select name="type" ng-model="mailer.type" class="mySelect">
+                            <option value="All" selected>All</option>
+                            <option value="Poster">Posters Only</option>
+                            <option value="Seeker">Seekers Only</option>
+                        </select>
+                        <br/>
+                        <input type="text" class="form-control" name="subject" placeholder="Mail subject" ng-model="mailer.subject">
+                        <br/>
+                        <textarea class="form-control" placeholder="Mail message" ng-model="mailer.message" maxlength="800" name="message" rows="10"></textarea>
+                    </div>
+                    <div class="modal-body" ng-show="sendResponse != null">
+                       {{sendResponse}}
+                    </div>
+                    
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="sendMail()" ng-show="sendResponse == null">Send</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="wipe()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
+    
+    
 
 
 

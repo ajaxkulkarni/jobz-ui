@@ -407,7 +407,15 @@ angular.module("app").controller('dashboard', function ($scope, userService, job
 
         console.log('file is ');
         console.dir(file);
-        
+        if(file == null) {
+            $scope.uploadError = "Please select a file";
+            return;
+        }
+        if(file.size > 3000000) {
+            alert(file.size);
+            $scope.uploadError = "File size is too large. Can't upload more than 3 MBs.";
+            return;
+        }
         $.skylo('start');
         $.skylo('inch', 5);
         userService.uploadCV($scope).then(function (response) {
