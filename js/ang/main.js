@@ -114,6 +114,26 @@ app.service('userService', function ($http, $q) {
         response = deferred.promise;
         return $q.when(response);
     }
+    
+    this.resend = function ($scope) {
+        var dataObj = {
+            requestedBy: {
+                email: $scope.user.email
+            }
+        };
+        deferred = $q.defer();
+        var res = $http.post(root + '/resendActivation', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
 
     this.logout = function () {
         localStorage.loggedIn = null;

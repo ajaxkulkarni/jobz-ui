@@ -70,6 +70,10 @@
                     <!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
                     <strong>Oh snap!</strong> {{registerResponse}}
                 </div>
+                <div class="alert alert-success" ng-show="successResponse != null && successResponse.length > 0">
+                    <!--button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button-->
+                    {{successResponse}}
+                </div>
             </div>
         </div>
 
@@ -79,10 +83,18 @@
                 <p>We have sent you an activation link on {{user.email}}. Please activate your account either by using that link or by providing the activation code. Kindly check the spam folder in case the mail doesn't show up.</p>
                 <input type="text" class="form-control" placeholder="Enter the activation code" ng-model="user.activationCode">
             </div>
-            <div class="col-md-8 col-md-offset-2 text-center mySubmit profileSubmit">
-                <button type="button" class="btn btn-block mySubmitButton profileSubmitButton" ng-click="activateUser()" style="padding-bottom:7%">Activate</button>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="col-md-6" style="padding-bottom:10%">
+                <button type="button" class="btn btn-block mySubmitButton activateButton" ng-click="activateUser()" style="">Activate</button>
+                </div>
+                
+                <div class="col-md-6">
+                <button type="button" class="btn btn-block mySubmitButton resendButton" ng-click="resend()" style="">Resend Activation Mail</button>
+                </div>
             </div>
-
         </div>
 
     </div>

@@ -90,6 +90,29 @@ angular.module("app").controller('activation', function ($scope, userService, $l
         });
 
     };
+    
+    $scope.resend = function () {
+        
+        $scope.showProgress = true;
+        $.skylo('start');
+        $.skylo('inch', 5);
+       
+        userService.resend($scope).then(function (response) {
+            $.skylo('end');
+            $scope.showProgress = false;
+            if (response == null) {
+                $scope.registerResponse = "Error connecting server ..";
+            }
+            if (response.status != 200) {
+                $scope.registerResponse = response.responseText;
+                return;
+            } else {
+                $scope.successResponse = "Activation mail sent again!";
+            }
+            
+        });
+
+    };
 
 
 });
