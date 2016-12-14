@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Talnote | Home</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- SmartAddon.com Verification -->
+    <!--meta name="smartaddon-verification" content="936e8d43184bc47ef34e25e426c508fe" />
+	<meta name="keywords" content="Flat UI Design, UI design, UI, user interface, web interface design, user interface design, Flat web design, Bootstrap, Bootflat, Flat UI colors, colors">
+	<meta name="description" content="The complete style of the Bootflat Framework.">
+    <link rel="shortcut icon" href="favicon_16.ico"/>
+    <link rel="bookmark" href="favicon_16.ico"/-->
+
+    <!--<ng-include="'talnote_keywords'"></ng-include>-->
+
+    <!-- site css -->
+    <link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/skylo.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <meta name="description" content="A FREE online job portal for connecting right individuals.">
+
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
+
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--<base href="http://localhost:9090/job/" />-->
+
+    <script type="text/javascript" src="js/site.min.js"></script>
+
+    <script src="js/skylo.js"></script>
+
+    <script src="js/angular.min.js"></script>
+
+    <script src="js/ang/route/angular-route.js"></script>
+
+    <script src="js/ang/main.js"></script>
+
+    <script src="js/ang/activation.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="activation">
+
+
+
+
+    <div class="container-fluid">
+
+        <div ng-include="'header.html'"></div>
+
+        <h3 class="text-center">Unsubscribe service</h3>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="alert alert-danger" ng-show="unsubscribeResponse != null && unsubscribeResponse.length > 0">
+                    <strong>Oh snap!</strong> {{unsubscribeResponse}}
+                </div>
+                <div class="alert alert-success" ng-show="successResponse != null && successResponse.length > 0">
+                    {{successResponse}}
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+</body>
+
+</html>

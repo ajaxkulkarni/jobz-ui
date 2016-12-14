@@ -315,6 +315,27 @@ app.service('userService', function ($http, $q) {
         response = deferred.promise;
         return $q.when(response);
     }
+    
+    this.unsubscribe = function ($scope) {
+        var dataObj = {
+            requestedBy: {
+                email: $scope.user.email,
+                id: $scope.user.id
+            }
+        };
+        deferred = $q.defer();
+        var res = $http.post(root + '/unsubscribe', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
 
 });
 

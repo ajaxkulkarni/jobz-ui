@@ -10,6 +10,9 @@ angular.module("app").controller('activation', function ($scope, userService, $l
     var code = $location.search().activationCode;
     var user = $location.search().activationUser;
     
+    var unsubscriberEmail = $location.search().email;
+    var unsubscriberId = $location.search().id;
+    
     console.log(code + ":" + user);
    
     $.skylo({
@@ -113,6 +116,37 @@ angular.module("app").controller('activation', function ($scope, userService, $l
         });
 
     };
+    
+    $scope.unsubscribe = function () {
+        //alert("Hi!");
+        $scope.user = {};
+        $scope.user.email = unsubscriberEmail;
+        $scope.user.id = unsubscriberId;
+        
+        $scope.showProgress = true;
+        $.skylo('start');
+        $.skylo('inch', 5);
+       
+        userService.unsubscribe($scope).then(function (response) {
+            $.skylo('end');
+            $scope.showProgress = false;
+            if (response == null) {
+                $scope.unsubscribeResponse = "Error connecting server ..";
+            }
+            if (response.status != 200) {
+                $scope.unsubscribeResponse = response.responseText;
+                return;
+            } else {
+                $scope.successResponse = "Unsubscribed successfully!";
+            }
+            
+        });
+
+    };
+    
+    if(unsubscriberEmail != null && unsubscriberId != null) {
+        $scope.unsubscribe();
+    }
 
 
 });
