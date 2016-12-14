@@ -65,6 +65,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Interactions</th>
+                            <th>Share</th>
                             <!--<th>Shortlisted</th>
 					<th>Matches</th>-->
                             <!--<th>Accepted</th>-->
@@ -80,13 +81,12 @@
                             <td>{{job.minExperience}} - {{job.maxExperience}}</td>
                             <td>{{job.postedDateString}}</td>
                             <td>{{job.expiryDateString}}</td>
-                            <td>{{job.postedBy.email}}</td>
+                            <td ng-show="job.poc == null || job.poc.email == null">{{job.postedBy.email}}</td>
+                            <td ng-show="job.poc != null && job.poc.email != null">{{job.poc.email}}</td>
                             <td>{{job.postedBy.phone}}</td>
                             <td>{{job.noOfApplications}}</td>
-			    <td><input type="button" value="View" ng-click="viewJob(job)"/></td>
-                            <!--<td>{{job.interestCandidates}}</td>
-                    <td>{{job.matches}}</td>-->
-                            <!--<td>@mdo</td>-->
+			                <td><input type="button" value="View" ng-click="viewJob(job)"/></td>
+                            <td><input type="button" value="Share" ng-click="shareJob(job)"/></td>
                         </tr>
                     </tbody>
                 </table>
@@ -185,7 +185,9 @@
                             <td>Experience</td>
                             <td>Status</td>
                             <td>Activation</td>
-                            <th>Description</th>
+                            <th>Resume upload</th>
+                            <!--<th>Last Login</th>-->
+                            <th>Visits</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -201,7 +203,11 @@
                             <td>{{c.experience}}</td>
                             <td>{{c.status}}</td>
                             <td>{{c.activationCode}}</td>
-			    <td><input type="button" value="View" ng-click="viewProfile(c)"/></td>
+                            <td ng-show="c.filePath != null && c.filePath.length > 0">Y</td>
+                            <td ng-show="c.filePath == null || c.filePath.length == 0">N</td>
+                            <!--<td>{{c.lastLogin}}</td>-->
+                            <td>{{c.noOfVisits}}</td>
+			                <td><input type="button" value="View" ng-click="viewProfile(c)"/></td>
                         </tr>
                     </tbody>
                 </table>

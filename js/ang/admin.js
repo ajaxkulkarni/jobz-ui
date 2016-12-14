@@ -152,6 +152,11 @@ angular.module("app").controller('admin', function ($scope, adminService) {
    $scope.wipe = function() {
        $scope.sendResponse = null;   
    }
+   
+   $scope.shareJob = function(job) {
+       var text = job.jobTitle + "required at" + job.companyName + "for experience" + job.minExperience + "-" + job.maxExperience + "years. Apply now at Talnote.com";
+       window.location.href = "whatsapp://send?text=" + text;
+   }
 
 });
 
