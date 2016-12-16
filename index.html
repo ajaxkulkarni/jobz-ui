@@ -178,7 +178,13 @@
                          <p ng-show="registerShowErrors == true && registerForm.type.$invalid">Please let us know if you're a job seeker or a job poster</p>
                     </div>
 
-
+                    <div class="col-md-8 col-md-offset-2">
+                        <!--<div class="checkbox">-->
+                            <label><input type="checkbox" name="agree" id="agree" ng-model="user.agree" ng-required="true"> I accept the <a href="terms.html">Terms and Conditions</a></label>
+                        <!--</div>-->
+                        <p ng-show="registerShowErrors == true && registerForm.agree.$invalid">Please Accept the terms</p>
+                    </div>
+                        
                     <div class="col-md-8 col-md-offset-2 text-center mySubmit">
                         <button ng-disabled="false" type="button" class="btn btn-block mySubmitButton" ng-click="registerUser(registerForm.$valid)">Submit</button>
                     </div>
@@ -194,7 +200,7 @@
                 <p class="howInfo">If you have any questions or doubts, feel free to give us a call anytime. We would be happy to talk to you and take your suggestions.</p>
                 <p class="howInfo"><span style="float:left">contact@talnote.com</span><span style="float:right">+91 7350182285</span></p>
             </div>
-
+            
         </div>
 
 
