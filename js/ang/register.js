@@ -171,6 +171,8 @@ function postLogin($scope) {
         window.location.href = 'postJob.html';
     } else if ($scope.user.type == 'Seeker' && ($scope.user.description == null || $scope.user.description.length == 0)) {
         window.location.href = 'updateProfile.html';
+    } else if (localStorage.applyJob != null && localStorage.applyJob != 'null') {
+        window.location.href = 'applyJob.html';
     } else {
         window.location.href = 'dashboard.html';
     }

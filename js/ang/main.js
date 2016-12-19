@@ -144,6 +144,7 @@ app.service('userService', function ($http, $q) {
         localStorage.viewProfile = null;
         localStorage.viewType = null;
         localStorage.intent = null;
+        localStorage.applyJob = null;
         window.location.href = "index.html";
     }
 
@@ -197,6 +198,30 @@ app.service('userService', function ($http, $q) {
             /*alert("failure message: " + JSON.stringify({
                 data: data
             }));*/
+            response = data;
+            deferred.resolve(response);
+        });
+        response = deferred.promise;
+        return $q.when(response);
+    }
+    
+    this.getJob = function ($scope) {
+        //alert("In service");
+        var dataObj = {
+            applyJobRequested: {
+                id: $scope.jobId,
+                currentCandidate : {
+                    email : $scope.email
+                }
+            }
+        };
+        deferred = $q.defer();
+        var res = $http.post(root + '/getJob', dataObj);
+        res.success(function (data, status, headers, config) {
+            response = data;
+            deferred.resolve(response);
+        });
+        res.error(function (data, status, headers, config) {
             response = data;
             deferred.resolve(response);
         });

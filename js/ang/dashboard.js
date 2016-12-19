@@ -1,6 +1,7 @@
 angular.module("app").controller('dashboard', function ($scope, userService, jobService, $http) {
 
     localStorage.intent = null;
+    localStorage.applyJob = null;
     $scope.isDashboard = true;
     $scope.downloadUrl = root + "/download/";
     userService.validateUser($scope);

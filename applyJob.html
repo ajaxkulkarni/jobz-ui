@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Talnote | Job Info</title>
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="css/site.min.css">
+    <link rel="stylesheet" href="css/skylo.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i" rel="stylesheet">
+
+    <script type="text/javascript" src="js/site.min.js"></script>
+    <script src="js/skylo.js"></script>
+    <script src="js/angular.min.js"></script>
+
+    <script src="js/ang/main.js"></script>
+    
+    <script src="js/ang/dashboard.js"></script>
+
+    <script src="js/ang/applyJob.js"></script>
+
+</head>
+
+<body ng-app="app" ng-controller="applyJob">
+
+
+
+
+    <div class="container-fluid">
+
+        <div ng-include="'header.html'"></div>
+
+
+        <h3 class="text-center">Job Post</h3>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="alert alert-danger" ng-show="jobResponse != null && jobResponse.length > 0">
+                    <strong>Oh snap!</strong> {{jobResponse}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row" ng-show="jobResponse == null">
+            <div class="col-md-6 col-md-offset-3">
+
+                <div class="panel panel-default jobPanel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h2 class="panel-title jobPanelTitle">{{job.jobTitle}}</h2>
+                                        <p class="panel-title jobPanelSubTitle">{{job.companyName}}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="panel-title jobPanelSubTitle" ng-show="job.compatibility != null">Compatibility : {{job.compatibility}} %</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-map-marker jobPanelIcon"></span>
+                                        <span class="jobPanelProps">&nbsp;{{job.location}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-briefcase jobPanelIcon" style="font-size:20px"></span> <span class="jobPanelProps">&nbsp;{{job.minExperience}} - {{job.maxExperience}} years</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="glyphicon glyphicon-user jobPanelIcon" style="font-size:20px"></span> 
+                                        <span class="jobPanelProps">&nbsp;{{job.type}}</span>
+                                    </div>
+                                </div>
+                                <br/>
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span ng-repeat="skill in job.skillsRequired"><span class="myBadge">{{skill.name}}</span>&nbsp;&nbsp;</span>
+
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row" id="job{{job.id}}">
+                            <div class="col-md-12">
+                                <p style="white-space: pre-wrap">{{job.description}}</p>
+                                <br/>
+                                <br/>
+                                <p><b>Job Offer Valid Till :</b> {{job.expiryDateString}}</p>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row panel-body jobPanelFooter" style="padding-bottom:5%">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="price-foot viewJobFooter">
+                        <!--<button type="button" class="btn btn-primary myPanelButton myPanelButtonBack" ng-click="back()">Back</button>-->
+                        <button type="button" class="btn btn-primary myPanelButton myPanelButtonSave" ng-show="!applied" ng-click="apply()">Apply</button>
+                        <a href="dashboard.html" ><button type="button" class="btn btn-primary myPanelButton myPanelButtonSave" ng-show="applied">More jobs</button></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="modal" id="applyJobModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Apply</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p ng-show="applyJobResponse == null">Are you sure you want to apply for this job? ({{job.companyName}})</p>
+                        <p ng-show="applyJobResponse == null"><input type="checkbox" class="" ng-model="attachCv">&nbsp;&nbsp;Send Resume</p>
+                        <p ng-show="applyJobResponse != null">{{applyJobResponse}}</p>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="wipe()">Close</button>
+                        <button type="button" class="btn btn-success" ng-click="applyForJob()" ng-show="applyJobResponse == null">Apply</button>
+                        <a href="dashboard.html"><button type="button" class="btn btn-success" ng-show="applyJobResponse != null">Dashboard</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="modal" id="uploadModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Upload Resume</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p ng-show="uploadResponse == null">Please upload your latest resume in order to make your profile complete.</p>
+                        <p><input type="file" file-model = "myFile" /></p>
+                        <p ng-show="uploadResponse != null">{{uploadResponse}}</p>
+                        <p ng-show="uploadError != null && uploadResponse == null">{{uploadError}}</p>
+                    </div>
+                    
+                      
+                   
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" ng-click="uploadFile()" ng-show="uploadResponse == null">Upload</button>
+                        <a href="{{downloadUrl}}{{profile.email}}"><button type="button" class="btn btn-success" ng-show="profile.filePath != null">View</button></a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal" id="acceptedCandidateModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Contact Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Name : {{acceptedCandidate.name}}</p>
+                        <p>Email : {{acceptedCandidate.email}}</p>
+                        <p>Phone : {{acceptedCandidate.phone}}</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+
+</body>
+
+</html>

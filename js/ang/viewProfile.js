@@ -52,7 +52,10 @@ angular.module("app").controller('viewProfile', function ($scope, userService, $
                 //alert($scope.loginResponse);
                 return;
             }
-            //localStorage.viewType = "AvailableJobs";
+            if(localStorage.applyJob != null && localStorage.applyJob != 'null') {
+                window.location.href = "applyJob.html";
+                return;
+            }
             window.location.href = "dashboard.html";
         });
     };
