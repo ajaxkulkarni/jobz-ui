@@ -154,7 +154,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
    }
    
    $scope.shareJob = function(job) {
-       var text = job.jobTitle + " required at " + job.companyName + " for experience " + job.minExperience + " - " + job.maxExperience + " years.\nLocation : " + job.location + "\nApply now at : http://talnote.com/applyJob.html#?jobId=" + job.id;
+       var text = job.jobTitle + " required at " + job.companyName + " for experience " + job.minExperience + " - " + job.maxExperience + " years. Location : " + job.location + ". Apply now at : http://talnote.com/applyJob.html#?jobId=" + job.id + ". Job ID :" + job.id;
        window.location.href = "whatsapp://send?text=" + text;
    }
 
