@@ -2,9 +2,10 @@ angular.module("app").controller('admin', function ($scope, adminService) {
 
     //alert("Here!");
     $scope.response = {};
-
+    //$scope.filter = {};
 
     $scope.loggedIn = null;
+    $scope.userCount = 0;
     /*if (localStorage.user != null && localStorage.user != 'null') {
         $scope.loggedIn = JSON.parse(localStorage.user);
         $scope.user = $scope.loggedIn;
@@ -41,6 +42,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = false;
                 $scope.showAccepted = false;
                 $scope.showPosted = true;
+                $scope.response.candidates = {};
                 $scope.response.postedJobs = response.adminResponse.postedJobs;
                 //alert($scope.response);
                 return;
@@ -64,6 +66,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = true;
                 $scope.showAccepted = false;
                 $scope.showPosted = false;
+                $scope.response.candidates = {};
                 $scope.response.pendingJobs = response.adminResponse.postedJobs;
                 //alert($scope.response);
                 return;
@@ -87,6 +90,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = false;
                 $scope.showAccepted = true;
                 $scope.showPosted = false;
+                $scope.response.candidates = {};
                 $scope.response.acceptedJobs = response.adminResponse.postedJobs;
                 //alert($scope.response.pendingJobs);
                 return;
@@ -110,6 +114,7 @@ angular.module("app").controller('admin', function ($scope, adminService) {
                 $scope.showPending = false;
                 $scope.showAccepted = false;
                 $scope.showPosted = false;
+                $scope.response.postedJobs = {};
                 $scope.response.candidates = response.adminResponse.candidates;
                 //alert($scope.response.pendingJobs);
                 return;
@@ -151,11 +156,45 @@ angular.module("app").controller('admin', function ($scope, adminService) {
 
    $scope.wipe = function() {
        $scope.sendResponse = null;   
+       $scope.filter = null;
    }
    
    $scope.shareJob = function(job) {
-       var text = job.jobTitle + " required at " + job.companyName + " for experience " + job.minExperience + " - " + job.maxExperience + " years. Location : " + job.location + ". Apply now at : http://talnote.com/applyJob.html#?jobId=" + job.id + ". Job ID :" + job.id;
+       var link = "http://talnote.com/applyJob.html#?jobId=" + job.id;
+       console.log(link);
+       var text = job.jobTitle + " required at " + job.companyName + " for experience " + job.minExperience + " - " + job.maxExperience + " years. Location : " + job.location + ". Apply now at : " + link;
        window.location.href = "whatsapp://send?text=" + text;
+   }
+   
+   $scope.filterCandidate = function(candidate) {
+       //console.log($scope.filter);
+       //$scope.userCount++;
+       if($scope.filter == null) {
+           //console.log("null");
+           return true;
+       }
+       var filter = $scope.filter;
+       //console.log("1");
+       if(filter.type != 'All' && filter.type != candidate.type) {
+           return false;
+       }
+       //console.log("2:" + filter.resume);
+       if(filter.resume) {
+           //console.log("3");
+           if(candidate.filePath == null || candidate.filePath.length == 0) {
+               return false;
+           }
+       }
+       //console.log("3");
+       if(filter.minExp > candidate.experience) {
+           return false;
+       }
+       //console.log("4");
+       if(filter.maxExp < candidate.experience) {
+           return false;
+       }
+       //console.log("5");
+       return true;
    }
 
 });

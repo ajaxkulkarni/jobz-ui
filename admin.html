@@ -11,7 +11,7 @@
 
 
     <![endif]-->
-    
+
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript" src="js/site.min.js"></script>
 
@@ -47,11 +47,25 @@
         <br/>
         <div class="row">
             <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="adminPostJob.html"><button type="button" class="btn btn-block">Post Job</button></a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#mailModal" data-toggle="modal"><button type="button" class="btn btn-default btn-block">Send Mail</button></a>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#userFilter" data-toggle="modal"><button type="button" class="btn btn-primary btn-block">Filter</button></a>
+                    </div>
+                    <!--<div class="col-md-3">
+                        <button type="button" class="btn btn-success btn-block">Success</button>
+                    </div>-->
+                </div>
                 <h2>{{heading}}</h2>
-                <a href="adminPostJob.html">Post New Job</a>
+                <!--<a href="adminPostJob.html">Post New Job</a>
                 <a href="#mailModal" data-toggle="modal">Send mail</a>
-                
-                <table class="table" ng-show="showPosted">
+                <a href="#userFilter" data-toggle="modal">Filter</a>-->
+                <table class="table" ng-show="response.postedJobs.length > 0 && showPosted">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -85,8 +99,12 @@
                             <td ng-show="job.poc != null && job.poc.email != null">{{job.poc.email}}</td>
                             <td>{{job.postedBy.phone}}</td>
                             <td>{{job.noOfApplications}}</td>
-			                <td><input type="button" value="View" ng-click="viewJob(job)"/></td>
-                            <td><input type="button" value="Share" ng-click="shareJob(job)"/></td>
+                            <td>
+                                <input type="button" value="View" ng-click="viewJob(job)" />
+                            </td>
+                            <td>
+                                <input type="button" value="Share" ng-click="shareJob(job)" />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -109,6 +127,7 @@
                             <th>Seeker Experience</th>
                             <th>Poster Interest</th>
                             <th>Seeker Interest</th>
+                            <th>Resume sent</th>
                             <!--<th>Applied Date</th>-->
                         </tr>
                     </thead>
@@ -128,6 +147,7 @@
                             <td>{{job.currentCandidate.experience}}</td>
                             <td>{{job.interestShownByPoster}}</td>
                             <td>{{job.interestShownBySeeker}}</td>
+                            <td>{{job.attachCv}}</td>
                             <!--<td>{{job.appliedDateString}}</td>-->
                         </tr>
                     </tbody>
@@ -147,6 +167,7 @@
                             <th>Seeker Name</th>
                             <th>Seeker Email</th>
                             <th>Seeker Phone</th>
+                            <th>Resume Downloaded</th>
                             <!--<th>Interactions</th>-->
                             <!--<th>Poster Interest</th>
                     <th>Seeker Interest</th>-->
@@ -165,13 +186,14 @@
                             <td>{{job.currentCandidate.name}}</td>
                             <td>{{job.currentCandidate.email}}</td>
                             <td>{{job.currentCandidate.phone}}</td>
-                            
+                            <td>{{job.resumeDownloaded}}</td>
 
                         </tr>
                     </tbody>
                 </table>
-
+                Count : {{filtered.length}}
                 <table class="table" ng-show="response.candidates.length > 0">
+
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -191,7 +213,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="c in response.candidates">
+                        <tr ng-repeat="c in response.candidates | filter: filterCandidate as filtered">
                             <td>{{c.id}}</td>
                             <td>{{c.type}}</td>
                             <td>{{c.sector.name}}</td>
@@ -207,16 +229,18 @@
                             <td ng-show="c.filePath == null || c.filePath.length == 0">N</td>
                             <!--<td>{{c.lastLogin}}</td>-->
                             <td>{{c.noOfVisits}}</td>
-			                <td><input type="button" value="View" ng-click="viewProfile(c)"/></td>
+                            <td>
+                                <input type="button" value="View" ng-click="viewProfile(c)" />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                
+
 
             </div>
 
         </div>
-        
+
         <div class="modal" id="mailModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -225,7 +249,7 @@
                         <h4 class="modal-title">Send Mail</h4>
                     </div>
                     <div class="modal-body" ng-show="sendResponse == null">
-                       <select name="type" ng-model="mailer.type" class="mySelect">
+                        <select name="type" ng-model="mailer.type" class="mySelect">
                             <option value="All" selected>All</option>
                             <option value="Poster">Posters Only</option>
                             <option value="Seeker">Seekers Only</option>
@@ -236,9 +260,9 @@
                         <textarea class="form-control" placeholder="Mail message" ng-model="mailer.message" maxlength="800" name="message" rows="10"></textarea>
                     </div>
                     <div class="modal-body" ng-show="sendResponse != null">
-                       {{sendResponse}}
+                        {{sendResponse}}
                     </div>
-                    
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" ng-click="sendMail()" ng-show="sendResponse == null">Send</button>
@@ -248,9 +272,42 @@
             </div>
         </div>
 
+        <div class="modal" id="userFilter">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Filter Candidates</h4>
+                    </div>
+                    <div class="modal-body" ng-show="sendResponse == null">
+                        <select name="type" ng-model="filter.type" class="mySelect">
+                            <option value="All" selected>All</option>
+                            <option value="Poster">Posters Only</option>
+                            <option value="Seeker">Seekers Only</option>
+                        </select>
+                        <br/>
+                        <input type="checkbox" value="Y" name="resume" placeholder="Mail subject" ng-model="filter.resume"> With Resume
+                        <br/>
+                        <input type="text" class="form-control" name="min" placeholder="Min Exp" ng-model="filter.minExp">
+                        <br/>
+                        <input type="text" class="form-control" name="max" placeholder="Max Exp" ng-model="filter.maxExp">
+                    </div>
+                    <div class="modal-body" ng-show="sendResponse != null">
+                        {{sendResponse}}
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="wipe()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    
-    
+
+
 
 
 
